@@ -1,0 +1,17 @@
+app = "truledgr-traefik"
+primary_region = "ord"
+
+[env]
+  EMAIL = "your@email.com" # Set this to your real email for Let's Encrypt
+
+[[services]]
+  internal_port = 80
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+  [[services.ports]]
+    port = 443
+
+[[mounts]]
+  source = "traefik_certificates"
+  destination = "/certificates"

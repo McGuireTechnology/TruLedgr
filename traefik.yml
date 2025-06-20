@@ -1,0 +1,26 @@
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+
+api:
+  dashboard: true
+  insecure: false
+
+providers:
+  file:
+    directory: /etc/traefik
+    watch: true
+
+certificatesResolvers:
+  le:
+    acme:
+      email: ${EMAIL}
+      storage: /certificates/acme.json
+      tlsChallenge: true
+
+log:
+  level: INFO
+
+accessLog: {}
