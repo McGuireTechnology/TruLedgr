@@ -3,36 +3,23 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'truledgr-backend'
-primary_region = 'ord'
+app = "truledgr-backend"
+primary_region = "ord"
 
 [build]
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = 'stop'
+  auto_stop_machines = "stop"
   auto_start_machines = true
   min_machines_running = 0
-  processes = ['app']
+  processes = ["app"]
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
+  memory = "1gb"
+  cpu_kind = "shared"
   cpus = 1
-
-app = "truledgr-backend"
-primary_region = "ord"
 
 [env]
   # Add any environment variables here, or set them as secrets
-
-[[services]]
-  internal_port = 80  # Change to 8000 if your backend listens on 8000
-  protocol = "tcp"
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
