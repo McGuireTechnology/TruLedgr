@@ -1,0 +1,5 @@
+app = "truledgr-dashboard"
+primary_region = "ord"
+
+[env]
+  VITE_API_URL = "https://api.truledgr.com" # Set this to your deployed API URL
