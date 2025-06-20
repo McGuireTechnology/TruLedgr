@@ -1,0 +1,51 @@
+# fly.toml app configuration file generated for truledgr-backend on 2025-06-20T19:05:16Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "truledgr-backend"
+primary_region = "ord"
+
+app = "truledgr-traefik"
+primary_region = "ord"
+
+[env]
+  EMAIL = "admin@mcguire.technology"
+
+[[services]]
+  internal_port = 80
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+  [[services.ports]]
+    port = 443
+
+[[mounts]]
+  source = "traefik_certificates"
+  destination = "/certificates"
+
+[build]
+  dockerfile = "traefik.Dockerfile"
+
+
+[build]
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[env]
+  PROJECT_NAME = "TruLedgr"
+  POSTGRES_SERVER = "truledgr-db.internal"
+  POSTGRES_USER = "postgres"
+  POSTGRES_DB = "truledgr"
+  FIRST_SUPERUSER = "admin@truledgr.app"

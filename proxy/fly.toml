@@ -1,10 +1,12 @@
-# fly.toml app configuration file generated for truledgr-traefik on 2025-06-20T18:42:58Z
+# fly.toml app configuration file generated for truledgr-proxy on 2025-06-20T21:05:09Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'truledgr-traefik'
+app = 'truledgr-proxy'
 primary_region = 'ord'
+
+[build]
 
 [http_service]
   internal_port = 8080
@@ -16,3 +18,13 @@ primary_region = 'ord'
 
 [[vm]]
   size = 'shared-cpu-1x'
+
+[[services.ports]]
+  handlers = ["http"]
+  port = 80
+  internal_port = 8080
+
+[[services.ports]]
+  handlers = ["tls", "http"]
+  port = 443
+  internal_port = 8443
