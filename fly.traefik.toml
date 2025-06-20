@@ -2,7 +2,7 @@ app = "truledgr-traefik"
 primary_region = "ord"
 
 [env]
-  EMAIL = "your@email.com" # Set this to your real email for Let's Encrypt
+  EMAIL = "admin@mcguire.technology"
 
 [[services]]
   internal_port = 80
@@ -15,3 +15,6 @@ primary_region = "ord"
 [[mounts]]
   source = "traefik_certificates"
   destination = "/certificates"
+
+[build]
+  dockerfile = "traefik.Dockerfile"

@@ -1,0 +1,50 @@
+# flyctl launch added from .gitignore
+**/.vscode
+**/node_modules
+test-results
+playwright-report
+blob-report
+playwright/.cache
+
+# flyctl launch added from backend/.gitignore
+backend/**/__pycache__
+backend/**/app.egg-info
+backend/**/*.pyc
+backend/**/.mypy_cache
+backend/**/.coverage
+backend/**/htmlcov
+backend/**/.cache
+backend/**/.venv
+
+# flyctl launch added from frontend/.gitignore
+# Logs
+frontend/**/logs
+frontend/**/*.log
+frontend/**/npm-debug.log*
+frontend/**/yarn-debug.log*
+frontend/**/yarn-error.log*
+frontend/**/pnpm-debug.log*
+frontend/**/lerna-debug.log*
+
+frontend/**/node_modules
+frontend/**/dist
+frontend/**/dist-ssr
+frontend/**/*.local
+frontend/**/openapi.json
+
+# Editor directories and files
+frontend/**/.vscode/*
+!frontend/**/.vscode/extensions.json
+frontend/**/.idea
+frontend/**/.DS_Store
+frontend/**/*.suo
+frontend/**/*.ntvs*
+frontend/**/*.njsproj
+frontend/**/*.sln
+frontend/**/*.sw?
+frontend/test-results
+frontend/playwright-report
+frontend/blob-report
+frontend/playwright/.cache
+frontend/playwright/.auth
+fly.toml
