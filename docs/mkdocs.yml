@@ -1,0 +1,8 @@
+docs_dir: content
+site_name: TruLedgr Docs
+theme:
+  name: material
+  palette:
+    scheme: auto
+    primary: red
+    accent: red
