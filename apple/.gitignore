@@ -1,0 +1,8 @@
+
+#
+#   Apple Xcode project files
+#   https://github.com/github/gitignore/blob/main/Global/Xcode.gitignore
+#
+
+## User settings
+xcuserdata/
