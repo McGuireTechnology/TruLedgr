@@ -1,0 +1,3 @@
+from .routes import journals_router
+
+# ...existing code...

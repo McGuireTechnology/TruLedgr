@@ -1,0 +1,3 @@
+from .routes import categories_router
+
+# ...existing code...

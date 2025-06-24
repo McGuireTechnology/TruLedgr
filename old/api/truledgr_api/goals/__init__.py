@@ -1,0 +1,3 @@
+from .routes import goals_router
+
+# ...existing code...

@@ -1,0 +1,26 @@
+[project]
+name = "truledgr"
+version = "0.1.0"
+description = "TruLedgr backend FastAPI application"
+authors = [
+    { name = "Nathan McGuire", email = "nathan@mcguire.technology" },
+    { name = "McGuire Technology, LLC" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+    "python-dotenv",
+    "sqlalchemy",
+    "alembic"
+]
+
+[tool.setuptools]
+package-dir = {"" = "truledgr"}
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,25 @@
+site_name: TruLedgr Docs
+site_url: https://docs.truledgr.app
+site_author: McGuire Technology, LLC and contributors
+site_description: TruLedgr is an Open Source Project by McGuire Technology, LLC and contributors
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  features:
+#    - navigation.tabs
+#    - navigation.top
+    - navigation.sections
+    - navigation.expand
+    - navigation.tracking
+    - navigation.instant
+    - navigation.indexes
+    - content.code.annotate
+    - content.code.copy
+    - content.code.highlight
+    - content.code.tabs
+  custom_dir: overrides
+plugins:
+  - tags

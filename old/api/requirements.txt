@@ -1,0 +1,6 @@
+fastapi
+python-dotenv
+requests
+sqlmodel
+uvicorn
+ulid-py

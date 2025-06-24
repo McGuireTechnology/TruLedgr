@@ -1,0 +1,65 @@
+@startuml core
+entity User {
+  * id : UUID
+  * name : string
+  ...
+}
+
+entity Institution {
+  * id : UUID
+  * name : string
+  ...
+}
+
+entity Ledger {
+  * id : UUID
+  * name : string
+  * user_id : UUID
+  ...
+}
+
+entity Account {
+  * id : UUID
+  * ledger_id : UUID
+  * institution_id : UUID
+  * name : string
+  * type : string
+  * subtype : string
+  * bank_name : string
+  * account_number : string
+  ...
+}
+
+entity Journal {
+  * id : UUID
+  * ledger_id : UUID
+  * date : date
+  * description : string
+  ...
+}
+
+entity Transaction {
+  * id : UUID
+  * journal_id : UUID
+  * date : date
+  * description : string
+  ...
+}
+
+entity Entry {
+  * id : UUID
+  * transaction_id : UUID
+  * account_id : UUID
+  * amount : decimal
+  * is_debit : boolean
+  ...
+}
+
+User ||--o{ Ledger
+Ledger ||--o{ Account
+Institution ||--o{ Account
+Ledger ||--o{ Journal
+Journal ||--o{ Transaction
+Transaction ||--o{ Entry
+Account ||--o{ Entry
+@enduml

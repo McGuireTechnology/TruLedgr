@@ -1,0 +1,17 @@
+alembic
+bcrypt
+emails
+fastapi[standard]
+PyJWT
+passlib
+pydantic_settings
+psycopg2-binary
+sentry-sdk[fastapi]
+sqlmodel
+pydantic_settings
+pytest
+pytest-asyncio
+httpx
+black
+ruff
+tenacity
