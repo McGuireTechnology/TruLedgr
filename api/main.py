@@ -1,11 +1,15 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import os
 import logging
+import time
+from datetime import datetime
 from dotenv import load_dotenv
+from templates import get_api_landing_page
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -45,6 +49,9 @@ app.add_middleware(
 # Security
 security = HTTPBearer()
 
+# Track startup time for uptime calculation
+startup_time = time.time()
+
 @app.on_event("startup")
 async def startup_event():
     logger.info("TruLedgr API startup complete - ready to accept requests")
@@ -75,9 +82,14 @@ class TokenResponse(BaseModel):
     token_type: str
 
 # Routes
-@app.get("/", response_model=HealthCheck)
+@app.get("/", response_class=HTMLResponse)
 async def root():
-    """Root endpoint - health check"""
+    """Beautiful landing page for the TruLedgr API"""
+    return get_api_landing_page()
+
+@app.get("/api", response_model=HealthCheck) 
+async def api_root():
+    """JSON API root endpoint"""
     return {
         "status": "healthy",
         "message": "TruLedgr API is running",
@@ -87,10 +99,31 @@ async def root():
 @app.get("/health", response_model=HealthCheck)
 async def health_check():
     """Health check endpoint for monitoring"""
+    uptime_seconds = int(time.time() - startup_time)
+    uptime_hours = uptime_seconds // 3600
+    uptime_minutes = (uptime_seconds % 3600) // 60
+    
     return {
         "status": "healthy",
-        "message": "All systems operational",
+        "message": f"All systems operational (uptime: {uptime_hours}h {uptime_minutes}m)",
         "version": "1.0.0"
+    }
+
+@app.get("/api/v1/status")
+async def get_system_status():
+    """Detailed system status information"""
+    uptime_seconds = int(time.time() - startup_time)
+    return {
+        "status": "operational",
+        "version": "1.0.0",
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "uptime_seconds": uptime_seconds,
+        "environment": os.getenv("ENVIRONMENT", "development"),
+        "features": {
+            "authentication": "available",
+            "mobile_api": "available", 
+            "health_monitoring": "active"
+        }
     }
 
 # API Routes
