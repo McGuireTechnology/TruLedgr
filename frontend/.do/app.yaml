@@ -1,0 +1,41 @@
+name: truledgr-frontend
+services:
+  - name: frontend
+    source_dir: /frontend
+    github:
+      repo: your-username/truledgr
+      branch: main
+    build_command: npm run build
+    run_command: npm run preview -- --port $PORT --host 0.0.0.0
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 4173
+    routes:
+      - path: /
+    envs:
+      - key: VITE_API_URL
+        value: https://api.truledgr.app
+      - key: VITE_APP_TITLE
+        value: TruLedgr Dashboard
+      - key: VITE_APP_VERSION
+        value: 1.0.0
+      - key: VITE_ENABLE_ANALYTICS
+        value: "true"
+      - key: VITE_ENABLE_PUSH_NOTIFICATIONS  
+        value: "true"
+static_sites:
+  - name: truledgr-static
+    source_dir: /frontend
+    github:
+      repo: your-username/truledgr
+      branch: main
+    build_command: npm run build
+    output_dir: /dist
+    index_document: index.html
+    error_document: index.html  # For SPA routing
+    routes:
+      - path: /
+    envs:
+      - key: VITE_API_URL
+        value: https://api.truledgr.app

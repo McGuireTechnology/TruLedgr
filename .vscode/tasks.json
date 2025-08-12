@@ -1,0 +1,73 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Backend (FastAPI)",
+			"type": "shell",
+			"command": ".venv/bin/uvicorn",
+			"args": [
+				"main:app",
+				"--reload",
+				"--host",
+				"0.0.0.0",
+				"--port",
+				"8000"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Frontend (Vue/Vite)",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			},
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Frontend for Production",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			},
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Install Backend Dependencies",
+			"type": "shell",
+			"command": ".venv/bin/pip",
+			"args": [
+				"install",
+				"-r",
+				"requirements.txt"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Install Frontend Dependencies",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"install"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			},
+			"group": "build"
+		}
+	]
+}
