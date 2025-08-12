@@ -30,6 +30,8 @@ services:
         value: ${truledgr-db.DATABASE_URL}
       - key: ALLOWED_ORIGINS
         value: https://dash.truledgr.app,https://truledgr.app
+      - key: PYTHON_VERSION
+        value: "3.11.10"
 
 # Static Site for Frontend (recommended for Vue/React SPAs)
 static_sites:

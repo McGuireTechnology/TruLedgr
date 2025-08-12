@@ -28,6 +28,8 @@ services:
         type: SECRET
       - key: ALLOWED_ORIGINS
         value: https://dash.truledgr.app,https://truledgr.app
+      - key: PYTHON_VERSION
+        value: "3.11.10"
 databases:
   - name: truledgr-db
     engine: PG
