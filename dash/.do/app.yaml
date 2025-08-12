@@ -1,8 +1,8 @@
-# Frontend-only deployment  
-name: truledgr-frontend
+# Frontend deployment for Digital Ocean App Platform
+name: truledgr-dash
 static_sites:
-  - name: frontend
-    source_dir: /frontend
+  - name: dash
+    source_dir: /
     github:
       repo: McGuireTechnology/truledgr
       branch: main

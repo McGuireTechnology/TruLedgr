@@ -1,6 +1,112 @@
-# TruLedgr - Multi-Platform Application Suite
+# TruLedgr
 
-A comprehensive application ecosystem consisting of a FastAPI backend, Vue.js frontend, and mobile applications, all designed for deployment on Digital Ocean's App Platform.
+A comprehensive multi-platform application suite with clean separation of concerns.
+
+## 🏗️ Project Structure
+
+```
+truledgr/
+├── api/                    # FastAPI Backend
+│   ├── main.py            # FastAPI application
+│   ├── requirements.txt   # Python dependencies
+│   ├── runtime.txt        # Python version
+│   ├── Procfile          # Process definitions
+│   ├── start.sh          # Startup script
+│   ├── .venv/            # Virtual environment
+│   └── test_main.py      # API tests
+├── dash/                  # Vue.js Frontend Dashboard
+│   ├── src/              # Vue source code
+│   ├── public/           # Static assets
+│   ├── package.json      # Node dependencies
+│   ├── vite.config.ts    # Vite configuration
+│   └── dist/            # Built assets (generated)
+├── docs/                 # Documentation
+│   ├── mobile-integration.md
+│   ├── frontend-deployment.md
+│   └── domain-routing-fix.md
+└── *.yaml               # Deployment configurations
+```
+
+## 🚀 Deployment Configurations
+
+### Standard Digital Ocean Structure
+Each component has its own `.do/app.yaml` deployment configuration:
+- **`api/.do/app.yaml`**: API deployment → `api.truledgr.app`
+- **`dash/.do/app.yaml`**: Frontend deployment → `dash.truledgr.app`
+
+## 🔧 Development Setup
+
+### Backend (API)
+```bash
+cd api
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+```
+
+### Frontend (Dashboard)
+```bash
+cd dash
+npm ci
+npm run dev
+```
+
+## 📱 Platform Architecture
+
+- **Backend API**: FastAPI (Python) - `api.truledgr.app`
+- **Frontend Dashboard**: Vue.js + Vite (TypeScript) - `dash.truledgr.app`  
+- **Mobile Apps**: iOS (Swift) + Android (Kotlin) integration guides
+- **Database**: PostgreSQL (configured for production)
+- **Authentication**: JWT-based with biometric support
+
+## 🌐 Deployment
+
+### Digital Ocean App Platform
+Deploy each component separately for optimal performance and management:
+
+1. **Deploy API**: 
+   - Create App → GitHub → Select `/api` folder
+   - Uses `api/.do/app.yaml` automatically  
+   - Domain: `api.truledgr.app`
+
+2. **Deploy Dashboard**:
+   - Create App → GitHub → Select `/dash` folder  
+   - Uses `dash/.do/app.yaml` automatically
+   - Domain: `dash.truledgr.app`
+
+## 📖 Documentation
+
+- **Mobile Integration**: `docs/mobile-integration.md`
+- **Frontend Deployment**: `docs/frontend-deployment.md`  
+- **Domain Routing**: `docs/domain-routing-fix.md`
+
+## 🔐 Security Features
+
+- JWT authentication with refresh tokens
+- CORS configuration for cross-domain requests
+- Biometric authentication support (mobile)
+- Secure environment variable handling
+
+## 📈 Monitoring & Health
+
+- Health check endpoints (`/health`)
+- Logging and error tracking
+- Performance monitoring ready
+- Digital Ocean App Platform integration
+
+## 🧪 Testing
+
+```bash
+# Backend tests
+cd api
+python -m pytest
+
+# Frontend tests  
+cd dash
+npm run test:unit
+npm run test:e2e
+```
 
 ## Architecture Overview
 
