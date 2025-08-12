@@ -12,8 +12,34 @@ services:
     http_port: 8080
     health_check:
       http_path: /health
+    routes:
+      - path: /
     envs:
       - key: PORT
         value: "8080"
       - key: ENVIRONMENT
         value: production
+
+# Static Site for Frontend
+static_sites:
+  - name: frontend
+    source_dir: /frontend
+    github:
+      repo: McGuireTechnology/truledgr
+      branch: main
+    build_command: npm ci && npm run build
+    output_dir: /dist
+    index_document: index.html
+    error_document: index.html
+    routes:
+      - path: /
+    envs:
+      - key: VITE_API_URL
+        value: https://api.truledgr.app
+
+# Domain configuration
+domains:
+  - domain: api.truledgr.app
+    type: PRIMARY
+  - domain: dash.truledgr.app
+    type: ALIAS
