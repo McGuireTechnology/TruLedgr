@@ -81,22 +81,25 @@ Frontend will be available at: http://localhost:5173
 
 Both the backend and frontend are configured for Digital Ocean App Platform deployment with the following domain setup:
 
-- **Backend API**: `api.truledgr.app`
-- **Frontend Dashboard**: `dash.truledgr.app`
+- **Backend API**: `api.truledgr.app` (accessible on ports 80/443)
+- **Frontend Dashboard**: `dash.truledgr.app` (accessible on ports 80/443)
 
-#### Backend Deployment
+#### Deployment Configuration
+Use the main `app-platform.yaml` file for a complete single-app deployment, or use the individual configurations:
+
+**Single App Deployment (Recommended):**
 1. Create a new app in Digital Ocean App Platform
-2. Connect your GitHub repository
-3. Use the configuration in `.do/app.yaml`
-4. Set required environment variables:
+2. Connect your GitHub repository (McGuireTechnology/truledgr)
+3. Use the configuration in `app-platform.yaml`
+4. Configure your custom domains in the Digital Ocean console
+5. Set required environment variables:
    - `APP_SECRET_KEY`
    - `JWT_SECRET`
-   - `DATABASE_URL` (will be auto-configured if using DO managed database)
+   - Database will be auto-configured
 
-#### Frontend Deployment
-1. Create a static site or service in Digital Ocean App Platform
-2. Use the configuration in `frontend/.do/app.yaml`
-3. The build process will automatically create optimized production assets
+**Separate Apps Deployment:**
+- Backend: Use configuration in `.do/app.yaml`
+- Frontend: Use configuration in `frontend/.do/app.yaml`
 
 ## API Endpoints
 

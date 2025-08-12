@@ -3,14 +3,14 @@ services:
   - name: frontend
     source_dir: /frontend
     github:
-      repo: your-username/truledgr
+      repo: McGuireTechnology/truledgr
       branch: main
     build_command: npm run build
     run_command: npm run preview -- --port $PORT --host 0.0.0.0
     environment_slug: node-js
     instance_count: 1
     instance_size_slug: basic-xxs
-    http_port: 4173
+    http_port: 80
     routes:
       - path: /
     envs:
@@ -28,7 +28,7 @@ static_sites:
   - name: truledgr-static
     source_dir: /frontend
     github:
-      repo: your-username/truledgr
+      repo: McGuireTechnology/truledgr
       branch: main
     build_command: npm run build
     output_dir: /dist

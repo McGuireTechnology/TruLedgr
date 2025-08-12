@@ -23,6 +23,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://dash.truledgr.app",
+        "https://truledgr.app", 
         "http://localhost:3000",  # For local development
         "http://localhost:5173",  # Vite default port
     ],

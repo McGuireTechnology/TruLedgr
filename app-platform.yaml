@@ -1,0 +1,72 @@
+name: truledgr
+services:
+  # Backend API Service
+  - name: api
+    source_dir: /
+    github:
+      repo: McGuireTechnology/truledgr
+      branch: main
+    run_command: uvicorn main:app --host 0.0.0.0 --port $PORT
+    environment_slug: python
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /api
+      - path: /docs
+      - path: /redoc
+      - path: /openapi.json
+    health_check:
+      http_path: /health
+    envs:
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        value: ${APP_SECRET_KEY}
+        type: SECRET
+      - key: JWT_SECRET_KEY  
+        value: ${JWT_SECRET}
+        type: SECRET
+      - key: DATABASE_URL
+        value: ${truledgr-db.DATABASE_URL}
+      - key: ALLOWED_ORIGINS
+        value: https://dash.truledgr.app,https://truledgr.app
+
+# Static Site for Frontend (recommended for Vue/React SPAs)
+static_sites:
+  - name: frontend
+    source_dir: /frontend
+    github:
+      repo: McGuireTechnology/truledgr
+      branch: main
+    build_command: npm ci && npm run build
+    output_dir: /dist
+    index_document: index.html
+    error_document: index.html  # For SPA routing
+    routes:
+      - path: /
+    envs:
+      - key: VITE_API_URL
+        value: https://api.truledgr.app
+      - key: VITE_APP_TITLE
+        value: TruLedgr Dashboard
+      - key: VITE_APP_VERSION
+        value: 1.0.0
+      - key: VITE_ENABLE_ANALYTICS
+        value: "true"
+      - key: VITE_ENABLE_PUSH_NOTIFICATIONS  
+        value: "true"
+
+# Database
+databases:
+  - name: truledgr-db
+    engine: PG
+    version: "14"
+    size: basic
+    num_nodes: 1
+
+# Domain configuration (to be set in DO console)
+domains:
+  - domain: api.truledgr.app
+    type: PRIMARY
+  - domain: dash.truledgr.app
+    type: ALIAS
