@@ -146,10 +146,13 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 8000))
     environment = os.getenv("ENVIRONMENT", "development")
     
+    logger.info(f"Starting server on 0.0.0.0:{port}")
+    
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
         port=port,
         reload=environment == "development",
-        log_level="info"
+        log_level="info",
+        access_log=True
     )

@@ -6,7 +6,7 @@ services:
     github:
       repo: McGuireTechnology/truledgr
       branch: main
-    run_command: uvicorn main:app --host 0.0.0.0 --port $PORT
+    run_command: ./start.sh
     environment_slug: python
     instance_count: 1
     instance_size_slug: basic-xxs
