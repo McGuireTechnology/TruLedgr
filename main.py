@@ -4,10 +4,20 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import List, Optional
 import os
+import logging
 from dotenv import load_dotenv
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
+
+# Log startup information
+logger.info(f"Starting TruLedgr API...")
+logger.info(f"Environment: {os.getenv('ENVIRONMENT', 'development')}")
+logger.info(f"Port: {os.getenv('PORT', '8000')}")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -34,6 +44,14 @@ app.add_middleware(
 
 # Security
 security = HTTPBearer()
+
+@app.on_event("startup")
+async def startup_event():
+    logger.info("TruLedgr API startup complete - ready to accept requests")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    logger.info("TruLedgr API shutting down")
 
 # Pydantic models
 class HealthCheck(BaseModel):
@@ -125,9 +143,13 @@ async def get_mobile_config():
 
 if __name__ == "__main__":
     import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    environment = os.getenv("ENVIRONMENT", "development")
+    
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=int(os.getenv("PORT", 8000)),
-        reload=os.getenv("ENVIRONMENT") == "development"
+        port=port,
+        reload=environment == "development",
+        log_level="info"
     )

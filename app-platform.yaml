@@ -10,11 +10,9 @@ services:
     environment_slug: python
     instance_count: 1
     instance_size_slug: basic-xxs
+    http_port: 8080
     routes:
-      - path: /api
-      - path: /docs
-      - path: /redoc
-      - path: /openapi.json
+      - path: /
     health_check:
       http_path: /health
     envs:
