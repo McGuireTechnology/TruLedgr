@@ -13,7 +13,7 @@ This guide covers integrating iOS and Android mobile applications with the TruLe
 
 #### 1. User Registration
 ```http
-POST /api/v1/auth/register
+POST /auth/register
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Response:
 
 #### 2. User Login
 ```http
-POST /api/v1/auth/login
+POST /auth/login
 Content-Type: application/json
 
 {
@@ -63,7 +63,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 Get mobile-specific configuration and feature flags:
 
 ```http
-GET /api/v1/mobile/config
+GET /mobile/config
 Authorization: Bearer {token}
 ```
 
@@ -94,7 +94,7 @@ class TruLedgrAPI {
     private var authToken: String?
     
     func login(email: String, password: String) async throws -> TokenResponse {
-        let url = URL(string: "\(baseURL)/api/v1/auth/login")!
+        let url = URL(string: "\(baseURL)/auth/login")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -116,7 +116,7 @@ class TruLedgrAPI {
             throw APIError.notAuthenticated
         }
         
-        let url = URL(string: "\(baseURL)/api/v1/users/me")!
+        let url = URL(string: "\(baseURL)/users/me")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
@@ -198,7 +198,7 @@ class TruLedgrAPI {
         val body = json.toRequestBody(jsonMediaType)
         
         val request = Request.Builder()
-            .url("$baseUrl/api/v1/auth/login")
+            .url("$baseUrl/auth/login")
             .post(body)
             .build()
         
@@ -219,7 +219,7 @@ class TruLedgrAPI {
         val token = getStoredToken() ?: throw IllegalStateException("Not authenticated")
         
         val request = Request.Builder()
-            .url("$baseUrl/api/v1/users/me")
+            .url("$baseUrl/users/me")
             .header("Authorization", "Bearer $token")
             .build()
         

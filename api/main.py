@@ -109,7 +109,7 @@ async def health_check():
         "version": "1.0.0"
     }
 
-@app.get("/api/v1/status")
+@app.get("/status")
 async def get_system_status():
     """Detailed system status information"""
     uptime_seconds = int(time.time() - startup_time)
@@ -126,8 +126,8 @@ async def get_system_status():
         }
     }
 
-# API Routes
-@app.post("/api/v1/auth/register", response_model=User)
+# Authentication Routes
+@app.post("/auth/register", response_model=User)
 async def register_user(user_data: UserCreate):
     """Register a new user"""
     # TODO: Implement user registration logic
@@ -138,7 +138,7 @@ async def register_user(user_data: UserCreate):
         "is_active": True
     }
 
-@app.post("/api/v1/auth/login", response_model=TokenResponse)
+@app.post("/auth/login", response_model=TokenResponse)
 async def login_user(user_data: UserCreate):
     """Authenticate user and return access token"""
     # TODO: Implement authentication logic
@@ -147,7 +147,7 @@ async def login_user(user_data: UserCreate):
         "token_type": "bearer"
     }
 
-@app.get("/api/v1/users/me", response_model=User)
+@app.get("/users/me", response_model=User)
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     """Get current authenticated user"""
     # TODO: Implement JWT token validation and user retrieval
@@ -159,7 +159,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     }
 
 # Mobile-specific endpoints
-@app.get("/api/v1/mobile/config")
+@app.get("/mobile/config")
 async def get_mobile_config():
     """Configuration endpoint for mobile apps"""
     return {

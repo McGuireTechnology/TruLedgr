@@ -90,12 +90,12 @@ export const api = {
 
   // Authentication
   async register(userData: UserCreate): Promise<User> {
-    const response = await apiClient.post<User>('/api/v1/auth/register', userData)
+    const response = await apiClient.post<User>('/auth/register', userData)
     return response.data
   },
 
   async login(credentials: { email: string; password: string }): Promise<TokenResponse> {
-    const response = await apiClient.post<TokenResponse>('/api/v1/auth/login', credentials)
+    const response = await apiClient.post<TokenResponse>('/auth/login', credentials)
 
     // Store token in localStorage
     if (response.data.access_token) {
@@ -110,13 +110,13 @@ export const api = {
   },
 
   async getCurrentUser(): Promise<User> {
-    const response = await apiClient.get<User>('/api/v1/users/me')
+    const response = await apiClient.get<User>('/users/me')
     return response.data
   },
 
   // Mobile config (useful for feature flags)
   async getMobileConfig(): Promise<MobileConfig> {
-    const response = await apiClient.get<MobileConfig>('/api/v1/mobile/config')
+    const response = await apiClient.get<MobileConfig>('/mobile/config')
     return response.data
   },
 }

@@ -299,19 +299,19 @@ def get_api_landing_page() -> str:
                 </div>
                 <div class="endpoint">
                     <span class="method post">POST</span>
-                    <span class="path">/api/v1/auth/register</span> - User registration
+                    <span class="path">/auth/register</span> - User registration
                 </div>
                 <div class="endpoint">
                     <span class="method post">POST</span>
-                    <span class="path">/api/v1/auth/login</span> - User authentication
+                    <span class="path">/auth/login</span> - User authentication
                 </div>
                 <div class="endpoint">
                     <span class="method get">GET</span>
-                    <span class="path">/api/v1/users/me</span> - Current user profile
+                    <span class="path">/users/me</span> - Current user profile
                 </div>
                 <div class="endpoint">
                     <span class="method get">GET</span>
-                    <span class="path">/api/v1/mobile/config</span> - Mobile app configuration
+                    <span class="path">/mobile/config</span> - Mobile app configuration
                 </div>
             </div>
             
@@ -322,11 +322,11 @@ def get_api_landing_page() -> str:
                     <a href="/health" target="_blank" style="background: #48bb78; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;">
                         <i class="fas fa-heartbeat"></i> /health
                     </a>
-                    <a href="/api/v1/mobile/config" target="_blank" style="background: #4299e1; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;">
+                    <a href="/mobile/config" target="_blank" style="background: #4299e1; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;">
                         <i class="fas fa-mobile-alt"></i> /mobile/config
                     </a>
-                    <a href="/api" target="_blank" style="background: #805ad5; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;">
-                        <i class="fas fa-code"></i> /api
+                    <a href="/status" target="_blank" style="background: #805ad5; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;">
+                        <i class="fas fa-code"></i> /status
                     </a>
                 </div>
             </div>
