@@ -1,0 +1,78 @@
+/* Custom CSS for TruLedgr Documentation */
+
+:root {
+  --md-primary-fg-color: #667eea;
+  --md-primary-fg-color--light: #7c8af0;
+  --md-primary-fg-color--dark: #5a73e8;
+}
+
+.md-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.md-tabs {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+}
+
+/* Custom styling for the landing page */
+.md-typeset .highlight > pre code {
+  border-radius: 8px;
+}
+
+.md-typeset .admonition {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+/* Custom button styling */
+.md-button--primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+}
+
+.md-button--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Table styling */
+.md-typeset table:not([class]) th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Code block improvements */
+.md-typeset .highlight {
+  background: #1a1a1a;
+  border-radius: 8px;
+}
+
+/* Custom hero section if added */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 0;
+  text-align: center;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+/* Custom footer */
+.md-footer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+}

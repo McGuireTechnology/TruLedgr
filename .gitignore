@@ -79,3 +79,6 @@ frontend/yarn-error.log*
 # Temporary files
 *.tmp
 *.temp
+
+# MkDocs
+site/
