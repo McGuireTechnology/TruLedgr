@@ -3,18 +3,18 @@
   "name": "truledgr-www",
   "builds": [
     {
-      "src": "www/**/*",
+      "src": "dist/**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/www/$1"
+      "dest": "/dist/$1"
     },
     {
       "src": "/",
-      "dest": "/www/index.html"
+      "dest": "/dist/index.html"
     }
   ],
   "headers": [

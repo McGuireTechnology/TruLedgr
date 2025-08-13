@@ -1,0 +1,16 @@
+name = "truledgr-www"
+compatibility_date = "2024-08-13"
+
+# Cloudflare Pages configuration for Vue/Vite build
+pages_build_output_dir = "dist"
+
+# Build configuration:
+# - Build command: cd www && npm ci && npm run build
+# - Build output directory: dist (relative to www directory)
+# - Root directory: www
+# 
+# The build process:
+# 1. Set root directory to www in Cloudflare Pages dashboard
+# 2. Run npm ci to install dependencies
+# 3. Run npm run build to create Vue production build in dist/
+# 4. Cloudflare Pages will serve from dist directory
