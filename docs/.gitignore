@@ -1,0 +1,21 @@
+# MkDocs
+site/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
