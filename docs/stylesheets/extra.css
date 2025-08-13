@@ -70,9 +70,68 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+/* Header repository name styling */
+.md-header__source {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 200px !important;
+}
+
+.md-source {
+  max-width: 280px !important;
+  width: auto !important;
+}
+
+.md-source__repository {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+}
+
+/* Adjust header layout for repository name */
+.md-header__inner {
+  max-width: 100% !important;
+}
+
+.md-header__title {
+  flex-shrink: 1 !important;
+}
+
+/* Ensure search doesn't compress repository name */
+.md-search {
+  flex-shrink: 2 !important;
+  max-width: 300px;
+}
+
+/* On smaller screens, prioritize repository name */
+@media screen and (max-width: 1200px) {
+  .md-search {
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .md-search {
+    max-width: 200px;
+  }
+  
+  .md-source {
+    min-width: 180px !important;
+  }
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .hero {
     padding: 2rem 1rem;
+  }
+  
+  .md-source {
+    min-width: 160px !important;
+  }
+  
+  .md-search {
+    max-width: 150px;
   }
 }
