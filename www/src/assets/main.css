@@ -206,9 +206,9 @@ a {
 
 .hero-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 4rem;
-  align-items: center;
+  text-align: center;
   position: relative;
   z-index: 1;
 }
@@ -952,14 +952,7 @@ a {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .hero-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 3rem;
-  }
-  
   .hero-visual {
-    order: -1;
     scale: 0.8;
   }
   

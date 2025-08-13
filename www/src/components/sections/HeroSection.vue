@@ -1,6 +1,40 @@
 <template>
   <section class="hero">
     <div class="hero-container">
+      <div class="hero-visual">
+        <div class="hero-dashboard">
+          <div class="dashboard-mockup">
+            <div class="mockup-header">
+              <div class="mockup-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="mockup-title">dash.truledgr.app</div>
+            </div>
+            <div class="mockup-content">
+              <div class="mockup-chart"></div>
+              <div class="mockup-stats">
+                <div class="mockup-stat"></div>
+                <div class="mockup-stat"></div>
+                <div class="mockup-stat"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-mobile">
+          <div class="mobile-mockup">
+            <div class="mobile-screen">
+              <div class="mobile-header"></div>
+              <div class="mobile-content">
+                <div class="mobile-card"></div>
+                <div class="mobile-card"></div>
+                <div class="mobile-card"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="hero-content">
         <h1 class="hero-title">
           Modern Financial Management
@@ -33,40 +67,6 @@
           <div class="stat">
             <div class="stat-number">24/7</div>
             <div class="stat-label">Support</div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-dashboard">
-          <div class="dashboard-mockup">
-            <div class="mockup-header">
-              <div class="mockup-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="mockup-title">dash.truledgr.app</div>
-            </div>
-            <div class="mockup-content">
-              <div class="mockup-chart"></div>
-              <div class="mockup-stats">
-                <div class="mockup-stat"></div>
-                <div class="mockup-stat"></div>
-                <div class="mockup-stat"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-mobile">
-          <div class="mobile-mockup">
-            <div class="mobile-screen">
-              <div class="mobile-header"></div>
-              <div class="mobile-content">
-                <div class="mobile-card"></div>
-                <div class="mobile-card"></div>
-                <div class="mobile-card"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
