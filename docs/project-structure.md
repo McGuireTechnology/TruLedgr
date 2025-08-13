@@ -1,6 +1,5 @@
 # Project Structure Migration Guide
 
-
 ## Overview
 The TruLedgr project has been restructured for better separation of concerns and cleaner deployments.
 
