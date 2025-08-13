@@ -7,18 +7,22 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
-  
-# Cache static assets for 1 year
-/styles/*
-  Cache-Control: public, max-age=31536000, immutable
 
-/scripts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Cache HTML for 1 hour
+# Set proper MIME types for HTML files
 /*.html
+  Content-Type: text/html; charset=utf-8
   Cache-Control: public, max-age=3600
 
-# Cache root index for 1 hour
+# Root index should be HTML
 /
+  Content-Type: text/html; charset=utf-8
   Cache-Control: public, max-age=3600
+
+# Set proper MIME types for assets
+/styles/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
+
+/scripts/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
