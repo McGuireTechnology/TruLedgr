@@ -1,0 +1,23 @@
+# Marketing Website deployment for Digital Ocean App Platform
+name: truledgr-www
+static_sites:
+  - name: www
+    source_dir: /www
+    github:
+      repo: McGuireTechnology/truledgr
+      branch: main
+    build_command: echo "Static site - no build required"
+    output_dir: /
+    index_document: index.html
+    error_document: index.html
+    routes:
+      - path: /
+    cors:
+      allow_origins:
+        - "*"
+      allow_methods:
+        - GET
+        - HEAD
+        - OPTIONS
+      allow_headers:
+        - "*"

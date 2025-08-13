@@ -1,10 +1,25 @@
 name = "truledgr-www"
 compatibility_date = "2024-08-13"
 
-# Cloudflare Pages configuration
+# Cloudflare Pages configuration for Vue/Vite build
+pages_build_output_dir = "."
+
+# Build configuration:
+# - Build command: ./build.sh
+# - Build output directory: (empty/default)
+# - Root directory: (empty/default)
+# 
+# The build script will:
+# 1. Run npm ci in the www directory
+# 2. Run npm run build to create Vue production build
+# 3. Copy dist/* to root directory for Cloudflare Pagesuledgr-www"
+compatibility_date = "2024-08-13"
+
+# Cloudflare Pages configuration for Vue/Vite build
 pages_build_output_dir = "."
 
 # Build configuration should be set in Cloudflare Pages dashboard:
 # - Build command: ./build.sh
 # - Build output directory: (empty/default)
 # - Root directory: (empty/default)
+# This will build the Vue app and copy files to root
