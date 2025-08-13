@@ -1,8 +1,10 @@
 name = "truledgr-www"
 compatibility_date = "2024-08-13"
 
-# This is for Cloudflare Pages
+# Cloudflare Pages configuration
+pages_build_output_dir = "."
+
 # Build configuration should be set in Cloudflare Pages dashboard:
-# - Build command: (empty)
-# - Build output directory: www
+# - Build command: ./build.sh
+# - Build output directory: (empty/default)
 # - Root directory: (empty/default)
