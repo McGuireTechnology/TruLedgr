@@ -1,0 +1,272 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "truledgr"
+version = "0.1.0"
+description = "A modern, secure Personal Finance Application"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [
+    { name = "McGuire Technology, LLC", email = "developer@mcguire.technology" },
+]
+maintainers = [
+    { name = "Nathan C. McGuire", email = "nathan@mcguire.technology" },
+]
+keywords = [
+    "finance",
+    "budgeting",
+    "expenses",
+    "personal-finance",
+    "fastapi",
+    "vue",
+    "web-application"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: FastAPI",
+    "Environment :: Web Environment",
+    "Operating System :: OS Independent",
+]
+
+# Core dependencies for the application
+dependencies = [
+    "fastapi[standard]>=0.104.0",
+    "sqlmodel>=0.0.14",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "aiosqlite>=0.19.0",
+    "passlib[argon2,bcrypt]>=1.7.4",
+    "python-jose>=3.3.0",
+    "ulid-py>=1.1.0",
+    "pyotp>=2.9.0",
+    "qrcode[pil]>=7.4.2",
+    "greenlet>=3.0.0",
+]
+
+[project.optional-dependencies]
+# Documentation dependencies
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.2.0",
+    "pymdown-extensions>=10.4.0",
+]
+
+# Development dependencies
+dev = [
+    # Testing
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.25.0",
+    
+    # Code quality
+    "black>=23.9.0",
+    "isort>=5.12.0",
+    "pylint>=3.0.0",
+    "mypy>=1.6.0",
+    "pre-commit>=3.5.0",
+    
+    # Development tools
+    "watchfiles>=0.21.0",
+    "python-dotenv>=1.0.0",
+    "ipython>=8.17.0",
+]
+
+# Production database support
+postgres = [
+    "asyncpg>=0.29.0",
+    "psycopg2-binary>=2.9.7",
+]
+
+# Landing page specific dependencies (if different from main app)
+landing = [
+    # Add landing-specific deps here if needed
+    # For now, inherits from base dependencies
+]
+
+# Full development environment
+full = [
+    "truledgr[dev,docs,postgres]",
+]
+
+# Testing environment
+test = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.25.0",
+    "faker>=20.1.0",
+]
+
+# Performance monitoring
+monitoring = [
+    "sentry-sdk[fastapi]>=1.38.0",
+    "prometheus-client>=0.19.0",
+]
+
+[project.urls]
+Homepage = "https://truledgr.app"
+Documentation = "https://docs.truledgr.app"
+Repository = "https://github.com/McGuireTechnology/TruLedgr"
+Issues = "https://github.com/McGuireTechnology/TruLedgr/issues"
+Changelog = "https://docs.truledgr.app/about/changelog/"
+
+[project.scripts]
+truledgr-api = "tools.launchers:start_api"
+truledgr-docs = "tools.launchers:start_docs"
+truledgr-dash = "tools.launchers:start_dash"
+truledgr-landing = "tools.launchers:start_landing"
+
+[tool.hatch.version]
+path = "__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+exclude = [
+    "/.git",
+    "/.github",
+    "/node_modules",
+    "/dashboard/node_modules", 
+    "/dashboard/dist",
+    "/site",
+    "*.db",
+    ".env*",
+    "/recycle",
+]
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+)/
+'''
+
+# isort configuration
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["api", "scripts"]
+known_third_party = ["fastapi", "sqlmodel", "pydantic"]
+
+# pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+asyncio_mode = "auto"
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["api", "scripts"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/conftest.py",
+    "*/migrations/*",
+    "/dashboard/*",
+    "/docs/*",
+    "/recycle/*",
+    "/.github/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "qrcode.*",
+    "pyotp.*",
+    "jose.*",
+    "passlib.*",
+    "ulid.*",
+]
+ignore_missing_imports = true
+
+# Pylint configuration
+[tool.pylint.messages_control]
+disable = [
+    "C0330",  # Wrong hanging indentation
+    "C0326",  # Bad whitespace
+    "R0903",  # Too few public methods
+    "R0913",  # Too many arguments
+    "W0613",  # Unused argument
+]
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.pylint.design]
+max-args = 8
+max-locals = 15
+max-returns = 6
+max-branches = 12
+max-statements = 50
+max-parents = 7
+max-attributes = 7
+min-public-methods = 2
+max-public-methods = 20
