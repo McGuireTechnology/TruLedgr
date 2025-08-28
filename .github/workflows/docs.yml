@@ -82,7 +82,7 @@ jobs:
         mkdocs build --clean --strict
 
     - name: Upload documentation artifact
-      uses: actions/upload-pages-artifact@v2
+      uses: actions/upload-pages-artifact@v4
       with:
         path: ./site
 
@@ -95,4 +95,4 @@ jobs:
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v2
+      uses: actions/deploy-pages@v4
