@@ -1,4 +1,4 @@
-name: truledgr-api
+name: truledgr
 region: nyc1
 
 # Environment variables
@@ -15,24 +15,14 @@ envs:
     scope: RUN_AND_BUILD_TIME
     type: SECRET
 
-# Services
 services:
   - name: api
     source_dir: /
-    
-    # Build configuration
-    build:
-      method: docker
-      dockerfile_path: Dockerfile
-    
-    # Runtime environment
+    dockerfile_path: Dockerfile
+    build_method: docker
     instance_count: 1
     instance_size_slug: basic-xxs
-
-    # HTTP configuration
     http_port: 8000
-
-    # Health checks
     health_check:
       http_path: /health
       initial_delay_seconds: 60
@@ -40,8 +30,6 @@ services:
       timeout_seconds: 5
       success_threshold: 1
       failure_threshold: 3
-
-    # Routes
     routes:
       - path: /
 
