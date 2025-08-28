@@ -256,6 +256,15 @@ class Settings(BaseSettings):
     @classmethod
     def validate_database_url(cls, v):
         """Validate and normalize database URL format."""
+        # Handle SSL parameters for asyncpg
+        if "sslmode=require" in v:
+            # Remove sslmode from URL and add ssl=true parameter
+            v = v.replace("?sslmode=require", "").replace("&sslmode=require", "")
+            if "?" in v:
+                v += "&ssl=true"
+            else:
+                v += "?ssl=true"
+        
         # Handle standard PostgreSQL URLs without async driver
         if v.startswith("postgresql://"):
             v = v.replace("postgresql://", "postgresql+asyncpg://", 1)

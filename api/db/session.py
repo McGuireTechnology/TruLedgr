@@ -36,12 +36,24 @@ if settings.database_url.startswith("sqlite"):
     )
 else:
     # PostgreSQL/MySQL configuration
+    # Extract SSL parameter from URL if present
+    connect_args = {}
+    database_url = settings.database_url_for_env
+    
+    if "ssl=true" in database_url:
+        connect_args["ssl"] = True
+        # Remove ssl parameter from URL as it's now in connect_args
+        database_url = database_url.replace("?ssl=true", "").replace("&ssl=true", "")
+        if database_url.endswith("?"):
+            database_url = database_url[:-1]
+    
     engine: AsyncEngine = create_async_engine(
-        settings.database_url_for_env,
+        database_url,
         echo=settings.db_echo,
         pool_size=settings.db_pool_size,
         max_overflow=settings.db_max_overflow,
         pool_recycle=settings.db_pool_recycle,
+        connect_args=connect_args
     )
 
 # Create async session factory
