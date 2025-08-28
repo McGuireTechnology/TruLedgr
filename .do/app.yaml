@@ -18,6 +18,9 @@ envs:
 services:
   - name: api
     source_dir: /
+    github:
+      repo: McGuireTechnology/TruLedgr
+      branch: main
     dockerfile_path: Dockerfile
     instance_count: 1
     instance_size_slug: basic-xxs
