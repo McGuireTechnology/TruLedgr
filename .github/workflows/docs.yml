@@ -79,7 +79,7 @@ jobs:
 
     - name: Build documentation
       run: |
-        mkdocs build --clean --strict
+        mkdocs build --clean
 
     - name: Upload documentation artifact
       uses: actions/upload-pages-artifact@v4

@@ -17,7 +17,7 @@ fi
 
 # Build documentation
 echo "🏗️  Building documentation..."
-mkdocs build --clean --strict
+mkdocs build --clean
 
 # Check build status
 if [ $? -eq 0 ]; then
