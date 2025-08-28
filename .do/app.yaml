@@ -1,0 +1,94 @@
+name: truledgr
+services:
+- name: fastapi-security-sample
+  source_dir: /
+  github:
+    repo: username/fastapi-security-sample  # Replace with your GitHub repo
+    branch: main
+    deploy_on_push: true
+  dockerfile_path: Dockerfile
+  
+  # Instance configuration
+  instance_count: 2
+  instance_size_slug: basic-xxs  # $5/month instances
+  
+  # Environment variables
+  envs:
+  - key: ENVIRONMENT
+    value: production
+  - key: SECRET_KEY
+    value: ${SECRET_KEY}  # Set in DO App Platform dashboard
+    type: SECRET
+  - key: DATABASE_URL
+    value: ${DATABASE_URL}
+    type: SECRET
+  - key: CORS_ORIGINS
+    value: https://your-frontend.ondigitalocean.app
+  - key: LOG_LEVEL
+    value: INFO
+  - key: ACCESS_TOKEN_EXPIRE_MINUTES
+    value: "30"
+  
+  # Health check
+  health_check:
+    http_path: /health
+    initial_delay_seconds: 10
+    period_seconds: 10
+    timeout_seconds: 5
+    failure_threshold: 3
+    success_threshold: 1
+  
+  # HTTP configuration
+  http_port: 8000
+  
+  # Auto-scaling
+  instance_size_slug: basic-xxs
+  instance_count: 2
+  
+  # Routes
+  routes:
+  - path: /
+    
+# Database (managed PostgreSQL)
+databases:
+- name: fastapi-security-db
+  engine: PG
+  size: db-s-1vcpu-1gb  # $15/month
+  num_nodes: 1
+  version: "15"
+
+# Static site for frontend (optional)
+static_sites:
+- name: frontend
+  source_dir: /frontend
+  github:
+    repo: username/fastapi-security-frontend
+    branch: main
+    deploy_on_push: true
+  build_command: npm run build
+  output_dir: /dist
+  
+  # Environment variables for frontend
+  envs:
+  - key: VITE_API_URL
+    value: ${APP_URL}
+    
+# Domain configuration
+domains:
+- domain: your-app.your-domain.com
+  type: PRIMARY
+  wildcard: false
+  zone: your-domain.com
+
+# Features
+features:
+- buildpack-stack=ubuntu-22
+
+# Alerts
+alerts:
+- rule: CPU_UTILIZATION
+  value: 80
+- rule: MEM_UTILIZATION  
+  value: 80
+- rule: RESTART_COUNT
+  value: 5
