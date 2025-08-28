@@ -420,33 +420,34 @@ class TestSettings(Settings):
 @lru_cache()
 def get_settings() -> Settings:
     """Get cached settings instance with proper loading order: .env -> .env.local -> .env.{environment} -> .env.local."""
-    # Step 1: Load base .env and .env.local to determine environment
-    try:
-        from dotenv import dotenv_values
-        
-        # Load in order: .env, then .env.local
-        base_values = dotenv_values(".env")
-        local_values = dotenv_values(".env.local")
-        
-        # Merge with local taking priority
-        combined_values = {**base_values, **local_values}
-        env = combined_values.get("ENVIRONMENT", "development")
-        
-    except ImportError:
-        # Fallback without python-dotenv
-        env = os.getenv("ENVIRONMENT")
-        if env is None:
+    # Step 1: Check environment variable first (for containerized deployments)
+    env = os.getenv("ENVIRONMENT")
+    
+    # Step 2: If no environment variable, try to load from .env files
+    if env is None:
+        try:
+            from dotenv import dotenv_values
+            
+            # Load in order: .env, then .env.local
+            base_values = dotenv_values(".env")
+            local_values = dotenv_values(".env.local")
+            
+            # Merge with local taking priority
+            combined_values = {**base_values, **local_values}
+            env = combined_values.get("ENVIRONMENT")
+            
+        except ImportError:
+            # Fallback without python-dotenv - try reading .env file directly
             try:
                 with open(".env", "r") as f:
                     for line in f:
                         if line.strip().startswith("ENVIRONMENT="):
                             env = line.split("=", 1)[1].strip().strip('"').strip("'")
                             break
-                    else:
-                        env = "development"
             except FileNotFoundError:
-                env = "development"
+                pass
     
+    # Default to development if no environment is found
     env = (env or "development").lower()
     
     # Step 2: Return the appropriate settings class
