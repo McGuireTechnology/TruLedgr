@@ -19,7 +19,6 @@ services:
   - name: api
     source_dir: /
     dockerfile_path: Dockerfile
-    build_method: docker
     instance_count: 1
     instance_size_slug: basic-xxs
     http_port: 8000
