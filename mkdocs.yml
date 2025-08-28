@@ -140,31 +140,16 @@ markdown_extensions:
 nav:
   - Home: index.md
   - User Guide:
-    - Getting Started: user-guide/getting-started.md
-    - Managing Finances: user-guide/managing-finances.md
-    - Budgets & Analytics: user-guide/budgets-analytics.md
-    - Family & Household: user-guide/family-household.md
-    - Security & Privacy: user-guide/security-privacy.md
-    - FAQ: user-guide/faq.md
+    - Getting Started: user/getting-started.md
+    - Managing Finances: user/managing-finances.md
+    - FAQ: user/faq.md
   - Tutorials:
     - Quick Start Guide: tutorials/quick-start.md
     - Your First Budget: tutorials/first-budget.md
     - Family Finance Setup: tutorials/family-setup.md
     - Importing Your Data: tutorials/importing-data.md
   - Developer Guide:
-    - Overview: developer-guide/overview.md
-    - Development Setup: developer-guide/setup.md
-    - Architecture: developer-guide/architecture.md
-    - Backend Development: developer-guide/backend.md
-    - Frontend Development: developer-guide/frontend.md
-    - Testing: developer-guide/testing.md
-    - Deployment: developer-guide/deployment.md
-    - API Reference: developer-guide/api-reference.md
-  - API Documentation:
-    - Overview: api-documentation.md
-    - Plaid Integration: plaid-integration.md
-    - API Landing: api-landing-page.md
-    - URL Structure: api-url-cleanup.md
+    - Overview: developer/overview.md
   - Integrations:
     - Overview: integrations/overview.md
   - Security:
@@ -180,8 +165,6 @@ nav:
     - Data Model: reference/data-model.md
   - Contributing:
     - Guidelines: contributing/guidelines.md
-    - Code Style: contributing/code-style.md
-    - Pull Requests: contributing/pull-requests.md
   - About:
     - License: about/license.md
     - Changelog: about/changelog.md
