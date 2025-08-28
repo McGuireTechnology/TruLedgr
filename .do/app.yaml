@@ -1,9 +1,9 @@
 name: truledgr
 services:
-- name: fastapi-security-sample
+- name: truledgr
   source_dir: /
   github:
-    repo: username/fastapi-security-sample  # Replace with your GitHub repo
+    repo: McGuireTechnology/TruLedgr
     branch: main
     deploy_on_push: true
   dockerfile_path: Dockerfile

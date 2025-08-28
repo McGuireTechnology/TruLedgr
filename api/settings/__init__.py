@@ -174,7 +174,7 @@ class Settings(BaseSettings):
     metrics_endpoint: str = Field(default="/metrics", description="Metrics endpoint path")
     
     tracing_enabled: bool = Field(default=True, description="Enable OpenTelemetry tracing")
-    tracing_service_name: str = Field(default="fastapi-security-sample", description="Service name for tracing")
+    tracing_service_name: str = Field(default="truledgr", description="Service name for tracing")
     tracing_sample_rate: float = Field(default=0.1, description="Tracing sample rate (0.0-1.0)")
     
     sentry_dsn: Optional[str] = Field(default=None, description="Sentry DSN for error tracking")

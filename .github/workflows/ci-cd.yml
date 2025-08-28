@@ -203,17 +203,15 @@ jobs:
     - name: Deploy to DigitalOcean Kubernetes
       run: |
         # Update deployment image
-        kubectl set image deployment/fastapi-security-sample \
-          fastapi-security-sample=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+        kubectl set image deployment/truledgr \
+          truledgr=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
           --namespace=production
           
         # Wait for rollout
-        kubectl rollout status deployment/fastapi-security-sample --namespace=production
+        kubectl rollout status deployment/truledgr --namespace=production
         
-        # Verify deployment
-        kubectl get pods --namespace=production -l app=fastapi-security-sample
-
-  # Deploy to Digital Ocean App Platform (alternative)
+        # Get deployment status
+        kubectl get pods --namespace=production -l app=truledgr  # Deploy to Digital Ocean App Platform (alternative)
   deploy-app-platform:
     needs: [build]
     runs-on: ubuntu-latest
@@ -226,11 +224,11 @@ jobs:
     - name: Deploy to DO App Platform
       uses: digitalocean/app_action@v1.1.5
       with:
-        app_name: fastapi-security-sample
+        app_name: truledgr
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         images: |
           [{
-            "name": "fastapi-security-sample",
+            "name": "truledgr",
             "image": {
               "registry_type": "GHCR",
               "registry": "${{ env.REGISTRY }}",

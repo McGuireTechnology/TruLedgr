@@ -3,13 +3,13 @@
 # Digital Ocean deployment script
 set -e
 
-echo "🚀 Deploying FastAPI Security Sample to Digital Ocean"
+echo "🚀 Deploying TruLedgr to Digital Ocean"
 
 # Configuration
-APP_NAME="fastapi-security-sample"
+APP_NAME="truledgr"
 NAMESPACE="production"
 REGISTRY="ghcr.io"
-REPO="${GITHUB_REPOSITORY:-username/fastapi-security-sample}"
+REPO="${GITHUB_REPOSITORY:-McGuireTechnology/TruLedgr}"
 IMAGE_TAG="${GITHUB_SHA:-latest}"
 
 # Check required tools
