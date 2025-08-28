@@ -19,14 +19,12 @@ envs:
 services:
   - name: api
     source_dir: /
-    github:
-      repo: McGuireTechnology/TruLedgr
-      branch: main
-      deploy_on_push: true
-
-    # Use the existing Dockerfile
-    dockerfile_path: Dockerfile
-
+    
+    # Build configuration
+    build:
+      method: docker
+      dockerfile_path: Dockerfile
+    
     # Runtime environment
     instance_count: 1
     instance_size_slug: basic-xxs
