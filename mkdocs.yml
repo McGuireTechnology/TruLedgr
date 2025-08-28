@@ -72,6 +72,11 @@ nav:
     - Family & Household: user-guide/family-household.md
     - Security & Privacy: user-guide/security-privacy.md
     - FAQ: user-guide/faq.md
+  - Tutorials:
+    - Quick Start Guide: tutorials/quick-start.md
+    - Your First Budget: tutorials/first-budget.md
+    - Family Finance Setup: tutorials/family-setup.md
+    - Importing Your Data: tutorials/importing-data.md
   - Developer Guide:
     - Overview: developer-guide/overview.md
     - Development Setup: developer-guide/setup.md
@@ -81,6 +86,19 @@ nav:
     - Testing: developer-guide/testing.md
     - Deployment: developer-guide/deployment.md
     - API Reference: developer-guide/api-reference.md
+  - Integrations:
+    - Overview: integrations/overview.md
+  - Security:
+    - Overview: security/overview.md
+  - Support:
+    - Overview: support/overview.md
+  - Reference:
+    - Glossary: reference/glossary.md
+    - Keyboard Shortcuts: reference/keyboard-shortcuts.md
+    - File Formats: reference/file-formats.md
+    - System Requirements: reference/system-requirements.md
+    - Feature Comparison: reference/feature-comparison.md
+    - Data Model: reference/data-model.md
   - Contributing:
     - Guidelines: contributing/guidelines.md
     - Code Style: contributing/code-style.md
