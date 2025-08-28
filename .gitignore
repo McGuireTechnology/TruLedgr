@@ -428,3 +428,148 @@ docker-compose.override.yml
 
 # CI/CD artifacts
 .github/workflows/*.bak
+
+# =============================================================================
+# MOBILE DEVELOPMENT
+# =============================================================================
+
+# =============================================================================
+# iOS / XCODE
+# =============================================================================
+
+# Xcode user files
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Xcode build outputs
+build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode state files
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Xcode Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj/
+
+# CocoaPods
+Pods/
+*.podspec
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# Swift Package Manager artifacts
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# =============================================================================
+# ANDROID
+# =============================================================================
+
+# Gradle files
+.gradle/
+build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Android Studio / IntelliJ
+*.iml
+.idea/
+.settings/
+.project
+.classpath
+
+# Android build outputs
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Android SDK
+sdk/
+
+# Android NDK
+ndk/
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services
+google-services.json
+
+# Firebase
+firebase-debug.log
+.firebase/
+
+# Android Lint
+lint-report.html
+lint-report.xml
+lint-results.xml
+
+# Proguard
+proguard/
+
+# Log Files
+*.log
+
+# =============================================================================
+# REACT NATIVE (if used in future)
+# =============================================================================
+
+# React Native
+.expo/
+.expo-shared/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Metro
+.metro-health-check*
+
+# =============================================================================
+# FLUTTER (if used in future)
+# =============================================================================
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.g.dart
+*.freezed.dart
+*.gr.dart
