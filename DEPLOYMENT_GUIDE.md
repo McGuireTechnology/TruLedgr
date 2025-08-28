@@ -190,11 +190,9 @@ region: nyc1
 services:
   - name: api
     source_dir: /
-    github:
-      repo: McGuireTechnology/TruLedgr
-      branch: main
-      deploy_on_push: true
-    dockerfile_path: Dockerfile
+    build:
+      method: docker
+      dockerfile_path: Dockerfile
     instance_count: 1
     instance_size_slug: basic-xxs
     http_port: 8000
@@ -304,14 +302,22 @@ doctl apps update $APP_ID --instance-count 2
 
 ### Common Issues
 
-1. **App Platform Wizard detects Node.js instead of Python/FastAPI**
+1. **App Platform detects buildpack instead of Docker**
 
-   **Solution**: This is expected behavior. The repository contains both Python (backend) and Node.js (documentation) files. The `.do/app.yaml` configuration explicitly specifies Docker/Python deployment. Do not change the wizard settings - the configuration is correct.
+   **Solution**: The `.do/app.yaml` now includes explicit Docker build configuration:
+   
+   ```yaml
+   build:
+     method: docker
+     dockerfile_path: Dockerfile
+   ```
+   
+   This forces Digital Ocean to use Docker instead of buildpack detection.
 
    **Why this happens**:
-   - Root `package.json` exists for documentation purposes only
-   - `.do/.doignore` excludes Node.js files from deployment
-   - `.do/app.yaml` specifies Docker build with Python runtime
+   - DO App Platform may default to buildpack when it detects multiple build files
+   - The explicit `method: docker` overrides automatic detection
+   - `.do/.doignore` excludes conflicting build files
 
 2. **Deployment Failures**
 
