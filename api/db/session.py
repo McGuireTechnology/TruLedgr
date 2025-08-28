@@ -49,15 +49,18 @@ def create_engine_instance() -> AsyncEngine:
         database_url = settings.database_url_for_env
         
         if "ssl=true" in database_url:
-            connect_args["ssl"] = True
-            
-            # Configure SSL certificate verification based on settings
+            # Configure SSL for asyncpg
             if not settings.database_ssl_verify:
+                # For managed databases with self-signed certificates
+                # Use SSL but don't verify the certificate
                 import ssl
                 ssl_context = ssl.create_default_context()
                 ssl_context.check_hostname = False
                 ssl_context.verify_mode = ssl.CERT_NONE
-                connect_args["ssl_context"] = ssl_context
+                connect_args["ssl"] = ssl_context
+            else:
+                # Enable SSL with proper certificate verification
+                connect_args["ssl"] = True
             
             # Remove ssl parameter from URL as it's now in connect_args
             database_url = database_url.replace("?ssl=true", "").replace("&ssl=true", "")
