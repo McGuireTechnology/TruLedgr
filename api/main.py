@@ -137,6 +137,12 @@ def include_routers(app: FastAPI):
         app.include_router(items_router)
     except ImportError:
         print("⚠️ Items router not available")
+    
+    try:
+        from api.activities.router import router as activities_router
+        app.include_router(activities_router)
+    except ImportError:
+        print("⚠️ Activities router not available")
 
 
 
