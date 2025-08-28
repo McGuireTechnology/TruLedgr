@@ -255,7 +255,16 @@ class Settings(BaseSettings):
     @field_validator("database_url")
     @classmethod
     def validate_database_url(cls, v):
-        """Validate database URL format."""
+        """Validate and normalize database URL format."""
+        # Handle standard PostgreSQL URLs without async driver
+        if v.startswith("postgresql://"):
+            v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        elif v.startswith("mysql://"):
+            v = v.replace("mysql://", "mysql+aiomysql://", 1)
+        elif v.startswith("sqlite://"):
+            v = v.replace("sqlite://", "sqlite+aiosqlite://", 1)
+        
+        # Validate the final URL has an async driver
         if not v.startswith(("sqlite+aiosqlite://", "postgresql+asyncpg://", "mysql+aiomysql://")):
             raise ValueError("Database URL must use an async driver (aiosqlite, asyncpg, aiomysql)")
         return v
