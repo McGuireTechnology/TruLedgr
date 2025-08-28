@@ -29,12 +29,12 @@ from .schemas import (
     BulkTransactionUpdateRequest,
     TransactionDuplicateCheckRequest,
     TransactionDuplicateResponse,
-    UserCategoryCreate,
-    UserCategoryUpdate,
-    UserCategoryResponse,
-    UserCategoryTreeResponse,
-    UserCategoryListResponse,
-    UserCategoryMoveRequest,
+    TransactionCategoryCreate,
+    TransactionCategoryUpdate,
+    TransactionCategoryResponse,
+    TransactionCategoryTreeResponse,
+    TransactionCategoryListResponse,
+    TransactionCategoryMoveRequest,
     CategoryRuleCreate,
     CategoryRuleUpdate,
     CategoryRuleResponse,
@@ -43,6 +43,7 @@ from .schemas import (
     CategoryRuleTestResponse
 )
 from .models import TransactionCategory, TransactionSubcategory, TransactionStatus, TransactionSource
+from .service import transaction_service, transaction_category_service, category_rule_service
 
 logger = logging.getLogger(__name__)
 
@@ -604,16 +605,16 @@ async def create_recurring_transaction(
 
 @router.post(
     "/categories",
-    response_model=UserCategoryResponse,
+    response_model=TransactionCategoryResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Create User Category",
     description="Create a new user-defined transaction category"
 )
 async def create_user_category(
-    request: UserCategoryCreate,
+    request: TransactionCategoryCreate,
     current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
-) -> UserCategoryResponse:
+) -> TransactionCategoryResponse:
     """
     Create a new user category
 
@@ -631,7 +632,7 @@ async def create_user_category(
                 detail="Cannot create category for another user"
             )
 
-        result = await user_category_service.create_category(db, request)
+        result = await transaction_category_service.create_category(db, request)
         logger.info(f"Created category {result.id} for user {current_user['id']}")
         return result
 
@@ -647,7 +648,7 @@ async def create_user_category(
 
 @router.get(
     "/categories/{category_id}",
-    response_model=UserCategoryResponse,
+    response_model=TransactionCategoryResponse,
     summary="Get User Category",
     description="Retrieve a specific user category by ID"
 )
@@ -655,7 +656,7 @@ async def get_user_category(
     category_id: str,
     current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
-) -> UserCategoryResponse:
+) -> TransactionCategoryResponse:
     """
     Get user category by ID
 
@@ -666,7 +667,7 @@ async def get_user_category(
     Returns the category if found and user has access
     """
     try:
-        category = await user_category_service.get_category_by_id(db, category_id)
+        category = await transaction_category_service.get_category_by_id(db, category_id)
 
         if not category:
             raise HTTPException(
@@ -695,16 +696,16 @@ async def get_user_category(
 
 @router.put(
     "/categories/{category_id}",
-    response_model=UserCategoryResponse,
+    response_model=TransactionCategoryResponse,
     summary="Update User Category",
     description="Update an existing user category"
 )
 async def update_user_category(
     category_id: str,
-    request: UserCategoryUpdate,
+    request: TransactionCategoryUpdate,
     current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
-) -> UserCategoryResponse:
+) -> TransactionCategoryResponse:
     """
     Update user category
 
@@ -731,7 +732,7 @@ async def update_user_category(
                 detail="Access denied to category"
             )
 
-        result = await user_category_service.update_category(db, category_id, request)
+        result = await transaction_category_service.update_category(db, category_id, request)
 
         if not result:
             raise HTTPException(
@@ -776,7 +777,7 @@ async def delete_user_category(
     """
     try:
         # First check if category exists and user has access
-        existing = await user_category_service.get_category_by_id(db, category_id)
+        existing = await transaction_category_service.get_category_by_id(db, category_id)
 
         if not existing:
             raise HTTPException(
@@ -790,7 +791,7 @@ async def delete_user_category(
                 detail="Access denied to category"
             )
 
-        success = await user_category_service.delete_category(db, category_id, reassign_to)
+        success = await transaction_category_service.delete_category(db, category_id, reassign_to)
 
         if not success:
             raise HTTPException(
@@ -812,7 +813,7 @@ async def delete_user_category(
 
 @router.get(
     "/categories",
-    response_model=UserCategoryListResponse,
+    response_model=TransactionCategoryListResponse,
     summary="List User Categories",
     description="List user categories with pagination"
 )
@@ -822,7 +823,7 @@ async def list_user_categories(
     include_inactive: bool = Query(False, description="Include inactive categories"),
     current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
-) -> UserCategoryListResponse:
+) -> TransactionCategoryListResponse:
     """
     List user categories
 
@@ -835,11 +836,11 @@ async def list_user_categories(
     Returns paginated list of user's categories
     """
     try:
-        categories, total = await user_category_service.list_categories(
+        categories, total = await transaction_category_service.list_categories(
             db, current_user["id"], skip, limit, include_inactive
         )
 
-        return UserCategoryListResponse(
+        return TransactionCategoryListResponse(
             categories=categories,
             total=total,
             skip=skip,
@@ -856,14 +857,14 @@ async def list_user_categories(
 
 @router.get(
     "/categories/tree",
-    response_model=List[UserCategoryTreeResponse],
+    response_model=List[TransactionCategoryTreeResponse],
     summary="Get Category Tree",
     description="Get hierarchical category tree for the user"
 )
 async def get_category_tree(
     current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
-) -> List[UserCategoryTreeResponse]:
+) -> List[TransactionCategoryTreeResponse]:
     """
     Get category tree
 
@@ -873,7 +874,7 @@ async def get_category_tree(
     Returns hierarchical tree of user's categories
     """
     try:
-        tree = await user_category_service.get_category_tree(db, current_user["id"])
+        tree = await transaction_category_service.get_category_tree(db, current_user["id"])
         return tree
 
     except Exception as e:
@@ -886,16 +887,16 @@ async def get_category_tree(
 
 @router.post(
     "/categories/{category_id}/move",
-    response_model=UserCategoryResponse,
+    response_model=TransactionCategoryResponse,
     summary="Move User Category",
     description="Move a category to a new parent in the hierarchy"
 )
 async def move_user_category(
     category_id: str,
-    request: UserCategoryMoveRequest,
+    request: TransactionCategoryMoveRequest,
     current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
-) -> UserCategoryResponse:
+) -> TransactionCategoryResponse:
     """
     Move user category
 
@@ -908,7 +909,7 @@ async def move_user_category(
     """
     try:
         # First check if category exists and user has access
-        existing = await user_category_service.get_category_by_id(db, category_id)
+        existing = await transaction_category_service.get_category_by_id(db, category_id)
 
         if not existing:
             raise HTTPException(
@@ -922,7 +923,7 @@ async def move_user_category(
                 detail="Access denied to category"
             )
 
-        result = await user_category_service.move_category(
+        result = await transaction_category_service.move_category(
             db, category_id, request.new_parent_id, request.sort_order
         )
 

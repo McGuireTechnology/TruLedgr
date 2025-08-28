@@ -45,11 +45,11 @@ from .schemas import (
     BulkTransactionUpdateRequest,
     TransactionDuplicateCheckRequest,
     TransactionDuplicateResponse,
-    UserCategoryCreate,
-    UserCategoryUpdate,
-    UserCategoryResponse,
-    UserCategoryTreeResponse,
-    UserCategoryMoveRequest,
+    TransactionCategoryCreate,
+    TransactionCategoryUpdate,
+    TransactionCategoryResponse,
+    TransactionCategoryTreeResponse,
+    TransactionCategoryMoveRequest,
     CategoryRuleCreate,
     CategoryRuleUpdate,
     CategoryRuleResponse,
@@ -864,14 +864,14 @@ class TransactionService:
 transaction_service = TransactionService()
 
 
-class UserCategoryService:
-    """Service class for user category operations"""
+class TransactionCategoryService:
+    """Service class for transaction category operations"""
 
     def __init__(self):
-        """Initialize the user category service"""
+        """Initialize the transaction category service"""
         pass
 
-    async def create_category(self, session: AsyncSession, request: UserCategoryCreate) -> UserCategoryResponse:
+    async def create_category(self, session: AsyncSession, request: TransactionCategoryCreate) -> TransactionCategoryResponse:
         """
         Create a new user category
 
@@ -896,7 +896,7 @@ class UserCategoryService:
             if request.parent_id:
                 # Get parent category to determine level and path
                 parent_result = await session.execute(
-                    select(UserCategory).where(UserCategory.id == request.parent_id)
+                    select(TransactionCategory).where(TransactionCategory.id == request.parent_id)
                 )
                 parent = parent_result.scalar_one_or_none()
 
@@ -910,9 +910,10 @@ class UserCategoryService:
                 path = f"{parent.path}/{request.name}"
 
             # Create category instance
-            category = UserCategory(
+            category = TransactionCategory(
                 id=category_id,
                 user_id=request.user_id,
+                group_id=request.group_id,
                 name=request.name,
                 description=request.description,
                 color=request.color,
@@ -951,7 +952,7 @@ class UserCategoryService:
                 detail="Failed to create category"
             )
 
-    async def get_category_by_id(self, session: AsyncSession, category_id: str) -> Optional[UserCategoryResponse]:
+    async def get_category_by_id(self, session: AsyncSession, category_id: str) -> Optional[TransactionCategoryResponse]:
         """
         Get category by ID
 
@@ -984,8 +985,8 @@ class UserCategoryService:
         self,
         session: AsyncSession,
         category_id: str,
-        request: UserCategoryUpdate
-    ) -> Optional[UserCategoryResponse]:
+        request: TransactionCategoryUpdate
+    ) -> Optional[TransactionCategoryResponse]:
         """
         Update an existing category
 
@@ -1095,7 +1096,7 @@ class UserCategoryService:
         skip: int = 0,
         limit: int = 100,
         include_inactive: bool = False
-    ) -> Tuple[List[UserCategoryResponse], int]:
+    ) -> Tuple[List[TransactionCategoryResponse], int]:
         """
         List categories for a user
 
@@ -1140,7 +1141,7 @@ class UserCategoryService:
                 detail="Failed to retrieve categories"
             )
 
-    async def get_category_tree(self, session: AsyncSession, user_id: str) -> List[UserCategoryTreeResponse]:
+    async def get_category_tree(self, session: AsyncSession, user_id: str) -> List[TransactionCategoryTreeResponse]:
         """
         Get hierarchical category tree for a user
 
@@ -1186,7 +1187,7 @@ class UserCategoryService:
         category_id: str,
         new_parent_id: Optional[str],
         sort_order: Optional[int] = None
-    ) -> Optional[UserCategoryResponse]:
+    ) -> Optional[TransactionCategoryResponse]:
         """
         Move a category to a new parent
 
@@ -1283,23 +1284,24 @@ class UserCategoryService:
         except Exception as e:
             logger.warning(f"Error updating child paths for {parent_id}: {str(e)}")
 
-    def _build_category_tree(self, category: UserCategory, category_map: Dict[str, UserCategory]) -> UserCategoryTreeResponse:
+    def _build_category_tree(self, category: TransactionCategory, category_map: Dict[str, TransactionCategory]) -> TransactionCategoryTreeResponse:
         """Build tree structure for a category"""
         children = []
         for cat_id, cat in category_map.items():
             if cat.parent_id == category.id:
                 children.append(self._build_category_tree(cat, category_map))
 
-        return UserCategoryTreeResponse(
+        return TransactionCategoryTreeResponse(
             category=self._category_to_response(category),
             children=children
         )
 
-    def _category_to_response(self, category: UserCategory) -> UserCategoryResponse:
+    def _category_to_response(self, category: TransactionCategory) -> TransactionCategoryResponse:
         """Convert UserCategory model to UserCategoryResponse schema"""
-        return UserCategoryResponse(
+        return TransactionCategoryResponse(
             id=category.id or "",
             user_id=category.user_id,
+            group_id=category.group_id,
             name=category.name,
             description=category.description,
             color=category.color,
@@ -1767,5 +1769,5 @@ class CategoryRuleService:
 
 
 # Global service instances
-user_category_service = UserCategoryService()
+transaction_category_service = TransactionCategoryService()
 category_rule_service = CategoryRuleService()

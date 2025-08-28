@@ -369,10 +369,10 @@ class TransactionDuplicateResponse(BaseModel):
     similar_transactions: List[TransactionResponse] = Field(default_factory=list, description="Similar transactions found")
 
 
-# User Category Schemas
+# Transaction Category Schemas
 
-class UserCategoryBase(BaseModel):
-    """Base user category schema with common fields"""
+class TransactionCategoryBase(BaseModel):
+    """Base transaction category schema with common fields"""
     model_config = ConfigDict(from_attributes=True)
 
     # Category details
@@ -397,13 +397,14 @@ class UserCategoryBase(BaseModel):
     sort_order: int = Field(default=0, description="Display order within parent")
 
 
-class UserCategoryCreate(UserCategoryBase):
-    """Schema for creating new user categories"""
-    user_id: str = Field(..., description="User ID (category owner)")
+class TransactionCategoryCreate(TransactionCategoryBase):
+    """Schema for creating new transaction categories"""
+    user_id: Optional[str] = Field(None, description="User ID (category owner, null for group categories)")
+    group_id: Optional[str] = Field(None, description="Group ID (group owner, null for user categories)")
 
 
-class UserCategoryUpdate(BaseModel):
-    """Schema for updating existing user categories"""
+class TransactionCategoryUpdate(BaseModel):
+    """Schema for updating existing transaction categories"""
     model_config = ConfigDict(from_attributes=True)
 
     # Category details
@@ -428,11 +429,12 @@ class UserCategoryUpdate(BaseModel):
     sort_order: Optional[int] = Field(None, description="Display order within parent")
 
 
-class UserCategoryResponse(UserCategoryBase):
-    """Schema for user category API responses"""
+class TransactionCategoryResponse(TransactionCategoryBase):
+    """Schema for transaction category API responses"""
     # Primary identifiers
     id: str = Field(..., description="Category ID")
-    user_id: str = Field(..., description="User ID (category owner)")
+    user_id: Optional[str] = Field(None, description="User ID (category owner, null for group categories)")
+    group_id: Optional[str] = Field(None, description="Group ID (group owner, null for user categories)")
 
     # Hierarchical structure
     level: int = Field(..., description="Category level in hierarchy (1 = root)")
@@ -449,31 +451,33 @@ class UserCategoryResponse(UserCategoryBase):
     # Computed properties
     is_root: bool = Field(..., description="Whether this is a root category")
     is_leaf: bool = Field(..., description="Whether this is a leaf category")
+    is_user_category: bool = Field(..., description="Whether this is a user-level category")
+    is_group_category: bool = Field(..., description="Whether this is a group-level category")
     full_path_list: List[str] = Field(..., description="Full path as a list of category names")
     depth: int = Field(..., description="Depth of this category in the hierarchy")
 
 
-class UserCategoryTreeResponse(BaseModel):
-    """Schema for hierarchical user category tree responses"""
-    category: UserCategoryResponse = Field(..., description="Category information")
-    children: List["UserCategoryTreeResponse"] = Field(default_factory=list, description="Child categories")
+class TransactionCategoryTreeResponse(BaseModel):
+    """Schema for hierarchical transaction category tree responses"""
+    category: TransactionCategoryResponse = Field(..., description="Category information")
+    children: List["TransactionCategoryTreeResponse"] = Field(default_factory=list, description="Child categories")
 
 
-class UserCategoryListResponse(BaseModel):
-    """Schema for paginated user category list responses"""
-    categories: List[UserCategoryResponse] = Field(..., description="List of categories")
+class TransactionCategoryListResponse(BaseModel):
+    """Schema for paginated transaction category list responses"""
+    categories: List[TransactionCategoryResponse] = Field(..., description="List of categories")
     total: int = Field(..., description="Total number of categories")
     skip: int = Field(..., description="Number of categories skipped")
     limit: int = Field(..., description="Maximum number of categories returned")
 
 
-class UserCategoryMoveRequest(BaseModel):
+class TransactionCategoryMoveRequest(BaseModel):
     """Schema for moving categories within the hierarchy"""
     new_parent_id: Optional[str] = Field(None, description="New parent category ID (None for root)")
     sort_order: Optional[int] = Field(None, description="New sort order within parent")
 
 
-class UserCategoryBulkDeleteRequest(BaseModel):
+class TransactionCategoryBulkDeleteRequest(BaseModel):
     """Schema for bulk category deletion"""
     category_ids: List[str] = Field(..., description="List of category IDs to delete")
     delete_children: bool = Field(default=False, description="Whether to delete child categories")
@@ -577,4 +581,4 @@ class CategoryRuleBulkActionRequest(BaseModel):
 
 
 # Update forward references
-UserCategoryTreeResponse.model_rebuild()
+TransactionCategoryTreeResponse.model_rebuild()

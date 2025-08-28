@@ -50,8 +50,8 @@ class TransactionSource(str, Enum):
     OTHER = "other"
 
 
-class TransactionCategory(str, Enum):
-    """High-level transaction categories"""
+class SystemTransactionCategory(str, Enum):
+    """High-level transaction categories (system-defined)"""
     FOOD_AND_DRINK = "food_and_drink"
     TRAVEL = "travel"
     SHOPPING = "shopping"
@@ -154,7 +154,7 @@ class Transaction(SQLModel, table=True):
     This is the single source of truth for transactions in TruLedgr,
     pulling data from Plaid and allowing manual transaction creation.
     """
-    __tablename__ = "transactions"
+    __tablename__ = "transactions"  # type: ignore
 
     # Primary identifiers
     id: Optional[str] = ULIDPrimaryKey()
@@ -181,10 +181,11 @@ class Transaction(SQLModel, table=True):
     merchant_entity_id: Optional[str] = Field(None, description="Merchant entity ID")
 
     # Categorization
-    category: Optional[TransactionCategory] = Field(None, index=True, description="High-level category")
+    category: Optional[SystemTransactionCategory] = Field(None, index=True, description="High-level category")
     subcategory: Optional[TransactionSubcategory] = Field(None, index=True, description="Detailed subcategory")
     custom_category: Optional[str] = Field(None, description="Custom category if not in enum")
     user_category_id: Optional[str] = Field(None, index=True, description="User-defined category ID")
+    group_category_id: Optional[str] = Field(None, index=True, description="Group-defined category ID")
 
     # Status and processing
     status: TransactionStatus = Field(default=TransactionStatus.CLEARED, index=True)
@@ -292,6 +293,21 @@ class Transaction(SQLModel, table=True):
         """Get absolute transaction amount"""
         return abs(self.amount)
 
+    @property
+    def category_type(self) -> str:
+        """Get the type of category being used"""
+        if self.group_category_id:
+            return "group"
+        elif self.user_category_id:
+            return "user"
+        else:
+            return "system"
+
+    @property
+    def effective_category_id(self) -> Optional[str]:
+        """Get the effective category ID (group takes precedence over user)"""
+        return self.group_category_id or self.user_category_id
+
 
 class TransactionSourceMapping(SQLModel, table=True):
     """
@@ -300,7 +316,7 @@ class TransactionSourceMapping(SQLModel, table=True):
     This allows tracking of the same transaction across multiple data sources
     and prevents duplicate transaction creation.
     """
-    __tablename__ = "transaction_source_mappings"
+    __tablename__ = "transaction_source_mappings"  # type: ignore
 
     id: Optional[str] = ULIDPrimaryKey()
     transaction_id: str = ULIDForeignKey("transactions.id")
@@ -335,7 +351,7 @@ class TransactionModificationHistory(SQLModel, table=True):
     This provides audit trail for transaction changes
     and helps with troubleshooting and reconciliation.
     """
-    __tablename__ = "transaction_modification_history"
+    __tablename__ = "transaction_modification_history"  # type: ignore
 
     id: Optional[str] = ULIDPrimaryKey()
     transaction_id: str = ULIDForeignKey("transactions.id")
@@ -365,7 +381,7 @@ class RecurringTransaction(SQLModel, table=True):
     This helps identify and predict recurring transactions
     for budgeting and financial planning.
     """
-    __tablename__ = "recurring_transactions"
+    __tablename__ = "recurring_transactions"  # type: ignore
 
     id: Optional[str] = ULIDPrimaryKey()
     user_id: str = ULIDForeignKey("users.id")
@@ -377,7 +393,7 @@ class RecurringTransaction(SQLModel, table=True):
     # Pattern details
     recurrence_pattern: RecurrencePattern = Field(description="How often this recurs")
     estimated_amount: float = Field(description="Estimated transaction amount")
-    category: Optional[TransactionCategory] = Field(None, description="Transaction category")
+    category: Optional[SystemTransactionCategory] = Field(None, description="Transaction category")
     subcategory: Optional[TransactionSubcategory] = Field(None, description="Transaction subcategory")
 
     # Merchant information
@@ -431,7 +447,7 @@ class TransactionReconciliation(SQLModel, table=True):
     This helps maintain accurate financial records
     and provides audit trails for reconciliation processes.
     """
-    __tablename__ = "transaction_reconciliations"
+    __tablename__ = "transaction_reconciliations"  # type: ignore
 
     id: Optional[str] = ULIDPrimaryKey()
     account_id: str = ULIDForeignKey("accounts.id")
@@ -464,17 +480,19 @@ class TransactionReconciliation(SQLModel, table=True):
     )
 
 
-class UserCategory(SQLModel, table=True):
+class TransactionCategory(SQLModel, table=True):
     """
     User-defined transaction categories with hierarchical support
 
     This allows users to create their own category hierarchy for organizing transactions.
     Categories can have parent-child relationships to create nested structures.
+    Supports both user-level and group-level categories.
     """
-    __tablename__ = "transaction_categories"
+    __tablename__ = "transaction_categories"  # type: ignore
 
     id: Optional[str] = ULIDPrimaryKey()
-    user_id: str = ULIDForeignKey("users.id", description="Category owner")
+    user_id: Optional[str] = Field(None, foreign_key="users.id", description="Category owner (null for group categories)")
+    group_id: Optional[str] = Field(None, foreign_key="groups.id", description="Group owner (null for user categories)")
 
     # Category details
     name: str = Field(description="Category name")
@@ -514,11 +532,11 @@ class UserCategory(SQLModel, table=True):
     )
 
     # Relationships
-    parent: Optional["UserCategory"] = Relationship(
+    parent: Optional["TransactionCategory"] = Relationship(
         back_populates="children",
         sa_relationship_kwargs={"remote_side": "id"}
     )
-    children: List["UserCategory"] = Relationship(back_populates="parent")
+    children: List["TransactionCategory"] = Relationship(back_populates="parent")
 
     # Helper properties
     @property
@@ -530,6 +548,16 @@ class UserCategory(SQLModel, table=True):
     def is_leaf(self) -> bool:
         """Check if this is a leaf category (no children)"""
         return len(self.children) == 0
+
+    @property
+    def is_user_category(self) -> bool:
+        """Check if this is a user-level category"""
+        return self.user_id is not None and self.group_id is None
+
+    @property
+    def is_group_category(self) -> bool:
+        """Check if this is a group-level category"""
+        return self.group_id is not None and self.user_id is None
 
     @property
     def full_path_list(self) -> List[str]:
@@ -548,11 +576,13 @@ class CategoryRule(SQLModel, table=True):
 
     Users can define rules that automatically assign categories to transactions
     based on various criteria like merchant name, amount, description, etc.
+    Supports both user-level and group-level rules.
     """
-    __tablename__ = "category_rules"
+    __tablename__ = "category_rules"  # type: ignore
 
     id: Optional[str] = ULIDPrimaryKey()
-    user_id: str = ULIDForeignKey("users.id", description="Rule owner")
+    user_id: Optional[str] = Field(None, foreign_key="users.id", description="Rule owner (null for group rules)")
+    group_id: Optional[str] = Field(None, foreign_key="groups.id", description="Group owner (null for user rules)")
     category_id: str = ULIDForeignKey("transaction_categories.id", description="Target category")
 
     # Rule definition
@@ -586,6 +616,17 @@ class CategoryRule(SQLModel, table=True):
         sa_column=Column(DateTime(timezone=True), onupdate=func.now())
     )
 
+    # Helper properties
+    @property
+    def is_user_rule(self) -> bool:
+        """Check if this is a user-level rule"""
+        return self.user_id is not None and self.group_id is None
+
+    @property
+    def is_group_rule(self) -> bool:
+        """Check if this is a group-level rule"""
+        return self.group_id is not None and self.user_id is None
+
 
 # Create indexes for better query performance
 # Note: These will be created via database migrations
@@ -594,6 +635,6 @@ class CategoryRule(SQLModel, table=True):
 # Index("idx_transactions_category_date", Transaction.category, Transaction.transaction_date)
 # Index("idx_transactions_amount", Transaction.amount)
 # Index("idx_transactions_status_date", Transaction.status, Transaction.transaction_date)
-# Index("idx_transaction_categories_user_parent", UserCategory.user_id, UserCategory.parent_id)
-# Index("idx_transaction_categories_user_active", UserCategory.user_id, UserCategory.is_active)
+# Index("idx_transaction_categories_user_parent", TransactionCategory.user_id, TransactionCategory.parent_id)
+# Index("idx_transaction_categories_user_active", TransactionCategory.user_id, TransactionCategory.is_active)
 # Index("idx_category_rules_user_active", CategoryRule.user_id, CategoryRule.is_active)
