@@ -149,6 +149,12 @@ def include_routers(app: FastAPI):
         app.include_router(plaid_router)
     except ImportError:
         print("⚠️ Plaid router not available")
+    
+    try:
+        from api.institutions.router import router as institutions_router
+        app.include_router(institutions_router)
+    except ImportError:
+        print("⚠️ Institutions router not available")
 
 
 
