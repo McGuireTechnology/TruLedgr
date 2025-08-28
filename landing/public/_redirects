@@ -1,0 +1,16 @@
+# Redirects for Cloudflare Pages
+# Place this file in the www directory as _redirects
+
+# Redirect HTTP to HTTPS (handled by Cloudflare automatically)
+# Redirect www to apex domain
+https://www.truledgr.app/* https://truledgr.app/:splat 301
+
+# Redirect common paths
+/dashboard https://dash.truledgr.app 302
+/app https://dash.truledgr.app 302
+/api https://api.truledgr.app 302
+/docs https://docs.truledgr.app 302
+/documentation https://docs.truledgr.app 302
+
+# Handle SPA-style routing (if needed in the future)
+# /* /index.html 200

@@ -1,0 +1,75 @@
+name: Deploy Landing Page
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'landing/**'
+      - '.github/workflows/landing.yml'
+
+  # Allow manual deployment
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "landing"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: landing/package-lock.json
+    
+    - name: Install dependencies
+      working-directory: ./landing
+      run: npm ci
+    
+    - name: Type check
+      working-directory: ./landing
+      run: npm run type-check
+    
+    - name: Lint
+      working-directory: ./landing
+      run: npm run lint
+    
+    - name: Build landing page
+      working-directory: ./landing
+      run: npm run build
+    
+    - name: Upload landing page artifact
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: ./landing/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: landing-production
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+    - name: Deploy to Cloudflare Pages
+      id: deployment
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: truledgr-www
+        directory: ./landing/dist
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
