@@ -42,6 +42,17 @@ else:
     
     if "ssl=true" in database_url:
         connect_args["ssl"] = True
+        # For self-signed certificates (common in managed databases)
+        connect_args["sslmode"] = "require"
+        
+        # Configure SSL certificate verification based on settings
+        if not settings.database_ssl_verify:
+            import ssl
+            ssl_context = ssl.create_default_context()
+            ssl_context.check_hostname = False
+            ssl_context.verify_mode = ssl.CERT_NONE
+            connect_args["ssl_context"] = ssl_context
+        
         # Remove ssl parameter from URL as it's now in connect_args
         database_url = database_url.replace("?ssl=true", "").replace("&ssl=true", "")
         if database_url.endswith("?"):

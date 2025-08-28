@@ -99,6 +99,9 @@ class Settings(BaseSettings):
     database_url: str = Field(default="sqlite+aiosqlite:///./test.db")
     test_database_url: str = "sqlite+aiosqlite:///:memory:"
     
+    # Database SSL configuration
+    database_ssl_verify: bool = Field(default=True, description="Verify SSL certificates for database connections")
+    
     # Database Pool Settings
     db_pool_size: int = 20
     db_max_overflow: int = 0
@@ -391,6 +394,9 @@ class ProductionSettings(Settings):
     environment: Environment = Environment.PRODUCTION
     log_level: str = "WARNING"
     cors_origins: Union[str, List[str]] = []
+    
+    # Disable SSL certificate verification for managed databases
+    database_ssl_verify: bool = False
 
 
 class TestSettings(Settings):
