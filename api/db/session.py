@@ -42,8 +42,6 @@ else:
     
     if "ssl=true" in database_url:
         connect_args["ssl"] = True
-        # For self-signed certificates (common in managed databases)
-        connect_args["sslmode"] = "require"
         
         # Configure SSL certificate verification based on settings
         if not settings.database_ssl_verify:
