@@ -1,0 +1,55 @@
+# Exclude Node.js related files and directories
+node_modules/
+package-lock.json
+package.json
+*.log
+npm-debug.log*
+
+# Exclude frontend build artifacts
+frontend/*/node_modules/
+frontend/*/dist/
+frontend/*/.nuxt/
+frontend/*/.output/
+
+# Exclude development files
+.env*
+*.db
+*.sqlite
+*.sqlite3
+
+# Exclude Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Exclude IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude OS files
+.DS_Store
+Thumbs.db
+
+# Exclude test and documentation files
+tests/
+docs/
+*.md
+!README.md
+
+# Exclude recycle and backup files
+recycle/
+*.bak
+*.backup
+
+# Keep only essential files for the API deployment
+!api/
+!pyproject.toml
+!Dockerfile
+!scripts/
+!tools/
