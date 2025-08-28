@@ -47,14 +47,6 @@ services:
     routes:
       - path: /
 
-# Database
-databases:
-  - name: truledgr-db
-    engine: PG
-    version: "15"
-    size: basic
-    num_nodes: 1
-
 # Domains (optional - configure after deployment)
 # domains:
 #   - domain: api.truledgr.app

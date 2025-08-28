@@ -2,7 +2,23 @@
 
 ## Overview
 
-This guide covers deploying the TruLedgr API to Digital Ocean App Platform with a managed PostgreSQL database. The deployment includes:
+This guide covers deploying the TruLedgr API to Digital Ocean App Platform### Step 3: Database Configuration
+
+**Using Existing PostgreSQL Database:**
+
+1. **Prepare your database connection:**
+   - Ensure your PostgreSQL database is accessible from Digital Ocean App Platform
+   - Format: `postgresql://user:password@host:port/database`
+   - Example: `postgresql://myuser:mypass@myhost.com:5432/truledgr`
+
+2. **Set DATABASE_URL in deployment:**
+
+   ```bash
+   export DATABASE_URL="your-postgresql-connection-string"
+   ./scripts/deploy-do.sh deploy
+   ```
+
+   Or set it manually in the Digital Ocean App Platform dashboard after deployment.aged PostgreSQL database. The deployment includes:
 
 - **API Service**: FastAPI application with automatic scaling
 - **Database**: Managed PostgreSQL database
@@ -19,7 +35,7 @@ This guide covers deploying the TruLedgr API to Digital Ocean App Platform with 
 │                 │    │                 │
 │ • Landing Page  │    │ • API Service   │
 │   (truledgr.com)│    │   (api.truledgr.app)
-│                 │    │ • PostgreSQL DB │
+│                 │    │ • External DB   │
 │ • Dashboard     │    │ • Redis Cache   │
 │   (dash.truledgr.app)│    │ • Monitoring   │
 └─────────────────┘    └─────────────────┘
@@ -151,7 +167,7 @@ Set production environment variables in the Digital Ocean dashboard:
 **Required:**
 
 - `SECRET_KEY`: 32+ character random string
-- `DATABASE_URL`: Automatically provided by DO
+- `DATABASE_URL`: Connection string for your existing PostgreSQL database (format: `postgresql://user:password@host:port/database`)
 
 **Recommended:**
 
@@ -186,13 +202,6 @@ services:
       http_path: /health
     routes:
       - path: /
-
-databases:
-  - name: truledgr-db
-    engine: PG
-    version: "15"
-    size: basic
-    num_nodes: 1
 ```
 
 ### App Platform Wizard Setup
@@ -257,11 +266,11 @@ doctl apps update $APP_ID --instance-count 2
 
 ### Database Backups
 
-Digital Ocean automatically creates:
+**External Database Backups:**
 
-- Daily backups
-- Point-in-time recovery
-- 7-day retention
+- Configure backups according to your database provider's recommendations
+- Ensure your backup strategy covers the TruLedgr database
+- Test backup restoration procedures regularly
 
 ### Application Backups
 
@@ -343,13 +352,13 @@ doctl apps logs $APP_ID --follow
 
 ### Monthly Costs (Approximate)
 
-- **App Platform**: $12 (2x Basic XXS instances)
-- **PostgreSQL Database**: $15 (1vCPU, 1GB RAM)
+- **App Platform**: $12 (Basic XXS instance)
+- **External PostgreSQL Database**: $0 (using your existing database)
 - **Domain**: $0 (using existing domain)
 - **SSL**: $0 (included)
 - **Bandwidth**: $0 (first 1TB free)
 
-**Total Estimated Monthly Cost**: ~$27
+**Total Estimated Monthly Cost**: ~$12
 
 ## Next Steps
 
