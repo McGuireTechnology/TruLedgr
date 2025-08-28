@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # TruLedgr Documentation Deployment Script
-# This script builds and deploys the documentation to docs.truledgr.app
+# This script builds documentation locally for testing
+# Production deployment is handled by GitHub Actions
 
 set -e  # Exit on any error
 
-echo "🚀 Deploying TruLedgr Documentation to docs.truledgr.app"
+echo "🚀 Building TruLedgr Documentation (Local Build)"
 echo "=================================================="
 
 # Check if MkDocs is installed
@@ -25,11 +26,11 @@ if [ $? -eq 0 ]; then
     echo "📖 Local preview: http://localhost:8001"
     echo "🌐 Production URL: https://docs.truledgr.app"
     echo ""
-    echo "To deploy manually:"
-    echo "  npm run docs:deploy"
-    echo ""
     echo "To serve locally:"
     echo "  npm run docs:serve"
+    echo ""
+    echo "Note: Production deployment is automatic via GitHub Actions"
+    echo "when changes are pushed to the main branch."
 else
     echo "❌ Documentation build failed!"
     exit 1

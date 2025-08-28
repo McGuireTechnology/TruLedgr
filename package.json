@@ -17,7 +17,7 @@
     "docs:install": "pip install -e \".[docs]\"",
     "docs:serve": "mkdocs serve --dev-addr localhost:8001",
     "docs:build": "mkdocs build --clean",
-    "docs:deploy": "mkdocs gh-deploy --clean --message 'Deploy documentation to docs.truledgr.app'"
+    "docs:deploy": "echo 'Documentation deployment is handled by GitHub Actions. Push to main branch to deploy.'"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",

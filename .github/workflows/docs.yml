@@ -8,7 +8,7 @@ on:
       - 'mkdocs.yml'
       - 'pyproject.toml'
       - '.github/workflows/docs.yml'
-  
+
   # Allow manual deployment
   workflow_dispatch:
 
@@ -25,27 +25,62 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         fetch-depth: 0  # Fetch full history for git info
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
         cache: 'pip'
-    
+
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
         pip install -e ".[docs]"
-    
+
+    - name: Create docs directory if missing
+      run: |
+        mkdir -p docs
+        # Create basic index.md if it doesn't exist
+        if [ ! -f docs/index.md ]; then
+          cat > docs/index.md << 'EOF'
+        # TruLedgr Documentation
+
+        Welcome to the TruLedgr documentation!
+
+        ## Overview
+
+        TruLedgr is a modern, secure personal finance application built with FastAPI and Vue.js.
+
+        ## Quick Start
+
+        Get started with TruLedgr in minutes.
+
+        ## Features
+
+        - **Secure Authentication**: JWT-based authentication with multi-factor support
+        - **Transaction Management**: Comprehensive transaction tracking and categorization
+        - **Budget Planning**: Create and manage budgets with ease
+        - **Financial Analytics**: Visualize your financial data with interactive charts
+        - **Multi-Platform**: Web dashboard and mobile-responsive design
+
+        ## Documentation Sections
+
+        - [User Guide](user-guide/getting-started.md) - Learn how to use TruLedgr
+        - [Developer Guide](developer-guide/overview.md) - Technical documentation
+        - [API Reference](developer-guide/api-reference.md) - Complete API documentation
+        EOF
+        fi
+
     - name: Build documentation
       run: |
         mkdocs build --clean --strict
-    
+
     - name: Upload documentation artifact
       uses: actions/upload-pages-artifact@v2
       with:
@@ -54,11 +89,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
     steps:
     - name: Deploy to GitHub Pages
       id: deployment

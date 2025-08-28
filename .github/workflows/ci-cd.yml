@@ -67,7 +67,7 @@ jobs:
         ENVIRONMENT: test
         SECRET_KEY: test-secret-key-for-ci-32-characters-minimum
       run: |
-        pytest tests/ -v --cov=fastapi_security_sample --cov-report=xml --cov-report=html
+        pytest tests/ -v --cov=api --cov=truledgr --cov-report=xml --cov-report=html
         
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
@@ -79,7 +79,7 @@ jobs:
     - name: Run security scan with bandit
       run: |
         pip install bandit[toml]
-        bandit -r fastapi_security_sample/ -f json -o bandit-report.json || true
+        bandit -r api/ truledgr/ -f json -o bandit-report.json || true
         
     - name: Upload security scan results
       uses: actions/upload-artifact@v3
@@ -104,16 +104,16 @@ jobs:
         pip install -e .
         
     - name: Run Black
-      run: black --check fastapi_security_sample/ tests/
+      run: black --check api/ truledgr/ tests/
       
     - name: Run isort
-      run: isort --check-only fastapi_security_sample/ tests/
+      run: isort --check-only api/ truledgr/ tests/
       
     - name: Run flake8
-      run: flake8 fastapi_security_sample/ tests/
+      run: flake8 api/ truledgr/ tests/
       
     - name: Run mypy
-      run: mypy fastapi_security_sample/
+      run: mypy api/ truledgr/
 
   # Build and push Docker image
   build:
