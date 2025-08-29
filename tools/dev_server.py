@@ -63,13 +63,13 @@ class DevServer:
         """Start the Vue.js dashboard frontend."""
         print("📊 Starting dashboard frontend...")
         
-        dashboard_dir = WORKSPACE_ROOT / "dashboard"
+        dashboard_dir = WORKSPACE_ROOT / "dash"
         if not dashboard_dir.exists():
             print("⚠️ Dashboard directory not found, skipping...")
             return None
             
-        cmd = ["npm", "run", "dev"]
-        return subprocess.Popen(cmd, cwd=dashboard_dir)
+        cmd = ["npm", "run", "dev:dash"]
+        return subprocess.Popen(cmd, cwd=WORKSPACE_ROOT)
     
     def start_landing(self) -> Optional[subprocess.Popen]:
         """Start the Vue.js landing page frontend."""
@@ -80,8 +80,8 @@ class DevServer:
             print("⚠️ Landing page directory not found, skipping...")
             return None
             
-        cmd = ["npm", "run", "dev"]
-        return subprocess.Popen(cmd, cwd=landing_dir)
+        cmd = ["npm", "run", "dev:landing"]
+        return subprocess.Popen(cmd, cwd=WORKSPACE_ROOT)
     
     def start_docs(self) -> Optional[subprocess.Popen]:
         """Start the MkDocs documentation server."""

@@ -48,10 +48,7 @@
       "label": "📊 Dashboard Only (Vue/Vite)",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "dev"],
-      "options": {
-        "cwd": "${workspaceFolder}/frontend/dashboard"
-      },
+      "args": ["run", "dev:dash"],
       "group": "build",
       "isBackground": true,
       "presentation": {
@@ -65,10 +62,7 @@
       "label": "🌐 Landing Page Only (Vue/Vite)",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "dev"],
-      "options": {
-        "cwd": "${workspaceFolder}/frontend/landing"
-      },
+      "args": ["run", "dev:landing"],
       "group": "build",
       "isBackground": true,
       "presentation": {

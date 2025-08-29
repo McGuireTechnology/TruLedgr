@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'dashboard'),
+      '@': resolve(__dirname, 'dash'),
     },
   },
   server: {
@@ -24,5 +24,5 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
   },
-  root: 'dashboard',
+  root: 'dash',
 })

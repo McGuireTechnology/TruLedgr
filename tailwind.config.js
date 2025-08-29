@@ -2,7 +2,8 @@
 export default {
   content: [
     "./index.html",
-    "./dashboard/**/*.{vue,js,ts,jsx,tsx}",
+    "./dash/**/*.{vue,js,ts,jsx,tsx}",
+    "./landing/**/*.{vue,js,ts,jsx,tsx}",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
