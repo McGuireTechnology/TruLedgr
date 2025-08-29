@@ -2,19 +2,19 @@
   <section class="testimonials">
     <div class="container">
       <div class="section-header">
-        <h2>Trusted by Thousands</h2>
-        <p>See what our customers have to say about TruLedgr</p>
+        <h2>Development Updates</h2>
+        <p>Follow our progress as we build TruLedgr</p>
       </div>
       <div class="testimonials-grid">
-        <div v-for="testimonial in testimonials" :key="testimonial.id" class="testimonial-card">
-          <div class="testimonial-content">{{ testimonial.content }}</div>
+        <div v-for="update in updates" :key="update.id" class="testimonial-card">
+          <div class="testimonial-content">{{ update.content }}</div>
           <div class="testimonial-author">
             <div class="author-avatar">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-code"></i>
             </div>
             <div class="author-info">
-              <div class="author-name">{{ testimonial.author.name }}</div>
-              <div class="author-title">{{ testimonial.author.title }}</div>
+              <div class="author-name">{{ update.milestone }}</div>
+              <div class="author-title">{{ update.status }}</div>
             </div>
           </div>
         </div>
@@ -24,39 +24,31 @@
 </template>
 
 <script setup lang="ts">
-interface Testimonial {
+interface Update {
   id: number
   content: string
-  author: {
-    name: string
-    title: string
-  }
+  milestone: string
+  status: string
 }
 
-const testimonials: Testimonial[] = [
+const updates: Update[] = [
   {
     id: 1,
-    content: "TruLedgr transformed our financial workflow. The mobile app is incredible and the API integration was seamless.",
-    author: {
-      name: "Sarah Chen",
-      title: "CFO, TechStart Inc."
-    }
+    content: "Core backend architecture completed with FastAPI. Authentication system and database models finalized.",
+    milestone: "Backend Foundation",
+    status: "Completed Q4 2024"
   },
   {
     id: 2,
-    content: "The best financial management platform we've used. Fast, secure, and the support team is outstanding.",
-    author: {
-      name: "Michael Rodriguez",
-      title: "Founder, GrowthCo"
-    }
+    content: "Vue.js dashboard framework established. Component library and routing structure implemented.",
+    milestone: "Frontend Framework",
+    status: "Completed Q4 2024"
   },
   {
     id: 3,
-    content: "TruLedgr's analytics helped us identify cost savings worth $50k in the first quarter alone.",
-    author: {
-      name: "Emily Johnson",
-      title: "Finance Director, Scale LLC"
-    }
+    content: "Mobile app development in progress. iOS and Android native apps with offline-first architecture.",
+    milestone: "Mobile Applications",
+    status: "In Development"
   }
 ]
 </script>

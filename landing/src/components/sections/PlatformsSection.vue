@@ -2,8 +2,8 @@
   <section id="platforms" class="platforms">
     <div class="container">
       <div class="section-header">
-        <h2>Multi-Platform Excellence</h2>
-        <p>Access your financial data anywhere, anytime, on any device</p>
+        <h2>Multi-Platform Vision</h2>
+        <p>Planned access to your financial data anywhere, anytime, on any device</p>
       </div>
       <div class="platforms-grid">
         <div v-for="platform in platforms" :key="platform.id" class="platform-card">
@@ -35,34 +35,34 @@ const platforms: Platform[] = [
   {
     id: 1,
     title: "Web Dashboard",
-    description: "Powerful Vue.js dashboard with real-time updates and advanced features",
+    description: "Vue.js dashboard in development with real-time updates and advanced features",
     icon: "fas fa-desktop",
-    link: "https://dash.truledgr.app",
-    linkText: "Visit Dashboard"
+    link: "#notify",
+    linkText: "Coming Soon"
   },
   {
     id: 2,
     title: "iOS App",
-    description: "Native Swift app with Touch ID, Face ID, and offline-first architecture",
+    description: "Native Swift app planned with Touch ID, Face ID, and offline-first architecture",
     icon: "fab fa-apple",
-    link: "#",
-    linkText: "App Store"
+    link: "#notify",
+    linkText: "In Development"
   },
   {
     id: 3,
     title: "Android App",
-    description: "Material Design app with fingerprint auth and seamless sync",
+    description: "Material Design app planned with fingerprint auth and seamless sync",
     icon: "fab fa-android",
-    link: "#",
-    linkText: "Google Play"
+    link: "#notify",
+    linkText: "In Development"
   },
   {
     id: 4,
     title: "Developer API",
-    description: "RESTful API with OpenAPI documentation and SDKs",
+    description: "RESTful API being built with OpenAPI documentation and SDKs",
     icon: "fas fa-code",
-    link: "https://api.truledgr.app",
-    linkText: "API Docs"
+    link: "#notify",
+    linkText: "Coming Soon"
   }
 ]
 </script>

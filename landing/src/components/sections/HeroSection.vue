@@ -41,32 +41,32 @@
           <span class="hero-highlight">Simplified</span>
         </h1>
         <p class="hero-description">
-          TruLedgr is a comprehensive financial management platform that brings together 
-          powerful web dashboards, native mobile apps, and secure APIs. Built for modern 
-          businesses and individuals who demand excellence.
+          TruLedgr will be a comprehensive financial management platform bringing together 
+          powerful web dashboards, native mobile apps, and secure APIs. Currently in development 
+          for modern businesses and individuals who demand excellence.
         </p>
         <div class="hero-buttons">
-          <a href="https://dash.truledgr.app" class="btn btn-primary">
-            <i class="fas fa-rocket"></i>
-            Get Started Free
+          <a href="#pricing" class="btn btn-primary">
+            <i class="fas fa-bell"></i>
+            Get Notified
           </a>
-          <a href="#demo" class="btn btn-secondary">
-            <i class="fas fa-play"></i>
-            Watch Demo
+          <a href="#features" class="btn btn-secondary">
+            <i class="fas fa-info-circle"></i>
+            Learn More
           </a>
         </div>
         <div class="hero-stats">
           <div class="stat">
             <div class="stat-number">99.9%</div>
-            <div class="stat-label">Uptime</div>
+            <div class="stat-label">Target Uptime</div>
           </div>
           <div class="stat">
-            <div class="stat-number">10k+</div>
-            <div class="stat-label">Active Users</div>
+            <div class="stat-number">2025</div>
+            <div class="stat-label">Launch Year</div>
           </div>
           <div class="stat">
             <div class="stat-number">24/7</div>
-            <div class="stat-label">Support</div>
+            <div class="stat-label">Planned Support</div>
           </div>
         </div>
       </div>

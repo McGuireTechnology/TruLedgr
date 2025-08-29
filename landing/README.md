@@ -1,6 +1,12 @@
-# .
+# TruLedgr Landing Page
 
-This template should help get you started developing with Vue 3 in Vite.
+Landing page for TruLedgr financial management platform (currently in development).
+
+This is a Vue 3 + TypeScript + Vite application showcasing the upcoming TruLedgr platform.
+
+## ⚠️ Development Status
+
+TruLedgr is currently in active development. This landing page represents planned features and functionality that will be available upon launch.
 
 ## Recommended IDE Setup
 
@@ -16,24 +22,30 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
+Note: This project uses packages from the root workspace. Run commands from the workspace root:
+
 ```sh
+# From workspace root
 npm install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+# From workspace root
+npm run dev:landing
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-npm run build
+# From workspace root
+npm run build:landing
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-npm run lint
+# From workspace root
+npm run lint:landing
 ```

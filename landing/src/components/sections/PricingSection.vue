@@ -2,8 +2,8 @@
   <section id="pricing" class="pricing">
     <div class="container">
       <div class="section-header">
-        <h2>Simple, Transparent Pricing</h2>
-        <p>Choose the plan that fits your needs. Always fair, always transparent.</p>
+        <h2>Future Pricing Plans</h2>
+        <p>Planned pricing structure for when TruLedgr launches. Subject to change.</p>
       </div>
       <div class="pricing-grid">
         <div v-for="plan in pricingPlans" :key="plan.id" 
@@ -54,8 +54,8 @@ const pricingPlans: PricingPlan[] = [
       "Mobile apps",
       "Email support"
     ],
-    link: "https://dash.truledgr.app/signup?plan=starter",
-    buttonText: "Get Started",
+    link: "#notify",
+    buttonText: "Get Notified",
     buttonClass: "btn btn-outline"
   },
   {
@@ -69,8 +69,8 @@ const pricingPlans: PricingPlan[] = [
       "Priority support",
       "Custom integrations"
     ],
-    link: "https://dash.truledgr.app/signup?plan=pro",
-    buttonText: "Start Free Trial",
+    link: "#notify",
+    buttonText: "Get Notified",
     buttonClass: "btn btn-primary",
     featured: true,
     badge: "Most Popular"
@@ -87,7 +87,7 @@ const pricingPlans: PricingPlan[] = [
       "SLA guarantee"
     ],
     link: "mailto:sales@truledgr.app",
-    buttonText: "Contact Sales",
+    buttonText: "Early Access",
     buttonClass: "btn btn-outline"
   }
 ]

@@ -10,7 +10,7 @@
             <span class="footer-title">TruLedgr</span>
           </div>
           <p class="footer-description">
-            Modern financial management platform built for the cloud-native era.
+            Financial management platform in development for the cloud-native era.
           </p>
           <div class="footer-social">
             <a href="https://github.com/McGuireTechnology" aria-label="GitHub">
@@ -60,33 +60,33 @@ const footerSections: FooterSection[] = [
     links: [
       { text: "Features", url: "#features" },
       { text: "Pricing", url: "#pricing" },
-      { text: "API", url: "https://api.truledgr.app" },
-      { text: "Documentation", url: "https://docs.truledgr.app" }
+      { text: "Development", url: "#development" },
+      { text: "Roadmap", url: "#roadmap" }
     ]
   },
   {
     title: "Platforms",
     links: [
-      { text: "Web Dashboard", url: "https://dash.truledgr.app" },
-      { text: "iOS App", url: "#" },
-      { text: "Android App", url: "#" },
-      { text: "Developer API", url: "https://api.truledgr.app" }
+      { text: "Web Dashboard", url: "#platforms" },
+      { text: "iOS App", url: "#platforms" },
+      { text: "Android App", url: "#platforms" },
+      { text: "Developer API", url: "#platforms" }
     ]
   },
   {
     title: "Company",
     links: [
       { text: "About", url: "#about" },
-      { text: "Careers", url: "#careers" },
+      { text: "Team", url: "#team" },
       { text: "Blog", url: "#blog" },
-      { text: "Contact", url: "mailto:support@truledgr.app" }
+      { text: "Contact", url: "mailto:info@truledgr.app" }
     ]
   },
   {
     title: "Resources",
     links: [
-      { text: "Documentation", url: "https://docs.truledgr.app" },
-      { text: "Support", url: "#support" },
+      { text: "Early Access", url: "mailto:earlyaccess@truledgr.app" },
+      { text: "Updates", url: "#updates" },
       { text: "Privacy Policy", url: "#privacy" },
       { text: "Terms of Service", url: "#terms" }
     ]

@@ -2,16 +2,16 @@
   <section class="cta">
     <div class="container">
       <div class="cta-content">
-        <h2>Ready to Transform Your Financial Management?</h2>
-        <p>Join thousands of businesses already using TruLedgr. Start your free trial today.</p>
+        <h2>Ready to Follow Our Development Journey?</h2>
+        <p>Be among the first to know when TruLedgr launches. Join our early access program.</p>
         <div class="cta-buttons">
-          <a href="https://dash.truledgr.app/signup" class="btn btn-primary btn-large">
-            <i class="fas fa-rocket"></i>
-            Start Free Trial
+          <a href="mailto:earlyaccess@truledgr.app" class="btn btn-primary btn-large">
+            <i class="fas fa-bell"></i>
+            Join Early Access
           </a>
           <a href="mailto:sales@truledgr.app" class="btn btn-secondary btn-large">
             <i class="fas fa-envelope"></i>
-            Contact Sales
+            Contact Us
           </a>
         </div>
       </div>

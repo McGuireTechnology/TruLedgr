@@ -12,7 +12,7 @@
         <a href="#platforms" class="nav-link" @click="closeMenu">Platforms</a>
         <a href="#pricing" class="nav-link" @click="closeMenu">Pricing</a>
         <a href="#contact" class="nav-link" @click="closeMenu">Contact</a>
-        <a href="https://dash.truledgr.app" class="nav-link nav-cta">Dashboard</a>
+        <a href="mailto:earlyaccess@truledgr.app" class="nav-link nav-cta">Early Access</a>
       </div>
       <div class="nav-toggle" :class="{ active: isMenuOpen }" @click="toggleMenu">
         <span class="bar"></span>
