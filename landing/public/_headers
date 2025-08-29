@@ -4,69 +4,27 @@
 
 # Global headers for all files
 /*
-  # Security Headers
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
-  
-  # Strict Transport Security (HSTS)
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  
-  # Content Security Policy (CSP)
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.truledgr.app https://analytics.google.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'
-
-# HTML files (shorter cache for content updates)
-/*.html
-  Content-Type: text/html; charset=utf-8
-  Cache-Control: public, max-age=3600
-
-# Root index should be HTML
-/
-  Content-Type: text/html; charset=utf-8
-  Cache-Control: public, max-age=3600
 
 # Static assets from Vite build
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# JavaScript files
-*.js
-  Content-Type: application/javascript; charset=utf-8
-  Cache-Control: public, max-age=31536000, immutable
+# HTML files
+/*.html
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: public, max-age=3600
 
-# CSS files
-*.css
-  Content-Type: text/css; charset=utf-8
-  Cache-Control: public, max-age=31536000, immutable
-
-# Images
-*.png
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/png
-
-*.jpg
-*.jpeg
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/jpeg
-
-*.svg
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/svg+xml; charset=utf-8
-
-*.webp
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/webp
-
-# Fonts
-*.woff
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: font/woff
-
-*.woff2
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: font/woff2
+# Root index
+/
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: public, max-age=3600
 
 # Service Worker
 /sw.js
