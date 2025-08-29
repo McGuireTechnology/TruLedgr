@@ -29,23 +29,36 @@ async def lifespan(app: FastAPI):
     settings = get_settings()
     
     # Startup
-    print("🚀 Starting FastAPI Security Sample v2.0...")
+    print("🚀 Starting TruLedgr API v2.0...")
     print(f"📍 Environment: {settings.environment}")
     print(f"🗄️  Database: {settings.database_url.replace(settings.database_url.split('@')[0] if '@' in settings.database_url else settings.database_url, '***')}")
     
-    # Create database tables
-    try:
-        await create_tables(engine)
-        print("✅ Database tables created/verified")
-    except Exception as e:
-        print(f"❌ Database connection failed: {e}")
-        print("🔍 Please check your DATABASE_URL configuration")
-        print("🔗 Expected format: postgresql://user:password@host:port/database")
-        # Don't exit - let the app start with degraded database functionality
-        print("⚠️  Continuing startup without database tables...")
+    # Handle database initialization based on environment
+    if settings.environment == "production":
+        # In production, assume migrations have been run separately
+        # Just verify database connectivity
+        try:
+            async with engine.begin() as conn:
+                await conn.execute(text("SELECT 1"))
+            print("✅ Database connection verified")
+        except Exception as e:
+            print(f"❌ Database connection failed: {e}")
+            print("🔍 Please check your DATABASE_URL configuration")
+            print("🔗 Expected format: postgresql://user:password@host:port/database")
+            print("⚠️  Continuing startup with degraded database functionality...")
+    else:
+        # In development/test, create tables if they don't exist
+        try:
+            await create_tables(engine)
+            print("✅ Database tables created/verified")
+        except Exception as e:
+            print(f"❌ Database connection failed: {e}")
+            print("🔍 Please check your DATABASE_URL configuration")
+            print("🔗 Expected format: postgresql://user:password@host:port/database")
+            # Don't exit - let the app start with degraded database functionality
+            print("⚠️  Continuing startup without database tables...")
     
-    # Seed database if in development
-    if settings.is_development:
+        # Seed database if in development
         try:
             from api.db.seed import seed_database
             await seed_database()
