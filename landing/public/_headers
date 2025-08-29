@@ -10,11 +10,31 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.truledgr.app https://analytics.google.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.google.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://api.truledgr.app https://analytics.google.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'
 
 # Static assets from Vite build
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# CSS files - explicit MIME type
+/assets/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
+
+# JavaScript files - explicit MIME type
+/assets/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS files in root or other locations
+/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+# JavaScript files in root or other locations
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=3600
 
 # HTML files
 /*.html
