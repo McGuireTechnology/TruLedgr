@@ -8,7 +8,7 @@
     "dev:dash": "vite",
     "dev:landing": "vite --config landing/vite.config.ts",
     "build": "vue-tsc && vite build",
-    "build:dash": "vue-tsc && vite build",
+    "build:dash": "vite build",
     "build:landing": "vue-tsc && vite build --config landing/vite.config.ts",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
