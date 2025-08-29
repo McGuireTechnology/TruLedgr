@@ -1,0 +1,58 @@
+name: Deploy TruLedgr Landing Page to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'landing/**'
+      - '.github/workflows/deploy-landing.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'landing/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Pages
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'landing/package-lock.json'
+          
+      - name: Install dependencies
+        run: |
+          cd landing
+          npm ci
+          
+      - name: Build
+        run: |
+          cd landing
+          npm run build
+          
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: truledgr-www
+          directory: landing/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Deploy to staging for non-main branches
+      - name: Deploy to Staging (Preview)
+        if: github.ref != 'refs/heads/main'
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: truledgr-www-preview
+          directory: landing/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
