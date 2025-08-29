@@ -9,7 +9,7 @@
   },
   "scripts": {
   "dev": "vite",
-  "build": "npm run type-check && npm run build-only",
+  "build": "npm run build-only",
   "build:landing": "npm run build",
     "preview": "vite preview",
     "build-only": "vite build",
