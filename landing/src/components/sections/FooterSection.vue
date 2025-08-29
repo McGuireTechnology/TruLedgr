@@ -32,7 +32,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2025 McGuire Technology. All rights reserved.</p>
+        <p>&copy; 2025 McGuire Technology, LLC. All rights reserved.</p>
         <div class="footer-links">
           <a href="#privacy">Privacy</a>
           <a href="#terms">Terms</a>
@@ -67,10 +67,10 @@ const footerSections: FooterSection[] = [
   {
     title: "Platforms",
     links: [
-      { text: "Web Dashboard", url: "#platforms" },
-      { text: "iOS App", url: "#platforms" },
-      { text: "Android App", url: "#platforms" },
-      { text: "Developer API", url: "#platforms" }
+  { text: "Web Dashboard", url: "https://dash.truledgr.app" },
+  { text: "iOS App", url: "#platforms" },
+  { text: "Android App", url: "#platforms" },
+  { text: "Developer API", url: "https://api.truledgr.app" }
     ]
   },
   {
@@ -85,10 +85,11 @@ const footerSections: FooterSection[] = [
   {
     title: "Resources",
     links: [
-      { text: "Early Access", url: "mailto:earlyaccess@truledgr.app" },
-      { text: "Updates", url: "#updates" },
-      { text: "Privacy Policy", url: "#privacy" },
-      { text: "Terms of Service", url: "#terms" }
+  { text: "Early Access", url: "mailto:earlyaccess@truledgr.app" },
+  { text: "Documentation", url: "https://docs.truledgr.app" },
+  { text: "Updates", url: "#updates" },
+  { text: "Privacy Policy", url: "#privacy" },
+  { text: "Terms of Service", url: "#terms" }
     ]
   }
 ]

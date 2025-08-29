@@ -10,7 +10,7 @@
                 <span></span>
                 <span></span>
               </div>
-              <div class="mockup-title">dash.truledgr.app</div>
+              <div class="mockup-title"><a href="https://dash.truledgr.app" target="_blank" rel="noopener">dash.truledgr.app</a></div>
             </div>
             <div class="mockup-content">
               <div class="mockup-chart"></div>
@@ -57,16 +57,16 @@
         </div>
         <div class="hero-stats">
           <div class="stat">
-            <div class="stat-number">99.9%</div>
-            <div class="stat-label">Target Uptime</div>
+            <div class="stat-number">Q1</div>
+            <div class="stat-label">2025 Target</div>
           </div>
           <div class="stat">
-            <div class="stat-number">2025</div>
-            <div class="stat-label">Launch Year</div>
+            <div class="stat-number">3</div>
+            <div class="stat-label">Platforms</div>
           </div>
           <div class="stat">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Planned Support</div>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Open Source</div>
           </div>
         </div>
       </div>
@@ -81,3 +81,4 @@
 <style scoped>
 /* Hero section styles are in main.css */
 </style>
+         
