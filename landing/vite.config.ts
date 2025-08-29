@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  root: fileURLToPath(new URL('.', import.meta.url)),
   plugins: [
     vue(),
     vueDevTools(),
@@ -16,6 +17,8 @@ export default defineConfig({
     },
   },
   build: {
+    // Output to landing/dist
+    outDir: 'dist',
     // Optimize for production
     minify: 'terser',
     cssMinify: true,
