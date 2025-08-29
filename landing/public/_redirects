@@ -1,16 +1,41 @@
-# Redirects for Cloudflare Pages
-# Place this file in the www directory as _redirects
+# =============================================================================
+# TruLedgr Landing Page - Cloudflare Pages Redirects
+# =============================================================================
 
-# Redirect HTTP to HTTPS (handled by Cloudflare automatically)
-# Redirect www to apex domain
-https://www.truledgr.app/* https://truledgr.app/:splat 301
+# WWW to Apex Domain Redirect (301 Permanent)
+https://www.truledgr.com/* https://truledgr.com/:splat 301!
 
-# Redirect common paths
-/dashboard https://dash.truledgr.app 302
-/app https://dash.truledgr.app 302
-/api https://api.truledgr.app 302
-/docs https://docs.truledgr.app 302
-/documentation https://docs.truledgr.app 302
+# API Proxy (to avoid CORS issues if needed)
+/api/* https://api.truledgr.app/:splat 200
 
-# Handle SPA-style routing (if needed in the future)
-# /* /index.html 200
+# Dashboard Redirect
+/dashboard/* https://dash.truledgr.app/:splat 302
+/dash/* https://dash.truledgr.app/:splat 302
+/app/* https://dash.truledgr.app/:splat 302
+
+# Legacy redirects (if migrating from old URLs)
+/login https://dash.truledgr.app/login 302
+/signup https://dash.truledgr.app/signup 302
+/register https://dash.truledgr.app/register 302
+
+# Social media and marketing redirects
+/twitter https://twitter.com/truledgr 302
+/linkedin https://linkedin.com/company/truledgr 302
+/github https://github.com/McGuireTechnology/TruLedgr 302
+
+# Documentation redirects
+/docs/* https://docs.truledgr.com/:splat 302
+/help/* https://docs.truledgr.com/support/:splat 302
+/support/* https://docs.truledgr.com/support/:splat 302
+
+# Legal pages (if hosted elsewhere)
+/privacy https://truledgr.com/privacy 200
+/terms https://truledgr.com/terms 200
+/security https://truledgr.com/security 200
+
+# Force HTTPS (fallback if not configured in Cloudflare)
+http://truledgr.com/* https://truledgr.com/:splat 301!
+http://www.truledgr.com/* https://truledgr.com/:splat 301!
+
+# SPA fallback (for Vue Router)
+/* /index.html 200
