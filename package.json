@@ -13,6 +13,7 @@
     "build": "vue-tsc && vite build",
     "build:dash": "vite build",
     "build:landing": "vue-tsc --build landing/tsconfig.json && vite build --config landing/vite.config.ts",
+  "build:landing-ci": "npm --prefix landing install --include=dev && npm --prefix landing run build",
     "preview": "vite preview",
     "preview:landing": "vite preview --config landing/vite.config.ts",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
