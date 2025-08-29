@@ -10,13 +10,6 @@ name = "truledgr-landing"
 compatibility_date = "2024-08-21"
 
 # =============================================================================
-# STAGING ENVIRONMENT
-# =============================================================================
-[env.staging]
-name = "truledgr-landing-staging"
-compatibility_date = "2024-08-21"
-
-# =============================================================================
 # PREVIEW ENVIRONMENT (for pull requests)
 # =============================================================================
 [env.preview]
@@ -32,6 +25,7 @@ send_metrics = false
 # NOTES
 # =============================================================================
 # 1. This configuration is for Cloudflare Pages deployment
-# 2. Custom domains are configured in Cloudflare Dashboard
-# 3. Build settings: npm run build, output: dist, root: landing
-# 4. Deploy with: wrangler pages deploy dist --project-name=truledgr-landing
+# 2. Only "production" and "preview" environments are supported by Pages
+# 3. Custom domains are configured in Cloudflare Dashboard
+# 4. Build settings: npm run build, output: dist, root: landing
+# 5. Deploy with: wrangler pages deploy dist --project-name=truledgr-landing

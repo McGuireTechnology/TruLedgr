@@ -38,17 +38,17 @@ npm run build
 npm run deploy
 
 # Or use wrangler directly
-wrangler pages deploy dist --project-name=truledgr-www
+wrangler pages deploy dist --project-name=truledgr-landing
 ```
 
-### Staging Deployment
+### Preview Deployment
 
 ```bash
-# Deploy to staging
-npm run deploy:staging
+# Deploy to preview environment
+npm run deploy:preview
 
 # Or use wrangler directly  
-wrangler pages deploy dist --project-name=truledgr-www-staging
+wrangler pages deploy dist --project-name=truledgr-landing-preview
 ```
 
 ## Automatic Deployment (GitHub Actions)
@@ -89,12 +89,12 @@ VITE_ANALYTICS_ENABLED=true
 VITE_ENABLE_DEVTOOLS=false
 ```
 
-### Staging
+### Preview
 ```
-VITE_API_BASE_URL=https://api-staging.truledgr.app
-VITE_ENV=staging
-VITE_FEATURE_FLAGS=users,groups,items,oauth,payments
-VITE_ANALYTICS_ENABLED=true
+VITE_API_BASE_URL=https://api-preview.truledgr.app
+VITE_ENV=preview
+VITE_FEATURE_FLAGS=users,groups,items,oauth
+VITE_ANALYTICS_ENABLED=false
 VITE_ENABLE_DEVTOOLS=true
 ```
 

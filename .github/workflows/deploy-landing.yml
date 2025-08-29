@@ -42,17 +42,17 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: truledgr-www
+          projectName: truledgr-landing
           directory: landing/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           
-      # Deploy to staging for non-main branches
-      - name: Deploy to Staging (Preview)
+      # Deploy to preview for non-main branches
+      - name: Deploy to Preview
         if: github.ref != 'refs/heads/main'
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: truledgr-www-preview
+          projectName: truledgr-landing-preview
           directory: landing/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -16,9 +16,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "deploy": "wrangler pages deploy dist --project-name=truledgr-www",
-    "deploy:staging": "wrangler pages deploy dist --project-name=truledgr-www-staging",
-    "deploy:preview": "wrangler pages deploy dist --project-name=truledgr-www-preview"
+    "deploy": "wrangler pages deploy dist --project-name=truledgr-landing",
+    "deploy:preview": "wrangler pages deploy dist --project-name=truledgr-landing-preview"
   },
   "dependencies": {
     "vue": "^3.5.18",
