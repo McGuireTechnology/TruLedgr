@@ -13,6 +13,7 @@ from sqlmodel import SQLModel, Field, Column, String, Text, DateTime, Boolean
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from sqlalchemy import func, Index
+from sqlalchemy import Column as SAColumn
 from enum import Enum
 
 from api.common.ulid_utils import ULIDPrimaryKey, ULIDForeignKey
@@ -55,8 +56,14 @@ class Institution(SQLModel, table=True):
     common_name: Optional[str] = Field(None, description="Commonly used name")
     
     # Institution classification
-    institution_type: InstitutionType = Field(default=InstitutionType.BANK, index=True)
-    primary_source: InstitutionSource = Field(index=True, description="Primary data source")
+    institution_type: InstitutionType = Field(
+        default=InstitutionType.BANK, 
+        sa_column=SAColumn(String(20), index=True, nullable=False, default="bank")
+    )
+    primary_source: InstitutionSource = Field(
+        description="Primary data source",
+        sa_column=SAColumn(String(20), index=True, nullable=False)
+    )
     
     # External identifiers
     plaid_institution_id: Optional[str] = Field(None, index=True, description="Plaid institution ID")
@@ -159,7 +166,9 @@ class InstitutionSourceMapping(SQLModel, table=True):
     institution_id: str = ULIDForeignKey("institutions.id")
     
     # Source information
-    source: InstitutionSource = Field(index=True)
+    source: InstitutionSource = Field(
+        sa_column=SAColumn(String(20), index=True, nullable=False)
+    )
     source_institution_id: str = Field(index=True, description="ID in the source system")
     source_name: str = Field(description="Name from the source system")
     
