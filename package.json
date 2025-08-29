@@ -17,7 +17,14 @@
     "docs:install": "pip install -e \".[docs]\"",
     "docs:serve": "mkdocs serve --dev-addr localhost:8001",
     "docs:build": "mkdocs build --clean",
-    "docs:deploy": "echo 'Documentation deployment is handled by GitHub Actions. Push to main branch to deploy.'"
+    "docs:deploy": "echo 'Documentation deployment is handled by GitHub Actions. Push to main branch to deploy.'",
+    "migrate": "python scripts/migrate.py",
+    "migrate:check": "python scripts/migrate.py check",
+    "migrate:create": "python scripts/migrate.py create",
+    "migrate:upgrade": "python scripts/migrate.py upgrade",
+    "migrate:current": "python scripts/migrate.py current",
+    "migrate:history": "python scripts/migrate.py history",
+    "migrate:setup": "python scripts/migrate.py setup"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",

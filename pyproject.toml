@@ -53,6 +53,7 @@ dependencies = [
     "pyotp>=2.9.0",
     "qrcode[pil]>=7.4.2",
     "greenlet>=3.0.0",
+    "alembic>=1.13.0",
 ]
 
 [project.optional-dependencies]
