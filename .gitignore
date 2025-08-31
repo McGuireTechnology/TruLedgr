@@ -1,0 +1,12 @@
+recycle
+
+# Sub Projects
+truledgr-land
+truledgr-docs
+truledgr-api
+truledgr-dash
+truledgr-apple
+truledgr-android
+
+
+.DS_Store
