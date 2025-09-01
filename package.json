@@ -1,0 +1,20 @@
+{
+  "name": "truledgr",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "truledgr-dash",
+    "truledgr-land"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev:dash": "cd truledgr-dash && npm ci && npm run dev",
+    "dev:land": "cd truledgr-land && npm ci && npm run dev",
+    "dev:all": "concurrently \"npm:dev:dash\" \"npm:dev:land\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
