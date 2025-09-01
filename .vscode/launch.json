@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "api",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["truledgr_api.main:app", "--reload", "--host", "127.0.0.1", "--port", "8000"],
+      "cwd": "${workspaceFolder}/truledgr-api",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "docs",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "mkdocs",
+      "args": ["serve", "--dev-addr", "127.0.0.1:8001"],
+      "cwd": "${workspaceFolder}/truledgr-docs",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "dash",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:dash"],
+      "env": { "PORT": "3000" },
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "land",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:land"],
+      "env": { "PORT": "3001" },
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "all",
+      "configurations": [
+        "api",
+        "docs",
+        "dash",
+        "land"
+      ]
+    }
+  ]
+}
