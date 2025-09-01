@@ -1,5 +1,23 @@
-blank_issues_enabled: false
+blank_issues_enabled: enabled
 contact_links:
-  - name: Security
-    url: /SECURITY.md
-    about: Report a security vulnerability
+  - name: 🔒 Security Vulnerability
+    url: https://github.com/mcguiretechnology/truledgr/security/advisories/new
+    about: Report a security vulnerability privately through GitHub Security Advisories
+  - name: 📖 Documentation
+    url: https://docs.truledgr.app
+    about: Browse our comprehensive documentation and guides
+  - name: 💬 GitHub Discussions
+    url: https://github.com/mcguiretechnology/truledgr/discussions
+    about: Ask questions, share ideas, and discuss with the community
+  - name: 🚀 Feature Requests
+    url: https://github.com/mcguiretechnology/truledgr/discussions/categories/ideas
+    about: Suggest new features or enhancements in our Ideas discussion category
+  - name: ❓ Get Help
+    url: https://github.com/mcguiretechnology/truledgr/discussions/categories/q-a
+    about: Get help with setup, configuration, or usage questions
+  - name: 📞 Support
+    url: /SUPPORT.md
+    about: View all available support options and contact information
+  - name: 🤝 Contributing
+    url: /CONTRIBUTING.md
+    about: Learn how to contribute to TruLedgr development
