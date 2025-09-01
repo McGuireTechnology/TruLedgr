@@ -1,0 +1,107 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'truledgr-docs/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material
+      - name: Build site
+        run: |
+          cd truledgr-docs
+          mkdocs build --clean
+      - name: Deploy to external repo
+        env:
+          TARGET_REPO: ${{ secrets.DOCS_PAGES_REPO }}
+          TARGET_BRANCH: ${{ secrets.DOCS_PAGES_BRANCH }}
+          TARGET_TOKEN: ${{ secrets.DOCS_PAGES_TOKEN }}
+        run: |
+          if [ -z "${TARGET_REPO}" ] || [ -z "${TARGET_TOKEN}" ]; then
+            echo "TARGET_REPO and TARGET_TOKEN secrets must be set to deploy to an external repo.";
+            exit 1;
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir out || true
+          cp -r truledgr-docs/site/* out || true
+          cd out
+          git init
+          git remote add target "https://x-access-token:${TARGET_TOKEN}@github.com/${TARGET_REPO}.git"
+          git checkout -b "${TARGET_BRANCH:-gh-pages}" || git checkout "${TARGET_BRANCH:-gh-pages}"
+          git add -A
+          git commit -m "Deploy docs site from ${GITHUB_SHA}" || echo "No changes to commit"
+          git push --force target "${TARGET_BRANCH:-gh-pages}"
+      - name: Optional: Deploy via GitHub App
+        if: ${{ secrets.GH_APP_ID != '' && secrets.GH_APP_PRIVATE_KEY != '' }}
+        id: ghapp
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          installation_id: ${{ secrets.DOCS_GH_APP_INSTALLATION_ID }}
+      - name: Push via GitHub App token (if configured)
+        if: ${{ secrets.GH_APP_ID != '' && secrets.GH_APP_PRIVATE_KEY != '' }}
+        env:
+          TARGET_REPO: ${{ secrets.DOCS_PAGES_REPO }}
+          TARGET_BRANCH: ${{ secrets.DOCS_PAGES_BRANCH }}
+          INSTALL_TOKEN: ${{ steps.ghapp.outputs.token }}
+        run: |
+          if [ -z "${TARGET_REPO}" ]; then
+            echo "TARGET_REPO secret must be set (org/repo).";
+            exit 1;
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir out-app || true
+          cp -r truledgr-docs/site/* out-app || true
+          cd out-app
+          git init
+          git remote add target "https://x-access-token:${INSTALL_TOKEN}@github.com/${TARGET_REPO}.git"
+          git checkout -b "${TARGET_BRANCH:-gh-pages}" || git checkout "${TARGET_BRANCH:-gh-pages}"
+          git add -A
+          git commit -m "Deploy docs site via GitHub App from ${GITHUB_SHA}" || echo "No changes to commit"
+          git push --force target "${TARGET_BRANCH:-gh-pages}"
+      - name: Optional: Start SSH agent with private key
+        if: ${{ secrets.DOCS_PAGES_SSH_KEY != '' }}
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.DOCS_PAGES_SSH_KEY }}
+      - name: Push via SSH (if configured)
+        if: ${{ secrets.DOCS_PAGES_SSH_KEY != '' }}
+        env:
+          SSH_REPO: ${{ secrets.DOCS_PAGES_SSH_REPO }}
+          SSH_BRANCH: ${{ secrets.DOCS_PAGES_SSH_BRANCH }}
+        run: |
+          if [ -z "${SSH_REPO}" ]; then
+            echo "SSH_REPO secret must be set (org/repo).";
+            exit 1;
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir out-ssh || true
+          cp -r truledgr-docs/site/* out-ssh || true
+          cd out-ssh
+          git init
+          git remote add target "git@github.com:${SSH_REPO}.git"
+          git checkout -b "${SSH_BRANCH:-gh-pages}" || git checkout "${SSH_BRANCH:-gh-pages}"
+          git add -A
+          git commit -m "Deploy docs site via SSH from ${GITHUB_SHA}" || echo "No changes to commit"
+          git push --force target "${SSH_BRANCH:-gh-pages}"
