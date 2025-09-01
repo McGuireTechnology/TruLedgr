@@ -1,37 +1,38 @@
 
-# Bug report
+---
+name: 🐛 Bug Report
+about: Report a bug to help us improve TruLedgr
+title: '[BUG] '
+labels: ['bug', 'needs-triage']
+assignees: ''
+---
 
-Use this template to report bugs. Provide as much detail as possible to help maintainers reproduce and fix the issue.
+## 🐛 Bug Summary
+<!-- Provide a clear and concise description of the bug -->
 
-## Summary
+## 🔄 Steps to Reproduce
+<!-- Detailed steps to reproduce the issue -->
+1. Go to '...'
+2. Click on '...'
+3. Scroll down to '...'
+4. See error
 
-- Brief description of the problem
+## ✅ Expected Behavior
+<!-- A clear description of what you expected to happen -->
 
-## Steps to reproduce
+## ❌ Actual Behavior
+<!-- A clear description of what actually happened -->
 
-1. Step one
-2. Step two
-3. ...
+## 📱 Environment
+<!-- Please complete the following information -->
+- **TruLedgr Version/Commit**: 
+- **Platform**: [e.g., Web Dashboard, iOS App, Android App, API]
+- **OS**: [e.g., macOS 14, iOS 17, Windows 11, Ubuntu 22.04]
+- **Browser**: [e.g., Chrome 118, Safari 17, Firefox 119] (if applicable)
+- **Device**: [e.g., iPhone 15, iPad Pro, Desktop] (if applicable)
 
-## Expected behavior
+## 📋 Additional Context
+<!-- Add any other context, screenshots, or logs about the problem here -->
 
-- What you expected to happen
-
-## Actual behavior
-
-- What actually happened
-
-## Environment
-
-- TruLedgr version / commit SHA:
-- OS / version:
-- Browser / version (if applicable):
-- Any relevant configuration or environment variables:
-
-## Logs / Screenshots
-
-- Attach log snippets or screenshots (no secrets)
-
-## Additional context
-
-- Anything else that might be useful
+## 🔐 Security Consideration
+<!-- If this bug involves sensitive financial data or security concerns, please use the Security Vulnerability option instead -->
