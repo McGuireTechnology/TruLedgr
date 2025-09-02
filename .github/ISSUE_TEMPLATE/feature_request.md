@@ -1,10 +1,30 @@
 ---
 name: 🚀 Feature Request
 about: Suggest a new feature or enhancement for TruLedgr
-title: '[FEATURE] '
+title: 'feat([SCOPE]): [BRIEF DESCRIPTION]'
 labels: ['enhancement', 'needs-triage']
 assignees: ''
 ---
+
+## 📝 Type & Scope
+<!-- Select the type and scope for this feature request -->
+
+### Type
+- [ ] `feat` - New feature
+- [ ] `docs` - Documentation improvement
+- [ ] `perf` - Performance improvement
+- [ ] `refactor` - Code refactoring
+- [ ] `style` - Code style improvement
+- [ ] `test` - Test improvements
+
+### Scope
+- [ ] `api` - Backend API changes
+- [ ] `dash` - Frontend application changes  
+- [ ] `android` - Android app changes
+- [ ] `apple` - iOS app changes
+- [ ] `docs` - Documentation changes
+- [ ] `ci` - CI/CD pipeline changes
+- [ ] `deps` - Dependency updates
 
 ## 🚀 Feature Summary
 <!-- Provide a clear and concise description of the feature you'd like to see -->
@@ -26,14 +46,6 @@ assignees: ''
 
 ## 🔄 Alternatives Considered
 <!-- Describe any alternative solutions or features you've considered -->
-
-## 📱 Platform Considerations
-<!-- Which platforms should this feature support? -->
-- [ ] Web Dashboard
-- [ ] iOS App
-- [ ] Android App
-- [ ] API
-- [ ] All platforms
 
 ## 📊 Priority
 <!-- How important is this feature to you? -->
