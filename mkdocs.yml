@@ -6,7 +6,19 @@ site_dir: site
 nav:
   - Home: index.md
   - Architecture: architecture.md
-  - Contributing: contributing.md
+  - Contributing: 
+    - Overview: contributing.md
+    - Getting Started: contributing/getting-started.md
+    - Development Guidelines: contributing/development-guidlines.md
+    - Branching Strategy: contributing/branching-strategy.md
+    - Commit Guidelines: contributing/commit-guidlines.md
+    - Pull Request Process: contributing/pull-request-process.md
+    - Testing Strategy: contributing/testing-strategy.md
+    - Testing Setup: contributing/testing-setup.md
+    - Release Process: contributing/release-process.md
+    - Release Guide: contributing/release.md
+    - Repository Structure: contributing/repository-structure.md
+    - Server Ports: contributing/server-ports.md
   - Contributors: contributors.md
   - Support: support.md
   - Release Notes: RELEASE.md
