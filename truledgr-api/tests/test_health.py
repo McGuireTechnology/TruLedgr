@@ -1,9 +1,10 @@
-from httpx import AsyncClient
+from fastapi.testclient import TestClient
 from truledgr_api.main import app
 
-
-async def test_ping():
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        r = await ac.get("/health/ping")
-        assert r.status_code == 200
-        assert r.json()["status"] == "ok"
+def test_health():
+    client = TestClient(app)
+    response = client.get("/health")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "ok"
+    assert data["message"] == "pong"

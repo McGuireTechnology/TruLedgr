@@ -1,2 +1,0 @@
-# TruLedgr-Docs
-Truledgr Documentation
