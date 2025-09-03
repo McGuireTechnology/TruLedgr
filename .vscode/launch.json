@@ -7,7 +7,7 @@
       "request": "launch",
       "module": "uvicorn",
       "args": ["truledgr_api.main:app", "--reload", "--host", "127.0.0.1", "--port", "8000"],
-      "cwd": "${workspaceFolder}/truledgr-api",
+      "cwd": "${workspaceFolder}/api",
       "console": "integratedTerminal"
     },
     {
@@ -16,7 +16,7 @@
       "request": "launch",
       "module": "mkdocs",
       "args": ["serve", "--dev-addr", "127.0.0.1:8001"],
-      "cwd": "${workspaceFolder}/truledgr-docs",
+      "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
     },
     {

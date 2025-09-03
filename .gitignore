@@ -2,3 +2,10 @@ recycle
 .DS_Store
 .venv
 node_modules
+__pycache__/
+*.pyc
+.env
+*.sqlite3
+*.db
+.vscode/
+.pytest_cache/

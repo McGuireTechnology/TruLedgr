@@ -53,5 +53,138 @@
         "panel": "shared"
       }
     },
+    {
+      "label": "Test: All Dev Servers",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m", "pytest", 
+        "tests/test_dev_servers_pytest.py",
+        "-v",
+        "--tb=short"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Test: Single Server",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m", "pytest", 
+        "tests/test_dev_servers_pytest.py::test_${input:serverName}_server_startup",
+        "-v", 
+        "-s"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Test: Integration Summary",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m", "pytest", 
+        "tests/test_dev_servers_pytest.py::test_all_servers_startup_summary",
+        "-v",
+        "-s"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+    ,
+    {
+      "label": "Pull TruLedgr-Android",
+      "type": "shell",
+      "command": "if [ -d TruLedgr-Android/.git ]; then git -C TruLedgr-Android pull; else git clone https://github.com/McGuireTechnology/TruLedgr-Android.git TruLedgr-Android; fi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pull TruLedgr-Apple",
+      "type": "shell",
+      "command": "if [ -d TruLedgr-Apple/.git ]; then git -C TruLedgr-Apple pull; else git clone https://github.com/McGuireTechnology/TruLedgr-Apple.git TruLedgr-Apple; fi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pull TruLedgr-API",
+      "type": "shell",
+      "command": "if [ -d TruLedgr-API/.git ]; then git -C TruLedgr-API pull; else git clone https://github.com/McGuireTechnology/TruLedgr-API.git TruLedgr-API; fi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pull TruLedgr-Dash",
+      "type": "shell",
+      "command": "if [ -d TruLedgr-Dash/.git ]; then git -C TruLedgr-Dash pull; else git clone https://github.com/McGuireTechnology/TruLedgr-Dash.git TruLedgr-Dash; fi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pull TruLedgr-Land",
+      "type": "shell",
+      "command": "if [ -d TruLedgr-Land/.git ]; then git -C TruLedgr-Land pull; else git clone https://github.com/McGuireTechnology/TruLedgr-Land.git TruLedgr-Land; fi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pull TruLedgr-Docs",
+      "type": "shell",
+      "command": "if [ -d TruLedgr-Docs/.git ]; then git -C TruLedgr-Docs pull; else git clone https://github.com/McGuireTechnology/TruLedgr-Docs.git TruLedgr-Docs; fi",
+      "problemMatcher": []
+    },
+    {
+      "label": "Pull All Subrepos",
+      "dependsOn": [
+        "Pull TruLedgr-Android",
+        "Pull TruLedgr-Apple",
+        "Pull TruLedgr-API",
+        "Pull TruLedgr-Dash",
+        "Pull TruLedgr-Land",
+        "Pull TruLedgr-Docs"
+      ],
+      "dependsOrder": "sequence"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "serverName",
+      "description": "Select server to test",
+      "type": "pickString",
+      "options": [
+        "api",
+        "dash", 
+        "land",
+        "docs"
+      ]
+    }
   ]
 }
