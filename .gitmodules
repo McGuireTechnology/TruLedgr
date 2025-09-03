@@ -1,0 +1,15 @@
+[submodule "TruLedgr-API"]
+	path = TruLedgr-API
+	url = https://github.com/McGuireTechnology/TruLedgr-API.git
+[submodule "TruLedgr-Dash"]
+	path = TruLedgr-Dash
+	url = https://github.com/McGuireTechnology/TruLedgr-Dash.git
+[submodule "TruLedgr-Land"]
+	path = TruLedgr-Land
+	url = https://github.com/McGuireTechnology/TruLedgr-Land.git
+[submodule "TruLedgr-Apple"]
+	path = TruLedgr-Apple
+	url = https://github.com/McGuireTechnology/TruLedgr-Apple.git
+[submodule "TruLedgr-Android"]
+	path = TruLedgr-Android
+	url = https://github.com/McGuireTechnology/TruLedgr-Android.git
