@@ -1,2 +1,0 @@
-# TruLedgr-Land
-TruLedgr Landing

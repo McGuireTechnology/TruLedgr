@@ -1,1 +1,0 @@
-# TruLedgr Apple
