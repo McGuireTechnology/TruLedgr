@@ -22,34 +22,76 @@ Our brand communicates:
 
 Our primary colors form the foundation of the TruLedgr visual identity:
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+  <div style="background: #1E2A38; color: white; padding: 20px; border-radius: 8px;">
+    <h4 style="margin: 0 0 10px 0; color: white;">Deep Blue</h4>
+    <code style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px;">#1E2A38</code>
+    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.9;">Trust, stability, professionalism</p>
+  </div>
+  <div style="background: #00B8A9; color: white; padding: 20px; border-radius: 8px;">
+    <h4 style="margin: 0 0 10px 0; color: white;">Vibrant Teal</h4>
+    <code style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px;">#00B8A9</code>
+    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.9;">Modern, energetic, tech-forward</p>
+  </div>
+  <div style="background: #F4F5F7; color: #1E2A38; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
+    <h4 style="margin: 0 0 10px 0; color: #1E2A38;">Warm Gray</h4>
+    <code style="background: rgba(0,0,0,0.1); color: #1E2A38; padding: 4px 8px; border-radius: 4px;">#F4F5F7</code>
+    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.8;">Balance, cleanliness, visual rest</p>
+  </div>
+</div>
+
 **Deep Blue** `#1E2A38`
+
 - **Usage**: Primary navigation, headers, main brand elements
 - **Meaning**: Trust, stability, professionalism
 - **Role**: Anchor color that grounds the entire palette
 
 **Vibrant Teal** `#00B8A9`
+
 - **Usage**: CTAs, links, interactive elements, progress indicators
 - **Meaning**: Modern, energetic, tech-forward
 - **Role**: Primary action color that drives engagement
 
 **Warm Gray** `#F4F5F7`
+
 - **Usage**: Backgrounds, borders, disabled states
 - **Meaning**: Balance, cleanliness, visual rest
 - **Role**: Neutral foundation that reduces visual fatigue
 
 ### Accent Palette (Highlights & Actions)
 
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+  <div style="background: #FF6F3C; color: white; padding: 20px; border-radius: 8px;">
+    <h4 style="margin: 0 0 10px 0; color: white;">Sunset Orange</h4>
+    <code style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px;">#FF6F3C</code>
+    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.9;">Attention, urgency, energy</p>
+  </div>
+  <div style="background: #8BC34A; color: white; padding: 20px; border-radius: 8px;">
+    <h4 style="margin: 0 0 10px 0; color: white;">Lime Green</h4>
+    <code style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px;">#8BC34A</code>
+    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.9;">Growth, positivity, achievement</p>
+  </div>
+  <div style="background: #FFC107; color: #1E2A38; padding: 20px; border-radius: 8px;">
+    <h4 style="margin: 0 0 10px 0; color: #1E2A38;">Golden Yellow</h4>
+    <code style="background: rgba(0,0,0,0.1); color: #1E2A38; padding: 4px 8px; border-radius: 4px;">#FFC107</code>
+    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.8;">Caution, optimism, attention</p>
+  </div>
+</div>
+
 **Sunset Orange** `#FF6F3C`
+
 - **Usage**: Urgent actions, warnings, expense categories
 - **Meaning**: Attention, urgency, energy
 - **Context**: "Add transaction" buttons, alert states
 
 **Lime Green** `#8BC34A`
+
 - **Usage**: Success states, positive trends, income indicators
 - **Meaning**: Growth, positivity, achievement
 - **Context**: Budget targets met, positive account balances
 
 **Golden Yellow** `#FFC107`
+
 - **Usage**: Alerts, notifications, highlights, pending states
 - **Meaning**: Caution, optimism, attention
 - **Context**: Pending transactions, important notices
@@ -71,47 +113,142 @@ Typography in TruLedgr serves dual purposes: ensuring numerical readability and 
 
 ### Display Typography
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+  <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; margin: 0 0 15px 0; color: #1E2A38;">Montserrat Font Family</h4>
+  <div style="margin-bottom: 15px;">
+    <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 32px; margin: 0; color: #1E2A38;">TruLedgr Bold (700)</p>
+    <small style="color: #666;">Logo, primary headlines</small>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <p style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 24px; margin: 0; color: #1E2A38;">Section Headers Semibold (600)</p>
+    <small style="color: #666;">Section titles, important headings</small>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <p style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 20px; margin: 0; color: #1E2A38;">Subsection Medium (500)</p>
+    <small style="color: #666;">Subsection headers</small>
+  </div>
+  <div>
+    <p style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; margin: 0; color: #1E2A38;">Regular Text (400)</p>
+    <small style="color: #666;">Marketing copy, display text</small>
+  </div>
+</div>
+
 **Primary: Montserrat**
+
 - **Usage**: Logo, headlines, marketing materials, app headers
 - **Characteristics**: Modern, geometric, approachable
 - **Weights**: Regular (400), Medium (500), Semibold (600), Bold (700)
 
 **Alternative: Poppins**
+
 - **Usage**: Secondary display option for softer applications
 - **Characteristics**: Rounded, friendly, contemporary
 - **Use case**: Marketing materials requiring warmth
 
 ### Interface Typography
 
+<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+  <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 15px 0; color: #1E2A38;">Inter Font Family</h4>
+  <div style="margin-bottom: 15px;">
+    <p style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; margin: 0; color: #1E2A38;">Interface Semibold (600)</p>
+    <small style="color: #666;">Button labels, form labels</small>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <p style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; margin: 0; color: #1E2A38;">Interface Medium (500)</p>
+    <small style="color: #666;">Navigation, emphasized body text</small>
+  </div>
+  <div style="margin-bottom: 15px;">
+    <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; margin: 0; color: #1E2A38;">Body Text Regular (400)</p>
+    <small style="color: #666;">Main body text, descriptions</small>
+  </div>
+  <div>
+    <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px; margin: 0; color: #666;">Small Text (400)</p>
+    <small style="color: #666;">Captions, helper text</small>
+  </div>
+</div>
+
 **Primary: Inter**
+
 - **Usage**: Body text, UI elements, dashboards, data tables
 - **Characteristics**: Optimized for digital, excellent small-size legibility
 - **Strengths**: Superior tabular numerals, wide language support
 - **Weights**: Regular (400), Medium (500), Semibold (600)
 
 **Alternative: Roboto**
+
 - **Usage**: Fallback option for broad compatibility
 - **Characteristics**: Neutral, familiar, widely supported
 - **Use case**: Android-first implementations
 
 ### Numerical Typography
 
+<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+  <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 15px 0; color: #1E2A38;">Financial Data Display</h4>
+  <div style="font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums; background: white; padding: 15px; border-radius: 4px; border: 1px solid #e0e0e0;">
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; margin-bottom: 8px;">
+      <span>Checking Account</span>
+      <span style="font-weight: 500; color: #8BC34A;">$2,847.32</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; margin-bottom: 8px;">
+      <span>Savings Account</span>
+      <span style="font-weight: 500; color: #8BC34A;">$15,420.00</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; margin-bottom: 8px;">
+      <span>Credit Card</span>
+      <span style="font-weight: 500; color: #FF6F3C;">-$1,203.45</span>
+    </div>
+    <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 12px 0;">
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px;">
+      <span style="font-weight: 600;">Net Worth</span>
+      <span style="font-weight: 600; color: #1E2A38;">$17,063.87</span>
+    </div>
+  </div>
+  <small style="color: #666; margin-top: 10px; display: block;">Notice how the decimal points align perfectly using tabular numerals</small>
+</div>
+
 **Critical Requirement: Tabular Lining Numerals**
+
 - All financial amounts must use tabular (monospaced) numerals
 - Ensures proper decimal alignment in tables and lists
 - Both Inter and Roboto provide excellent tabular numeral support
 
 ### Typography Hierarchy
 
-```
-H1 (Page Titles): Montserrat Semibold 32px
-H2 (Section Heads): Montserrat Medium 24px
-H3 (Subsections): Montserrat Medium 20px
-Body Large: Inter Regular 16px
-Body: Inter Regular 14px
-Body Small: Inter Regular 12px
-Financial Data: Inter Medium 14px (Tabular)
-Captions: Inter Regular 11px
+<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+  <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 32px; margin: 0 0 8px 0; color: #1E2A38;">H1 Page Title</h1>
+  <small style="color: #666;">Montserrat Semibold 32px</small>
+  
+  <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 24px; margin: 20px 0 8px 0; color: #1E2A38;">H2 Section Header</h2>
+  <small style="color: #666;">Montserrat Medium 24px</small>
+  
+  <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 20px; margin: 20px 0 8px 0; color: #1E2A38;">H3 Subsection</h3>
+  <small style="color: #666;">Montserrat Medium 20px</small>
+  
+  <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 16px; margin: 20px 0 8px 0; color: #1E2A38;">Body Large Text</p>
+  <small style="color: #666;">Inter Regular 16px</small>
+  
+  <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; margin: 20px 0 8px 0; color: #1E2A38;">Body Text</p>
+  <small style="color: #666;">Inter Regular 14px</small>
+  
+  <p style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; margin: 20px 0 8px 0; color: #1E2A38; font-variant-numeric: tabular-nums;">$1,234.56</p>
+  <small style="color: #666;">Inter Medium 14px (Tabular)</small>
+  
+  <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px; margin: 20px 0 8px 0; color: #666;">Caption Text</p>
+  <small style="color: #666;">Inter Regular 12px</small>
+</div>
+
+```css
+/* CSS Classes for Implementation */
+.display-xl { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 32px; }
+.display-lg { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 24px; }
+.display-md { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 20px; }
+.body-lg { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 16px; }
+.body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; }
+.body-sm { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px; }
+.financial { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; font-variant-numeric: tabular-nums; }
+.caption { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px; color: #666; }
 ```
 
 ---
