@@ -1,5 +1,6 @@
 site_name: TruLedgr Documentation
 site_description: Documentation for TruLedgr platform
+site_url: https://docs.truledgr.app
 docs_dir: docs
 site_dir: site
 
@@ -8,6 +9,7 @@ nav:
   - Architecture: architecture.md
   - Contributing: 
     - Overview: contributing.md
+    - Index: contributing/index.md
     - Getting Started: contributing/getting-started.md
     - Development Guidelines: contributing/development-guidlines.md
     - Branching Strategy: contributing/branching-strategy.md
