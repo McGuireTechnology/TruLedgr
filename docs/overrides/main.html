@@ -1,0 +1,580 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- Google Fonts for TruLedgr branding -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* TruLedgr Brand Colors */
+      --tl-deep-blue: #1E2A38;
+      --tl-vibrant-teal: #00B8A9;
+      --tl-warm-gray: #F4F5F7;
+      --tl-sunset-orange: #FF6F3C;
+      --tl-lime-green: #8BC34A;
+      --tl-golden-yellow: #FFC107;
+      
+      /* Material Design Variables Override for Light Mode */
+      --md-primary-fg-color: var(--tl-deep-blue);
+      --md-primary-fg-color--light: var(--tl-vibrant-teal);
+      --md-primary-fg-color--dark: #162028;
+      --md-accent-fg-color: var(--tl-vibrant-teal);
+      --md-accent-fg-color--transparent: rgba(0, 184, 169, 0.1);
+      
+      /* Typography */
+      --md-text-font: "Inter", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      --md-code-font: "JetBrains Mono", "Roboto Mono", monospace;
+      
+      /* Light mode content styling */
+      --md-default-bg-color: #ffffff;
+      --md-default-fg-color: #2c3e50;
+      --md-typeset-color: #2c3e50;
+      --md-footer-bg-color: var(--tl-deep-blue);
+      --md-footer-fg-color: #ffffff;
+    }
+
+    /* Dark mode variables */
+    [data-md-color-scheme="slate"] {
+      --md-primary-fg-color: var(--tl-vibrant-teal);
+      --md-accent-fg-color: var(--tl-lime-green);
+      --md-hue: 185;
+      
+      /* Dark mode background and text colors */
+      --md-default-bg-color: #1a1a1a;
+      --md-default-fg-color: #e0e0e0;
+      --md-typeset-color: #e0e0e0;
+      --md-code-bg-color: #2d2d2d;
+      --md-code-fg-color: #f5f5f5;
+      
+      /* Dark sidebar */
+      --md-nav-bg-color: #1a1a1a;
+      --md-nav-fg-color: #e0e0e0;
+    }
+
+    /* Dark mode specific styling */
+    [data-md-color-scheme="slate"] .md-main {
+      background-color: #0d1117;
+    }
+
+    [data-md-color-scheme="slate"] .md-content {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      margin: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-md-color-scheme="slate"] .md-typeset {
+      color: #e0e0e0;
+    }
+
+    [data-md-color-scheme="slate"] .md-sidebar {
+      background-color: #1a1a1a;
+    }
+
+    [data-md-color-scheme="slate"] .md-nav {
+      color: #e0e0e0;
+    }
+
+    [data-md-color-scheme="slate"] .md-nav__link {
+      color: #e0e0e0;
+    }
+
+    [data-md-color-scheme="slate"] .md-nav__link:hover {
+      color: var(--tl-vibrant-teal);
+    }
+
+    [data-md-color-scheme="slate"] .md-nav__link--active {
+      color: var(--tl-vibrant-teal);
+    }
+
+    /* Dark mode typography */
+    [data-md-color-scheme="slate"] .md-typeset h1,
+    [data-md-color-scheme="slate"] .md-typeset h2,
+    [data-md-color-scheme="slate"] .md-typeset h3 {
+      color: #ffffff;
+    }
+
+    [data-md-color-scheme="slate"] .text-deep-blue {
+      color: #ffffff;
+    }
+
+    /* Dark mode cards and sections */
+    [data-md-color-scheme="slate"] .md-typeset .highlight {
+      background: #2d2d2d;
+      border-left: 4px solid var(--tl-vibrant-teal);
+    }
+
+    /* Dark mode card styling - override inline styles */
+    [data-md-color-scheme="slate"] div[style*="background: #ffffff"],
+    [data-md-color-scheme="slate"] div[style*="background:#ffffff"] {
+      background: #2d2d2d !important;
+      border-color: var(--tl-vibrant-teal) !important;
+    }
+
+    [data-md-color-scheme="slate"] div[style*="background: linear-gradient(135deg, #F4F5F7"] {
+      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%) !important;
+    }
+
+    [data-md-color-scheme="slate"] div[style*="background: linear-gradient(135deg, #1E2A38"] {
+      background: linear-gradient(135deg, #0d1117 0%, #1a1a1a 100%) !important;
+    }
+
+    /* Dark mode text in cards */
+    [data-md-color-scheme="slate"] div[style*="background: #ffffff"] h3,
+    [data-md-color-scheme="slate"] div[style*="background:#ffffff"] h3,
+    [data-md-color-scheme="slate"] div[style*="background: #ffffff"] p,
+    [data-md-color-scheme="slate"] div[style*="background:#ffffff"] p {
+      color: #e0e0e0 !important;
+    }
+
+    /* Dark mode for specific brand color backgrounds */
+    [data-md-color-scheme="slate"] div[style*="background: #F4F5F7"] {
+      background: #2d2d2d !important;
+    }
+
+    /* Ensure brand colors stay consistent in dark mode */
+    [data-md-color-scheme="slate"] a[style*="background: #8BC34A"] {
+      background: #8BC34A !important;
+      border-color: #8BC34A !important;
+      color: white !important;
+    }
+
+    [data-md-color-scheme="slate"] a[style*="background: #FF6F3C"] {
+      background: #FF6F3C !important;
+      border-color: #FF6F3C !important;
+      color: white !important;
+    }
+
+    [data-md-color-scheme="slate"] div[style*="border: 2px solid #00B8A9"] {
+      border-color: #00B8A9 !important;
+    }
+
+    [data-md-color-scheme="slate"] div[style*="border: 2px solid #8BC34A"] {
+      border-color: #8BC34A !important;
+    }
+
+    [data-md-color-scheme="slate"] div[style*="border: 2px solid #FF6F3C"] {
+      border-color: #FF6F3C !important;
+    }
+
+    /* Ensure primary button stays teal in both light and dark mode */
+    .md-button--primary {
+      background: var(--tl-vibrant-teal) !important;
+      border-color: var(--tl-vibrant-teal) !important;
+      color: white !important;
+    }
+
+    [data-md-color-scheme="slate"] .md-button--primary {
+      background: var(--tl-vibrant-teal) !important;
+      border-color: var(--tl-vibrant-teal) !important;
+      color: white !important;
+    }
+
+    /* Fix button colors in light mode too */
+    a[style*="background: #8BC34A"] {
+      background: #8BC34A !important;
+      border-color: #8BC34A !important;
+      color: white !important;
+    }
+
+    a[style*="background: #FF6F3C"] {
+      background: #FF6F3C !important;
+      border-color: #FF6F3C !important;
+      color: white !important;
+    }
+
+    /* Ensure proper light mode content area */
+    .md-main {
+      background-color: #f0f2f5;
+    }
+
+    .md-content {
+      background-color: #ffffff;
+      border-radius: 8px;
+      margin: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .md-typeset {
+      color: #2c3e50;
+    }
+
+    /* Header branding */
+    .md-header {
+      background: linear-gradient(135deg, var(--tl-deep-blue) 0%, #2a3c4a 100%);
+      box-shadow: 0 2px 8px rgba(30, 42, 56, 0.15);
+    }
+
+    /* Navigation tabs styling for better contrast */
+    .md-tabs {
+      background: var(--tl-deep-blue);
+    }
+
+    .md-tabs__link {
+      color: #ffffff !important;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .md-tabs__link:hover {
+      color: #ffffff !important;
+      opacity: 1;
+    }
+
+    .md-tabs__link--active {
+      color: #ffffff !important;
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    /* Dark mode header adjustment */
+    [data-md-color-scheme="slate"] .md-header {
+      background: linear-gradient(135deg, #0d1117 0%, var(--tl-deep-blue) 100%);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-md-color-scheme="slate"] .md-tabs {
+      background: #0d1117;
+    }
+
+    .md-header__title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      color: white;
+    }
+
+    /* Navigation styling */
+    .md-nav__title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      background-color: transparent !important;
+    }
+
+    .md-nav__link--active {
+      color: var(--tl-vibrant-teal);
+      font-weight: 500;
+    }
+
+    /* Dark mode nav title */
+    [data-md-color-scheme="slate"] .md-nav__title {
+      background-color: transparent !important;
+    }
+
+    /* Sidebar text styling */
+    .md-sidebar,
+    .md-sidebar *,
+    .md-sidebar > *,
+    .md-sidebar__scrollwrap,
+    .md-sidebar__inner {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+    
+    .md-sidebar--primary,
+    .md-sidebar--primary *,
+    .md-sidebar--primary > * {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+    
+    .md-sidebar--secondary,
+    .md-sidebar--secondary *,
+    .md-sidebar--secondary > * {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+    
+    .md-nav {
+      color: #2c3e50;
+      background-color: transparent !important;
+      background: transparent !important;
+    }
+
+    .md-nav__link {
+      color: #2c3e50;
+    }
+
+    .md-nav__link:hover {
+      color: var(--tl-vibrant-teal);
+    }
+
+    /* Dark mode sidebar styling */
+    [data-md-color-scheme="slate"] .md-sidebar,
+    [data-md-color-scheme="slate"] .md-sidebar *,
+    [data-md-color-scheme="slate"] .md-sidebar > *,
+    [data-md-color-scheme="slate"] .md-sidebar__scrollwrap,
+    [data-md-color-scheme="slate"] .md-sidebar__inner {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+    
+    [data-md-color-scheme="slate"] .md-sidebar--primary,
+    [data-md-color-scheme="slate"] .md-sidebar--primary *,
+    [data-md-color-scheme="slate"] .md-sidebar--primary > * {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+    
+    [data-md-color-scheme="slate"] .md-sidebar--secondary,
+    [data-md-color-scheme="slate"] .md-sidebar--secondary *,
+    [data-md-color-scheme="slate"] .md-sidebar--secondary > * {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+    
+    [data-md-color-scheme="slate"] .md-nav {
+      background-color: transparent !important;
+      background: transparent !important;
+    }
+    
+    /* Remove any sidebar transitions or separators */
+    .md-container::before,
+    .md-container::after,
+    .md-main::before,
+    .md-main::after {
+      display: none !important;
+    }
+    
+    /* Remove any Material Design dividers */
+    .md-sidebar::before,
+    .md-sidebar::after,
+    .md-sidebar--primary::before,
+    .md-sidebar--primary::after,
+    .md-sidebar--secondary::before,
+    .md-sidebar--secondary::after {
+      display: none !important;
+    }
+    
+    /* Ensure no weird gradients or overlays */
+    .md-overlay {
+      display: none !important;
+    }
+    
+    /* Reduce left and right margins on main content */
+    .md-main__inner.md-grid {
+      max-width: none !important;
+      margin-left: 1rem !important;
+      margin-right: 1rem !important;
+    }
+
+    /* Typography improvements */
+    .md-typeset h1 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      color: var(--tl-deep-blue);
+    }
+
+    .md-typeset h2 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      color: var(--tl-deep-blue);
+    }
+
+    .md-typeset h3 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      color: var(--tl-deep-blue);
+    }
+
+    /* Code blocks with brand accent */
+    .md-typeset .highlight {
+      background: var(--tl-warm-gray);
+      border-left: 4px solid var(--tl-vibrant-teal);
+    }
+
+    /* Buttons and CTAs */
+    .md-button {
+      background: var(--tl-vibrant-teal);
+      color: white;
+      border-color: var(--tl-vibrant-teal);
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+    }
+
+    .md-button:hover {
+      background: #009688;
+      border-color: #009688;
+    }
+
+    /* Admonitions with brand colors */
+    .md-typeset .admonition.success {
+      border-color: var(--tl-lime-green);
+    }
+
+    .md-typeset .admonition.warning {
+      border-color: var(--tl-golden-yellow);
+    }
+
+    .md-typeset .admonition.danger {
+      border-color: var(--tl-sunset-orange);
+    }
+
+    .md-typeset .admonition.info {
+      border-color: var(--tl-vibrant-teal);
+    }
+
+    /* Footer styling */
+    .md-footer {
+      background: var(--tl-deep-blue);
+      color: white;
+    }
+
+    .md-footer-meta {
+      background: #162028;
+    }
+
+    .md-footer__link {
+      color: var(--tl-vibrant-teal);
+    }
+
+    .md-footer__link:hover {
+      color: white;
+    }
+
+    /* Search styling */
+    .md-search__input {
+      font-family: "Inter", sans-serif;
+    }
+
+    .md-search__input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Table styling for financial data */
+    .md-typeset table:not([class]) {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .md-typeset table:not([class]) th {
+      background: var(--tl-warm-gray);
+      color: var(--tl-deep-blue);
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+    }
+
+    /* Custom classes from branding guide */
+    .display-xl { 
+      font-family: 'Montserrat', sans-serif; 
+      font-weight: 600; 
+      font-size: 32px; 
+      color: var(--tl-deep-blue);
+    }
+    
+    .display-lg { 
+      font-family: 'Montserrat', sans-serif; 
+      font-weight: 500; 
+      font-size: 24px; 
+      color: var(--tl-deep-blue);
+    }
+    
+    .display-md { 
+      font-family: 'Montserrat', sans-serif; 
+      font-weight: 500; 
+      font-size: 20px; 
+      color: var(--tl-deep-blue);
+    }
+    
+    .body-lg { 
+      font-family: 'Inter', sans-serif; 
+      font-weight: 400; 
+      font-size: 16px; 
+    }
+    
+    .body { 
+      font-family: 'Inter', sans-serif; 
+      font-weight: 400; 
+      font-size: 14px; 
+    }
+    
+    .body-sm { 
+      font-family: 'Inter', sans-serif; 
+      font-weight: 400; 
+      font-size: 12px; 
+    }
+    
+    .financial { 
+      font-family: 'Inter', sans-serif; 
+      font-weight: 500; 
+      font-size: 14px; 
+      font-variant-numeric: tabular-nums; 
+    }
+    
+    .caption { 
+      font-family: 'Inter', sans-serif; 
+      font-weight: 400; 
+      font-size: 11px; 
+      color: #666; 
+    }
+
+    /* Brand color utilities */
+    .text-deep-blue { color: var(--tl-deep-blue); }
+    .text-vibrant-teal { color: var(--tl-vibrant-teal); }
+    .text-sunset-orange { color: var(--tl-sunset-orange); }
+    .text-lime-green { color: var(--tl-lime-green); }
+    .text-golden-yellow { color: var(--tl-golden-yellow); }
+
+    .bg-deep-blue { background-color: var(--tl-deep-blue); }
+    .bg-vibrant-teal { background-color: var(--tl-vibrant-teal); }
+    .bg-warm-gray { background-color: var(--tl-warm-gray); }
+    .bg-sunset-orange { background-color: var(--tl-sunset-orange); }
+    .bg-lime-green { background-color: var(--tl-lime-green); }
+    .bg-golden-yellow { background-color: var(--tl-golden-yellow); }
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 76.1875em) {
+      .md-nav__title {
+        background: transparent !important;
+        color: #2c3e50;
+      }
+      
+      [data-md-color-scheme="slate"] .md-nav__title {
+        background: transparent !important;
+        color: #e0e0e0;
+      }
+    }
+
+    /* Fix any duplicate content issues */
+    .md-sidebar__inner {
+      overflow: hidden;
+    }
+
+    /* Ensure clean navigation structure */
+    .md-nav--secondary {
+      background: transparent !important;
+    }
+
+    .md-nav--primary {
+      background: transparent !important;
+    }
+  </style>
+{% endblock %}
