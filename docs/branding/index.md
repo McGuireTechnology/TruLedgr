@@ -255,77 +255,104 @@ Typography in TruLedgr serves dual purposes: ensuring numerical readability and 
 
 ## 3. Logo System
 
-### Logo Concepts
+The TruLedgr logo system creates a cohesive, modern identity that is structured like a ledger, elevated by growth, and anchored by a strong wordmark. Our logo balances traditional financial symbolism with contemporary digital aesthetics.
 
-Our logo balances traditional financial symbolism with modern digital aesthetics:
+### Core Logo Concepts
 
-**1. Ledger + Modern Grid**
-- Abstract "stacked lines" or "columns" evoking accounting ledgers
-- Clean, geometric interpretation of traditional bookkeeping
-- Scales well for digital applications
+**1. Ledger + Grid**
+- Abstract horizontal or vertical bars inspired by accounting ledgers
+- Represents order, clarity, and structured financial management
+- Clean, geometric design that adapts exceptionally well to digital use
+- Evokes the systematic nature of financial tracking and organization
 
-**2. Checkmark + Balance**
-- Symbolizes financial clarity and correctness
-- Communicates accuracy and verification
-- Builds trust through familiar positive associations
+**2. Abstract Growth Symbol**
+- Rising arrow, angled accent, or bar progression integrated into the ledger motif
+- Suggests progress, improvement, and upward financial momentum
+- Subtle enough to remain professional without falling into financial clichés
+- Communicates forward movement and positive financial outcomes
 
-**3. Monogram (TL)**
-- Geometric design forming recognizable brand mark
-- Optimized for app icons and favicons
-- Memorable shorthand for the brand
+**3. Wordmark-First Identity**
+- The "TruLedgr" wordmark serves as the central brand element
+- Custom typography that balances precision with approachability
+- Acts as the anchor across all brand applications and touchpoints
+- Immediately recognizable and memorable brand identifier
 
-**4. Abstract Growth Symbol**
-- Stylized upward arrow embedded in lettering
-- Suggests financial progress and improvement
-- Subtle integration maintains professional appearance
+**4. Ledger Symbol Icon**
+- A standalone abstract ledger/grid mark that doubles as the brand icon
+- Used for app launchers, favicons, and small-scale applications
+- Distinctive and recognizable without relying on initials or text
+- Maintains brand recognition even at minimal sizes
 
 ### Logo Variants
 
 **Primary Wordmark**
-- Full "TruLedgr" with custom typography treatment
-- Use for main brand applications, website headers
-- Minimum size: 120px width for digital, 1" for print
+- Full "TruLedgr" wordmark with custom typography treatment
+- Primary application: Website headers, print collateral, main brand usage
+- Minimum size: 120px width (digital) or 1 inch (print)
+- Most recognizable and authoritative brand presentation
 
 **Icon-Only Mark**
-- Monogram "TL" or abstract ledger symbol
-- Use for app launchers, favicons, social media avatars
-- Minimum size: 24px x 24px
+- Abstract ledger/grid symbol without text
+- Applications: App icons, favicons, social media avatars, compact brand uses
+- Minimum size: 24px × 24px
+- Maintains brand recognition in space-constrained environments
 
 **Horizontal Layout**
-- Icon + wordmark in horizontal arrangement
-- Use for letterheads, email signatures, footer applications
+- Icon positioned to the left of the wordmark
+- Ideal for: Email signatures, letterheads, footer applications, business cards
+- Balanced composition for wide format requirements
+- Professional presentation for corporate communications
 
 **Stacked Layout**
-- Icon above wordmark for square format requirements
-- Use for social media profiles, compact spaces
+- Icon positioned above wordmark in vertical arrangement
+- Perfect for: Social media profiles, square spaces, mobile applications
+- Compact vertical footprint while maintaining brand hierarchy
+- Optimized for square format constraints
 
-### Logo Design Principles
+### Design Principles
 
-**Visual Characteristics:**
-- Minimal, geometric, flat design (no gradients in core identity)
-- Slight rounding for approachability (avoid cold/sterile banking aesthetics)
-- High contrast ratios for accessibility compliance
-- Scalable vector format for all applications
+#### Visual Characteristics
+- **Minimal & Geometric**: Flat design approach with no gradients in core identity
+- **Approachable Precision**: Slight rounding of edges to avoid cold or overly corporate aesthetics
+- **High Contrast**: Ensures accessibility compliance across all applications
+- **Vector-First**: Scalable design optimized for both digital and print media
+- **Structured Elegance**: Reflects the organized nature of financial management
 
-**Technical Requirements:**
-- Works effectively at 16px favicon size
-- Maintains legibility in single color (monochrome)
-- Clear contrast against both light and dark backgrounds
-- Print-safe at 300 DPI resolution
+#### Technical Requirements
+- **Favicon Ready**: Effective and legible at 16px favicon size
+- **Monochrome Compatible**: Must work perfectly in single-color printing applications
+- **Dual-Background Support**: Maintains strong contrast on both light and dark backgrounds
+- **Print Optimized**: Guaranteed crisp reproduction at 300 DPI resolution
+- **Cross-Platform Scalability**: Consistent appearance across all devices and media
 
 ### Logo Usage Guidelines
 
-**Do:**
-- Maintain minimum clear space (equal to height of logo)
-- Use approved color combinations only
-- Ensure sufficient contrast with background
-- Scale proportionally (never stretch or distort)
+#### ✅ **Do**
+- Maintain clear space around the logo (minimum: logo height distance)
+- Use only approved color combinations from the brand palette
+- Ensure strong background contrast for optimal legibility
+- Scale proportionally — never stretch, distort, or skew the logo
+- Use vector formats whenever possible for maximum quality
+- Apply the logo consistently across all brand touchpoints
 
-**Don't:**
-- Apply effects, shadows, or gradients to logo
-- Place over busy or low-contrast backgrounds
-- Modify colors outside approved palette
-- Use compressed or pixelated versions
+#### ❌ **Don't**
+- Apply effects, shadows, gradients, or filters to the logo
+- Place over cluttered, busy, or low-contrast backgrounds
+- Alter or modify the approved brand colors
+- Use pixelated, compressed, or low-resolution logo files
+- Rotate, flip, or otherwise distort the logo proportions
+- Recreate or redraw the logo — always use official files
+
+### Logo Color Applications
+
+The TruLedgr logo system works seamlessly with our brand color palette:
+
+- **Primary**: Deep Blue (#1E2A38) on light backgrounds
+- **Secondary**: Vibrant Teal (#00B8A9) for digital emphasis
+- **Monochrome**: Pure black or white for maximum contrast
+- **Reversed**: White logo on Deep Blue or dark photographic backgrounds
+
+This comprehensive logo system ensures TruLedgr maintains a professional, trustworthy, and modern brand presence across all applications while remaining instantly recognizable and memorable in the competitive financial technology landscape.
 
 ---
 
