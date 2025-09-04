@@ -132,6 +132,43 @@
       background: #2d2d2d !important;
     }
 
+    /* Exception: Keep Warm Gray consistent on branding showcase cards */
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background: #F4F5F7"],
+    [data-md-color-scheme="slate"] .color-showcase div[style*="background: #F4F5F7"],
+    [data-md-color-scheme="slate"] .brand-showcase div[style*="background: #F4F5F7"] {
+      background: #F4F5F7 !important;
+    }
+
+    /* Use light text colors in brand showcase areas for dark mode readability */
+    [data-md-color-scheme="slate"] .brand-color-showcase h1,
+    [data-md-color-scheme="slate"] .brand-color-showcase h2,
+    [data-md-color-scheme="slate"] .brand-color-showcase h3,
+    [data-md-color-scheme="slate"] .brand-color-showcase h4,
+    [data-md-color-scheme="slate"] .brand-color-showcase p,
+    [data-md-color-scheme="slate"] .brand-color-showcase span {
+      color: #e0e0e0 !important;
+    }
+
+    /* Light color for small text and captions in brand showcase */
+    [data-md-color-scheme="slate"] .brand-color-showcase small {
+      color: #b0b0b0 !important;
+    }
+
+    /* Fix white backgrounds within brand showcase in dark mode */
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background: white"],
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background:#ffffff"],
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background: #ffffff"] {
+      background: #2d2d2d !important;
+      color: #e0e0e0 !important;
+    }
+
+    /* Ensure text within those white backgrounds is also light */
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background: white"] span,
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background:#ffffff"] span,
+    [data-md-color-scheme="slate"] .brand-color-showcase div[style*="background: #ffffff"] span {
+      color: #e0e0e0 !important;
+    }
+
     /* Ensure brand colors stay consistent in dark mode */
     [data-md-color-scheme="slate"] a[style*="background: #8BC34A"] {
       background: #8BC34A !important;

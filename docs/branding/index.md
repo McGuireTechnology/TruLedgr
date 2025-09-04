@@ -22,7 +22,7 @@ Our brand communicates:
 
 Our primary colors form the foundation of the TruLedgr visual identity:
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+<div class="brand-color-showcase" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
   <div style="background: #1E2A38; color: white; padding: 20px; border-radius: 8px;">
     <h4 style="margin: 0 0 10px 0; color: white;">Deep Blue</h4>
     <code style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px;">#1E2A38</code>
@@ -60,7 +60,7 @@ Our primary colors form the foundation of the TruLedgr visual identity:
 
 ### Accent Palette (Highlights & Actions)
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+<div class="brand-color-showcase" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
   <div style="background: #FF6F3C; color: white; padding: 20px; border-radius: 8px;">
     <h4 style="margin: 0 0 10px 0; color: white;">Sunset Orange</h4>
     <code style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px;">#FF6F3C</code>
@@ -115,7 +115,7 @@ Typography in TruLedgr serves dual purposes: ensuring numerical readability and 
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+<div class="brand-color-showcase" style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
   <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 600; margin: 0 0 15px 0; color: #1E2A38;">Montserrat Font Family</h4>
   <div style="margin-bottom: 15px;">
     <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 32px; margin: 0; color: #1E2A38;">TruLedgr Bold (700)</p>
@@ -149,7 +149,7 @@ Typography in TruLedgr serves dual purposes: ensuring numerical readability and 
 
 ### Interface Typography
 
-<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+<div class="brand-color-showcase" style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
   <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 15px 0; color: #1E2A38;">Inter Font Family</h4>
   <div style="margin-bottom: 15px;">
     <p style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; margin: 0; color: #1E2A38;">Interface Semibold (600)</p>
@@ -184,7 +184,7 @@ Typography in TruLedgr serves dual purposes: ensuring numerical readability and 
 
 ### Numerical Typography
 
-<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+<div class="brand-color-showcase" style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
   <h4 style="font-family: 'Inter', sans-serif; font-weight: 600; margin: 0 0 15px 0; color: #1E2A38;">Financial Data Display</h4>
   <div style="font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums; background: white; padding: 15px; border-radius: 4px; border: 1px solid #e0e0e0;">
     <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; margin-bottom: 8px;">
@@ -216,7 +216,7 @@ Typography in TruLedgr serves dual purposes: ensuring numerical readability and 
 
 ### Typography Hierarchy
 
-<div style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
+<div class="brand-color-showcase" style="margin: 20px 0; padding: 20px; background: #F4F5F7; border-radius: 8px;">
   <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 32px; margin: 0 0 8px 0; color: #1E2A38;">H1 Page Title</h1>
   <small style="color: #666;">Montserrat Semibold 32px</small>
   
