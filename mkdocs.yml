@@ -3,6 +3,7 @@ site_description: Documentation for TruLedgr platform
 site_url: https://docs.truledgr.app
 docs_dir: docs
 site_dir: site
+copyright: Copyright &copy; 2025 McGuire Technology, LLC. All rights reserved.
 
 nav:
   - Home: index.md
@@ -69,6 +70,9 @@ theme:
     repo: fontawesome/brands/github
     edit: material/pencil
     view: material/eye
+
+extra:
+  generator: false
 
 plugins:
   - search
