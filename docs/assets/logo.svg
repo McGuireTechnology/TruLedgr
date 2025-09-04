@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" width="200" height="40">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E2A38;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00B8A9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- TruLedgr Text -->
+  <text x="45" y="28" font-family="Montserrat, sans-serif" font-weight="600" font-size="24" fill="white">
+    TruLedgr
+  </text>
+  
+  <!-- Icon: Stylized ledger book with checkmark -->
+  <rect x="5" y="8" width="30" height="24" rx="2" fill="none" stroke="#00B8A9" stroke-width="2"/>
+  <line x1="10" y1="16" x2="25" y2="16" stroke="#00B8A9" stroke-width="1.5"/>
+  <line x1="10" y1="20" x2="20" y2="20" stroke="#00B8A9" stroke-width="1.5"/>
+  <line x1="10" y1="24" x2="22" y2="24" stroke="#00B8A9" stroke-width="1.5"/>
+  
+  <!-- Checkmark -->
+  <polyline points="26,14 28,16 32,12" fill="none" stroke="#8BC34A" stroke-width="2" stroke-linecap="round"/>
+</svg>
