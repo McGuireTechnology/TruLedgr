@@ -1,0 +1,23 @@
+# Example DigitalOcean App Spec - customize before use
+name: truledgr-app
+services:
+  - name: api
+    dockerfile_path: api/Dockerfile
+    git:
+      branch: main
+    run_command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    envs:
+      - key: DATABASE_URL
+        value: ${DATABASE_URL}
+      - key: SECRET_KEY
+        scope: RUN_AND_BUILD
+  - name: vue
+    static_site:
+      build_command: npm run build
+      publish_dir: dist
+      source_dir: dashboard
+  - name: landing
+    static_site:
+      build_command: npm run build
+      publish_dir: dist
+      source_dir: landing

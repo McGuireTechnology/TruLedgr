@@ -1,0 +1,31 @@
+site_name: TruLedgr Documentation
+site_description: Documentation for TruLedgr Personal Finance Application Suite
+site_author: Nathan
+site_url: https://truledgr.app
+
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: light blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Quick Start: getting-started/quick-start.md
+    - Running the Applications: getting-started/running-apps.md
+  - Architecture:
+    - Overview: architecture/overview.md
+    - API: architecture/api.md
+    - Frontend: architecture/frontend.md
+    - Mobile Apps: architecture/mobile.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true

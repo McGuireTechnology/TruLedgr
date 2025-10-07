@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "TruLedgr"
+version = "0.1.0"
+description = "Personal finance application suite"
+authors = ["McGuire Technology, LLC <hello@mcguire.technology>"]
+readme = "README.md"
+packages = [{include = "api"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.22.1"
+httpx = "^0.27.0"
+pytest-cov = "^4.1.0"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.6"
+ruff = "^0.24.0"
+black = "^24.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
