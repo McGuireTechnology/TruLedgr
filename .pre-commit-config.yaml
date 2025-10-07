@@ -1,21 +1,25 @@
 repos:
   - repo: https://github.com/psf/black
-    rev: 24.1.0
+    rev: 25.9.0
     hooks:
       - id: black
   # ruff pre-commit hook removed temporarily due to environment checkout issues
-  # - repo: https://github.com/charliermarsh/ruff-pre-commit
-  #   rev: v0.26.0
-  #   hooks:
-  #     - id: ruff
-  #       args: ["check"]
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.14.0
+    hooks:
+      - id: ruff
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.6.1
+    rev: v1.18.2
     hooks:
       - id: mypy
         args: ["--ignore-missing-imports"]
   - repo: local
     hooks:
+      - id: poetry-lock-check
+        name: Poetry lockfile check
+        entry: scripts/poetry-lock-check.sh
+        language: script
+        pass_filenames: false
       - id: js-lint
         name: JS Lint (npm)
         entry: bash -c "cd dashboard && npm install --no-audit --no-fund && npm run lint && cd ../landing && npm install --no-audit --no-fund && npm run lint"

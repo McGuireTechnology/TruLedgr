@@ -17,3 +17,8 @@ Protect `main` and `staging` branches with required status checks and at least 1
 ## Notes
 - The `.do/app-spec.yml` file is an example app spec for DigitalOcean App Platform. Customize before using `doctl apps create` or `doctl apps update`.
 - Mobile release flows (App Store / Play Store) require additional secrets (Apple API key, Google Play service account). Add them to GitHub secrets when ready.
+
+### Dependency changes and lockfile
+
+- When changing `pyproject.toml`, always regenerate `poetry.lock` locally (run `poetry lock`) and commit the updated `poetry.lock` alongside your `pyproject.toml` change.
+- The repository includes a pre-commit hook that will run `poetry lock` automatically and fail if `poetry.lock` was modified but not staged. CI also runs `poetry lock --check` early in the pipeline to prevent long runs with an out-of-date lockfile.
