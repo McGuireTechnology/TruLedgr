@@ -1,0 +1,161 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push-api:
+    name: Build & Push API image
+    runs-on: ubuntu-latest
+    if: secrets.DO_API_TOKEN != ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Log in to DOCR
+        uses: docker/login-action@v2
+        with:
+          registry: registry.digitalocean.com
+          username: do
+          password: ${{ secrets.DO_API_TOKEN }}
+      - name: Build and push image
+        run: |
+          IMAGE=registry.digitalocean.com/${{ secrets.DOCR_REGISTRY }}/api:${{ github.sha }}
+          docker build -t $IMAGE ./api
+          docker push $IMAGE
+      - name: Install CLI tools for backup and restore
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          python3 -m pip install --upgrade pip
+          pip install awscli
+        if: secrets.DATABASE_URL != '' && secrets.SPACES_KEY != '' && secrets.SPACES_SECRET != ''
+      - name: Create DB backup (optional)
+        if: secrets.DATABASE_URL != '' && secrets.SPACES_KEY != '' && secrets.SPACES_SECRET != ''
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET }}
+          SPACES_REGION: ${{ secrets.SPACES_REGION }}
+          SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}
+        run: |
+          set -e
+          echo "Creating DB backup..."
+          TIMESTAMP=$(date -u +"%Y%m%dT%H%M%SZ")
+          BACKUP_FILE=truledgr-db-backup-${TIMESTAMP}.dump
+          pg_dump "$DATABASE_URL" -Fc -f $BACKUP_FILE
+          aws --endpoint-url https://${SPACES_REGION}.digitaloceanspaces.com s3 cp $BACKUP_FILE s3://${SPACES_BUCKET}/backups/$BACKUP_FILE
+          echo "Backup uploaded: s3://${SPACES_BUCKET}/backups/$BACKUP_FILE"
+      - name: Run DB migrations (Alembic) if present
+        if: secrets.DATABASE_URL != ''
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET }}
+          SPACES_REGION: ${{ secrets.SPACES_REGION }}
+          SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}
+        run: |
+          set -e
+          if [ -f api/alembic.ini ] || [ -d api/alembic ]; then
+            echo "Running alembic migrations..."
+            python3 -m pip install --upgrade pip
+            pip install alembic
+            # use alembic config if present
+            if [ -f api/alembic.ini ]; then
+              ALEMBIC_CONFIG=api/alembic.ini
+            else
+              ALEMBIC_CONFIG=api/alembic
+            fi
+            alembic -c $ALEMBIC_CONFIG upgrade head || (
+              echo "Migrations failed. Restoring DB from latest backup...";
+              LATEST=$(aws --endpoint-url https://${SPACES_REGION}.digitaloceanspaces.com s3 ls s3://${SPACES_BUCKET}/backups/ | tail -n1 | awk '{print $4}');
+              if [ -n "$LATEST" ]; then
+                aws --endpoint-url https://${SPACES_REGION}.digitaloceanspaces.com s3 cp s3://${SPACES_BUCKET}/backups/$LATEST $LATEST;
+                pg_restore --clean --no-owner -d "$DATABASE_URL" $LATEST || true;
+                echo "DB restored from $LATEST";
+              else
+                echo "No backup found to restore.";
+              fi
+              exit 1;
+            )
+          else
+            echo "No alembic configuration found, skipping migrations."
+          fi
+      - name: Update DigitalOcean App (doctl)
+        if: secrets.DO_API_TOKEN != '' && secrets.DO_APP_ID != ''
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_TOKEN }}
+          args: apps update ${{ secrets.DO_APP_ID }} --spec .do/app-spec.yml
+
+  smoke-test:
+    name: Smoke test deployment
+    runs-on: ubuntu-latest
+    needs: build-and-push-api
+    if: secrets.APP_HEALTH_URL != ''
+    steps:
+      - name: Wait for service and run health check
+        env:
+          APP_HEALTH_URL: ${{ secrets.APP_HEALTH_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET }}
+          SPACES_REGION: ${{ secrets.SPACES_REGION }}
+          SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}
+        run: |
+          set -e
+          echo "Checking ${APP_HEALTH_URL} until healthy (timeout 120s)..."
+          for i in $(seq 1 24); do
+            status=$(curl -sSf ${APP_HEALTH_URL} || true)
+            if [ -n "$status" ]; then
+              echo "Health check response: $status"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Health check failed. Attempting DB restore from latest backup (if available)."
+          if [ -n "$DATABASE_URL" ] && [ -n "$AWS_ACCESS_KEY_ID" ]; then
+            LATEST=$(aws --endpoint-url https://${SPACES_REGION}.digitaloceanspaces.com s3 ls s3://${SPACES_BUCKET}/backups/ | tail -n1 | awk '{print $4}');
+            if [ -n "$LATEST" ]; then
+              aws --endpoint-url https://${SPACES_REGION}.digitaloceanspaces.com s3 cp s3://${SPACES_BUCKET}/backups/$LATEST $LATEST;
+              pg_restore --clean --no-owner -d "$DATABASE_URL" $LATEST || true;
+              echo "DB restored from $LATEST"
+            else
+              echo "No backup found to restore."
+            fi
+          fi
+          exit 1
+
+  deploy-static-sites:
+    name: Deploy static sites to Spaces
+    runs-on: ubuntu-latest
+    if: secrets.SPACES_KEY != '' && secrets.SPACES_SECRET != ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install aws cli
+        run: |
+          python -m pip install --upgrade pip
+          pip install awscli
+      - name: Build and sync Dashboard site
+        run: |
+          cd dashboard
+          npm ci
+          npm run build
+          aws --endpoint-url https://$SPACES_REGION.digitaloceanspaces.com s3 sync dist/ s3://$SPACES_BUCKET/dashboard --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET }}
+          SPACES_REGION: ${{ secrets.SPACES_REGION }}
+          SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}
+      - name: Build and sync Landing site
+        run: |
+          cd landing
+          npm ci
+          npm run build
+          aws --endpoint-url https://$SPACES_REGION.digitaloceanspaces.com s3 sync dist/ s3://$SPACES_BUCKET/landing --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET }}
+          SPACES_REGION: ${{ secrets.SPACES_REGION }}
+          SPACES_BUCKET: ${{ secrets.SPACES_BUCKET }}
