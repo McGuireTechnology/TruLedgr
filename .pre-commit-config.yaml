@@ -15,6 +15,11 @@ repos:
         args: ["--ignore-missing-imports"]
   - repo: local
     hooks:
+      - id: poetry-lock-check
+        name: Poetry lockfile check
+        entry: scripts/poetry-lock-check.sh
+        language: script
+        pass_filenames: false
       - id: js-lint
         name: JS Lint (npm)
         entry: bash -c "cd dashboard && npm install --no-audit --no-fund && npm run lint && cd ../landing && npm install --no-audit --no-fund && npm run lint"
