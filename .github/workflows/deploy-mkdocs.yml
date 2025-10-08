@@ -3,6 +3,9 @@ name: Deploy MkDocs site to GitHub Pages
 on:
   push:
     branches: [ main, staging ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
   workflow_dispatch:
 
 jobs:
@@ -43,3 +46,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
           publish_branch: gh-pages
+          cname: truledgr.app
