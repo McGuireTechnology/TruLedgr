@@ -9,6 +9,7 @@ TruLedgr is designed to help you manage your personal finances with a focus on m
 - **FastAPI Backend** - Core API handling financial data and business logic
 - **Dashboard (Vue)** - Responsive web interface
 - **Landing Page** - Marketing and project overview website
+- **Landing Page** - retired; documentation and project site are served from MkDocs at the repository root and deployed to GitHub Pages
 - **iOS/macOS App** - Native Apple Multiplatform application
 - **Android App** - Native Android application
 
@@ -34,11 +35,7 @@ npm run dev
 
 ### Landing Page
 
-```bash
-cd landing
-npm install
-npm run dev
-```
+The previous Vue-based landing site has been retired. The project's public site is generated from the MkDocs site in the repository root and deployed to GitHub Pages (see `.github/workflows/deploy-mkdocs.yml`).
 
 ### iOS/macOS App
 
@@ -48,6 +45,7 @@ swift run
 ```
 
 ### Android App
+
 Open `android` in Android Studio and run the project.
 
 ## Running tests
@@ -70,11 +68,7 @@ npm run test
 
 ### Landing (Vitest)
 
-```bash
-cd landing
-npm install
-npm run test
-```
+The landing Vue tests have been removed. Documentation and site content are managed in `docs/` and built with MkDocs.
 
 ## Documentation
 

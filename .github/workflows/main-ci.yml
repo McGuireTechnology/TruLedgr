@@ -117,26 +117,4 @@ jobs:
           npm run lint || true
           npm run test
 
-  landing-tests:
-    name: Landing tests (Node)
-    runs-on: ubuntu-latest
-    needs: precommit-setup
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('landing/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install and test
-        run: |
-          cd landing
-          npm ci
-          npm run lint || true
-          npm run test
+  # landing-tests removed — landing site retired in favor of mkdocs at project root

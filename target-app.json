@@ -1,0 +1,391 @@
+[
+  {
+    "id": "9459ce8a-c3ac-49fa-a15c-49b512096d43",
+    "owner_uuid": "b6eaee72-f7c9-4bfe-ab8f-af0e76b0ff4b",
+    "spec": {
+      "name": "truledgr-dash",
+      "static_sites": [
+        {
+          "name": "dash",
+          "github": {
+            "repo": "McGuireTechnology/TruLedgr",
+            "branch": "main"
+          },
+          "build_command": "npm ci --include=dev \u0026\u0026 npm run build:dash",
+          "source_dir": "/",
+          "output_dir": "dash/dist",
+          "index_document": "index.html",
+          "catchall_document": "index.html"
+        }
+      ],
+      "domains": [
+        {
+          "domain": "dash.truledgr.app",
+          "type": "PRIMARY"
+        }
+      ],
+      "region": "nyc",
+      "envs": [
+        {
+          "key": "NODE_ENV",
+          "value": "production",
+          "scope": "RUN_AND_BUILD_TIME"
+        },
+        {
+          "key": "VITE_API_URL",
+          "value": "https://api.truledgr.app",
+          "scope": "RUN_AND_BUILD_TIME"
+        }
+      ],
+      "ingress": {
+        "rules": [
+          {
+            "match": {
+              "path": {
+                "prefix": "/"
+              }
+            },
+            "component": {
+              "name": "dash"
+            }
+          }
+        ]
+      }
+    },
+    "last_deployment_active_at": "2025-08-29T04:36:43Z",
+    "default_ingress": "https://truledgr-dash-gvo45.ondigitalocean.app",
+    "created_at": "2025-08-29T04:04:22Z",
+    "updated_at": "2025-10-08T12:25:06Z",
+    "active_deployment": {
+      "id": "60ac130b-9aa4-4c2a-9c06-43582e0a7a50",
+      "spec": {
+        "name": "truledgr-dash",
+        "static_sites": [
+          {
+            "name": "dash",
+            "github": {
+              "repo": "McGuireTechnology/TruLedgr",
+              "branch": "main"
+            },
+            "build_command": "npm ci --include=dev \u0026\u0026 npm run build:dash",
+            "source_dir": "/",
+            "output_dir": "dash/dist",
+            "index_document": "index.html",
+            "catchall_document": "index.html"
+          }
+        ],
+        "domains": [
+          {
+            "domain": "dash.truledgr.app",
+            "type": "PRIMARY"
+          }
+        ],
+        "region": "nyc",
+        "envs": [
+          {
+            "key": "NODE_ENV",
+            "value": "production",
+            "scope": "RUN_AND_BUILD_TIME"
+          },
+          {
+            "key": "VITE_API_URL",
+            "value": "https://api.truledgr.app",
+            "scope": "RUN_AND_BUILD_TIME"
+          }
+        ],
+        "ingress": {
+          "rules": [
+            {
+              "match": {
+                "path": {
+                  "prefix": "/"
+                }
+              },
+              "component": {
+                "name": "dash"
+              }
+            }
+          ]
+        }
+      },
+      "static_sites": [
+        {
+          "name": "dash",
+          "source_commit_hash": "42fdb23a6a4652b40463cf1b90e7f231d1a944c5",
+          "buildpacks": [
+            {
+              "id": "heroku/nodejs",
+              "version": "0.296.5",
+              "latest": true,
+              "name": "Node.js",
+              "description": [
+                "Install dependencies using NPM, PNPM or Yarn"
+              ],
+              "docs_link": "https://docs.digitalocean.com/products/app-platform/languages-frameworks/nodejs/"
+            },
+            {
+              "id": "digitalocean/procfile",
+              "version": "0.1.0",
+              "latest": true,
+              "name": "Procfile",
+              "description": [
+                "Configure default run commands from the Procfile if one exists"
+              ]
+            },
+            {
+              "id": "digitalocean/custom",
+              "version": "0.2.0",
+              "latest": true,
+              "name": "Custom Build Command",
+              "description": [
+                "Run the provided custom build command"
+              ],
+              "docs_link": "https://docs.digitalocean.com/products/app-platform/how-to/build-run-commands/"
+            }
+          ]
+        }
+      ],
+      "phase_last_updated_at": "2025-08-29T04:36:43Z",
+      "created_at": "2025-08-29T04:36:37Z",
+      "updated_at": "2025-10-03T04:36:55Z",
+      "cause": "domain dash.truledgr.app ready",
+      "progress": {
+        "success_steps": 5,
+        "total_steps": 5,
+        "steps": [
+          {
+            "name": "build",
+            "status": "SUCCESS",
+            "steps": [
+              {
+                "name": "initialize",
+                "status": "SUCCESS",
+                "started_at": "2025-08-29T04:36:39.860841272Z",
+                "ended_at": "2025-08-29T04:36:40.149372635Z"
+              },
+              {
+                "name": "components",
+                "status": "SUCCESS",
+                "steps": [
+                  {
+                    "name": "dash",
+                    "status": "SUCCESS",
+                    "started_at": "0001-01-01T00:00:00Z",
+                    "ended_at": "0001-01-01T00:00:00Z",
+                    "reason": {
+                      "code": "PreviousBuildReused",
+                      "message": "Your previous build was reused."
+                    },
+                    "component_name": "dash",
+                    "message_base": "Building static site"
+                  }
+                ],
+                "started_at": "2025-08-29T04:36:40.149493655Z",
+                "ended_at": "2025-08-29T04:36:40.159485259Z"
+              }
+            ],
+            "started_at": "2025-08-29T04:36:39.860692736Z",
+            "ended_at": "2025-08-29T04:36:40.159842442Z"
+          },
+          {
+            "name": "deploy",
+            "status": "SUCCESS",
+            "steps": [
+              {
+                "name": "initialize",
+                "status": "SUCCESS",
+                "started_at": "2025-08-29T04:36:42.301758212Z",
+                "ended_at": "2025-08-29T04:36:42.417791023Z"
+              },
+              {
+                "name": "components",
+                "status": "SUCCESS",
+                "started_at": "2025-08-29T04:36:42.417836803Z",
+                "ended_at": "2025-08-29T04:36:42.417859926Z"
+              },
+              {
+                "name": "finalize",
+                "status": "SUCCESS",
+                "started_at": "2025-08-29T04:36:42.417934982Z",
+                "ended_at": "2025-08-29T04:36:42.90557201Z"
+              }
+            ],
+            "started_at": "2025-08-29T04:36:42.301740711Z",
+            "ended_at": "2025-08-29T04:36:42.905732546Z"
+          }
+        ]
+      },
+      "phase": "ACTIVE",
+      "tier_slug": "starter",
+      "previous_deployment_id": "58d2c943-2bc3-41a3-9ee6-f000e83f0bfa",
+      "cause_details": {
+        "internal": true,
+        "type": "MAINTENANCE"
+      },
+      "timing": {
+        "pending": "2.860841272s",
+        "build_total": "0.299001170s",
+        "build_billable": "0s"
+      }
+    },
+    "last_deployment_created_at": "2025-08-29T04:36:37Z",
+    "live_url": "https://dash.truledgr.app",
+    "region": {
+      "slug": "nyc",
+      "label": "New York",
+      "flag": "usa",
+      "continent": "North America",
+      "data_centers": [
+        "nyc1",
+        "nyc3"
+      ]
+    },
+    "tier_slug": "starter",
+    "live_url_base": "https://dash.truledgr.app",
+    "live_domain": "dash.truledgr.app",
+    "domains": [
+      {
+        "id": "b685b9ca-931d-4e65-9740-70ff92c990df",
+        "spec": {
+          "domain": "dash.truledgr.app",
+          "type": "PRIMARY"
+        },
+        "phase": "CONFIGURING",
+        "progress": {
+          "steps": [
+            {
+              "name": "default-ingress-ready",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.078886248Z",
+              "ended_at": "0001-01-01T00:00:00Z"
+            },
+            {
+              "name": "ensure-zone",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.078942605Z",
+              "ended_at": "2025-08-29T04:30:13.057799994Z"
+            },
+            {
+              "name": "ensure-ns-records",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.078990745Z",
+              "ended_at": "2025-08-29T04:30:13.057856884Z"
+            },
+            {
+              "name": "verify-nameservers",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.079034625Z",
+              "ended_at": "2025-08-29T04:30:13.057909535Z"
+            },
+            {
+              "name": "ensure-record",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.079078872Z",
+              "ended_at": "2025-08-29T04:30:13.057965184Z"
+            },
+            {
+              "name": "ensure-alias-record",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.079124098Z",
+              "ended_at": "2025-08-29T04:30:13.058017223Z"
+            },
+            {
+              "name": "ensure-wildcard-record",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.079172937Z",
+              "ended_at": "2025-08-29T04:30:13.058080086Z"
+            },
+            {
+              "name": "verify-cname",
+              "status": "RUNNING",
+              "started_at": "2025-09-03T18:44:20.135792521Z",
+              "ended_at": "0001-01-01T00:00:00Z",
+              "reason": {
+                "code": "DomainCNAMEMismatch",
+                "message": "Your domain is not yet active because the CNAME record value does not match the default ingress. If this persists, verify DNS records are configured correctly."
+              }
+            },
+            {
+              "name": "ensure-ssl-txt-record-saved",
+              "status": "SUCCESS",
+              "started_at": "2025-09-02T09:04:01.808497128Z",
+              "ended_at": "2025-08-29T04:35:29.133781864Z"
+            },
+            {
+              "name": "ensure-ssl-txt-record",
+              "status": "SUCCESS",
+              "started_at": "2025-09-02T09:04:01.808572855Z",
+              "ended_at": "2025-08-29T04:35:29.133907079Z"
+            },
+            {
+              "name": "ensure-renewal-email",
+              "status": "SUCCESS",
+              "started_at": "2025-09-02T09:04:01.808635764Z",
+              "ended_at": "2025-08-29T04:35:29.133989069Z"
+            },
+            {
+              "name": "ensure-CA-authorization",
+              "status": "SUCCESS",
+              "started_at": "2025-09-02T09:04:01.808688694Z",
+              "ended_at": "0001-01-01T00:00:00Z"
+            },
+            {
+              "name": "ensure-certificate",
+              "status": "SUCCESS",
+              "started_at": "2025-09-02T09:04:01.855351207Z",
+              "ended_at": "0001-01-01T00:00:00Z"
+            },
+            {
+              "name": "create-deployment",
+              "status": "SUCCESS",
+              "started_at": "0001-01-01T00:00:00Z",
+              "ended_at": "2025-08-29T04:36:37.95885242Z"
+            },
+            {
+              "name": "configuration-alert",
+              "status": "SUCCESS",
+              "started_at": "2025-09-03T18:44:20.221404426Z",
+              "ended_at": "2025-08-29T04:20:30.684619466Z"
+            }
+          ]
+        },
+        "validation": {},
+        "certificate_expires_at": "2025-11-27T04:35:31Z"
+      }
+    ],
+    "build_config": {
+      "cnb_versioning": {
+        "buildpacks": [
+          {
+            "id": "digitalocean/custom",
+            "latest": true,
+            "name": "Custom Build Command",
+            "description": [
+              "Run the provided custom build command"
+            ],
+            "docs_link": "https://docs.digitalocean.com/products/app-platform/how-to/build-run-commands/"
+          },
+          {
+            "id": "digitalocean/procfile",
+            "latest": true,
+            "name": "Procfile",
+            "description": [
+              "Configure default run commands from the Procfile if one exists"
+            ]
+          },
+          {
+            "id": "heroku/nodejs",
+            "latest": true,
+            "name": "Node.js",
+            "description": [
+              "Install dependencies using NPM, PNPM or Yarn"
+            ],
+            "docs_link": "https://docs.digitalocean.com/products/app-platform/languages-frameworks/nodejs/"
+          }
+        ],
+        "stack_id": "heroku-22"
+      }
+    },
+    "project_id": "74db22e0-2da3-4509-844d-cbc1f22c5120"
+  }
+]
