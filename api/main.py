@@ -1,6 +1,30 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI(title="TruLedgr API", version="0.1.0")
+
+# Configure CORS
+# Allow origins can be set via ALLOWED_ORIGINS env (comma-separated).
+allowed = os.getenv("ALLOWED_ORIGINS")
+if allowed:
+    allowed_origins = [o.strip() for o in allowed.split(",") if o.strip()]
+else:
+    # sensible defaults for staging/production and local dev
+    allowed_origins = [
+        "https://dash.truledgr.app",
+        "https://truledgr-dash-new-sx2si.ondigitalocean.app",
+        "http://localhost:8000",
+        "http://localhost:5173",
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
