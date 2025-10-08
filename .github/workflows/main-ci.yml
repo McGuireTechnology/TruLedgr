@@ -57,7 +57,6 @@ jobs:
           name: api-coverage-xml
           path: api/coverage.xml
       - name: Upload coverage to Codecov
-        if: secrets.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
