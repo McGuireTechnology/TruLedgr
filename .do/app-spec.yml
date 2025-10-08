@@ -1,4 +1,4 @@
-# Example DigitalOcean App Spec - customize before use
+# Minimal app spec: api service only. Add static sites via the DigitalOcean UI if needed.
 name: truledgr-app
 services:
   - name: api
@@ -10,13 +10,3 @@ services:
         value: ${DATABASE_URL}
       - key: SECRET_KEY
         scope: RUN_AND_BUILD
-  - name: vue
-    static_site:
-      build_command: npm run build
-      publish_dir: dist
-      source_dir: dashboard
-  - name: landing
-    static_site:
-      build_command: npm run build
-      publish_dir: dist
-      source_dir: landing
