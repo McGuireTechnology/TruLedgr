@@ -4,22 +4,21 @@ on:
   push:
     branches:
       - main
+      - staging
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write  # Required for peaceiris/actions-gh-pages to push to gh-pages branch
 
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,7 +27,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -39,29 +38,24 @@ jobs:
 
       - name: Install dependencies (Poetry)
         run: |
-          poetry config virtualenvs.create false
           poetry install --no-interaction --no-ansi
 
       - name: Build documentation
         run: |
           poetry run mkdocs build --site-dir site
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          cname: truledgr.app
+
+      - name: Validate build (staging)
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          echo "✅ MkDocs build successful on staging branch"
+          echo "📦 Site built to ./site directory"
+          echo "🚀 Will deploy to GitHub Pages when merged to main"
+          ls -lah ./site
