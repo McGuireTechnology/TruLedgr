@@ -11,14 +11,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Required for peaceiris/actions-gh-pages to push to gh-pages branch
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: "pages-${{ github.ref }}"
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -44,13 +46,15 @@ jobs:
         run: |
           poetry run mkdocs build --site-dir site
 
-      - name: Deploy to GitHub Pages
+      - name: Setup Pages
         if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
-          cname: truledgr.app
+          path: ./site
 
       - name: Validate build (staging)
         if: github.ref == 'refs/heads/staging'
@@ -59,3 +63,18 @@ jobs:
           echo "📦 Site built to ./site directory"
           echo "🚀 Will deploy to GitHub Pages when merged to main"
           ls -lah ./site
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
