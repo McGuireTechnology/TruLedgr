@@ -56,17 +56,12 @@ jobs:
         with:
           name: api-coverage-xml
           path: api/coverage.xml
-      - name: Upload coverage to Codecov (non-fatal)
-        if: ${{ secrets.CODECOV_TOKEN != '' }}
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
+        continue-on-error: true
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./api/coverage.xml
-
-      - name: Skip Codecov upload (no token)
-        if: ${{ secrets.CODECOV_TOKEN == '' }}
-        run: |
-          echo "CODECOV_TOKEN not set; skipping coverage upload"
 
   precommit-setup:
     name: Pre-commit setup
