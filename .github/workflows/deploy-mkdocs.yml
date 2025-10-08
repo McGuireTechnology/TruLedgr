@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - staging
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
@@ -28,7 +29,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -39,7 +40,6 @@ jobs:
 
       - name: Install dependencies (Poetry)
         run: |
-          poetry config virtualenvs.create false
           poetry install --no-interaction --no-ansi
 
       - name: Build documentation
@@ -47,21 +47,34 @@ jobs:
           poetry run mkdocs build --site-dir site
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        if: github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./site
 
+      - name: Validate build (staging)
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          echo "✅ MkDocs build successful on staging branch"
+          echo "📦 Site built to ./site directory"
+          echo "🚀 Will deploy to GitHub Pages when merged to main"
+          ls -lah ./site
+
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
