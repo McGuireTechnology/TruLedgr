@@ -1,0 +1,16 @@
+# Cloudflare Pages configuration for TruLedgr landing
+# See: https://developers.cloudflare.com/pages/framework-guides/deploy-a-site/
+
+project_name: truledgr-landing
+production:
+  branch: staging
+  build:
+    command: npm ci && npm run build
+    directory: dist
+  env:
+    VITE_API_URL: https://api.truledgr.app
+
+preview:
+  build:
+    command: npm ci && npm run build
+    directory: dist

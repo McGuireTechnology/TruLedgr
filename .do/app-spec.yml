@@ -1,23 +1,14 @@
-# Example DigitalOcean App Spec - customize before use
-name: truledgr-app
+# Minimal app spec: api service only. Add static sites via the DigitalOcean UI if needed.
+name: truledgr-api
 services:
   - name: api
     dockerfile_path: api/Dockerfile
     git:
       branch: staging
-    run_command: uvicorn api.main:app --host 0.0.0.0 --port 8000
     envs:
       - key: DATABASE_URL
         value: ${DATABASE_URL}
       - key: SECRET_KEY
-        scope: RUN_AND_BUILD
-  - name: vue
-    static_site:
-      build_command: npm run build
-      publish_dir: dist
-      source_dir: dashboard
-  - name: landing
-    static_site:
-      build_command: npm run build
-      publish_dir: dist
-      source_dir: landing
+      - key: VITE_API_URL
+        value: "https://api.truledgr.app"
+        scope: RUN_AND_BUILD_TIME

@@ -8,7 +8,7 @@ jobs:
   build-and-push-api:
     name: Build & Push API image
     runs-on: ubuntu-latest
-    if: secrets.DO_API_TOKEN != ''
+  # runs when pushed to main; action steps will use secrets if present
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
@@ -25,14 +25,14 @@ jobs:
           docker build -t $IMAGE ./api
           docker push $IMAGE
       - name: Install CLI tools for backup and restore
+        # only needed when backups are configured via secrets
         run: |
           sudo apt-get update
           sudo apt-get install -y postgresql-client
           python3 -m pip install --upgrade pip
           pip install awscli
-        if: secrets.DATABASE_URL != '' && secrets.SPACES_KEY != '' && secrets.SPACES_SECRET != ''
       - name: Create DB backup (optional)
-        if: secrets.DATABASE_URL != '' && secrets.SPACES_KEY != '' && secrets.SPACES_SECRET != ''
+        # will be a no-op if DATABASE_URL or Spaces creds are not provided
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
@@ -48,7 +48,7 @@ jobs:
           aws --endpoint-url https://${SPACES_REGION}.digitaloceanspaces.com s3 cp $BACKUP_FILE s3://${SPACES_BUCKET}/backups/$BACKUP_FILE
           echo "Backup uploaded: s3://${SPACES_BUCKET}/backups/$BACKUP_FILE"
       - name: Run DB migrations (Alembic) if present
-        if: secrets.DATABASE_URL != ''
+        # runs migrations if alembic exists; DATABASE_URL read from env if set
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_KEY }}
@@ -83,7 +83,7 @@ jobs:
             echo "No alembic configuration found, skipping migrations."
           fi
       - name: Update DigitalOcean App (doctl)
-        if: secrets.DO_API_TOKEN != '' && secrets.DO_APP_ID != ''
+        # requires DO API token and app id to be configured in repository secrets
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DO_API_TOKEN }}
@@ -93,7 +93,7 @@ jobs:
     name: Smoke test deployment
     runs-on: ubuntu-latest
     needs: build-and-push-api
-    if: secrets.APP_HEALTH_URL != ''
+  # smoke-test will run after build-and-push-api; health check URL is read from env if set
     steps:
       - name: Wait for service and run health check
         env:
@@ -130,7 +130,7 @@ jobs:
   deploy-static-sites:
     name: Deploy static sites to Spaces
     runs-on: ubuntu-latest
-    if: secrets.SPACES_KEY != '' && secrets.SPACES_SECRET != ''
+  # deploy-static-sites will attempt to deploy to Spaces using provided secrets
     steps:
       - uses: actions/checkout@v4
       - name: Install aws cli

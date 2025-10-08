@@ -24,8 +24,6 @@ jobs:
               - 'api/**'
             dashboard:
               - 'dashboard/**'
-            landing:
-              - 'landing/**'
             docs:
               - 'docs/**'
             global:
@@ -152,34 +150,4 @@ jobs:
           npm run lint || true
           npm run test
 
-  landing:
-    name: Landing tests (Node)
-    needs: [determine_changes, precommit-setup]
-    if: needs.determine_changes.outputs.landing == 'true' || needs.determine_changes.outputs.global == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pre-commit (JS lint uses npm)
-        run: |
-          python -m pip install --upgrade pip
-          pip install pre-commit
-      - name: Run pre-commit
-        run: |
-          pre-commit run --all-files
-      - name: Use Node 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('landing/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install and test
-        run: |
-          cd landing
-          npm ci
-          npm run lint || true
-          npm run test
+  # landing job removed — site replaced by MkDocs at repository root

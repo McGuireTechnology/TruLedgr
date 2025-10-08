@@ -10,7 +10,7 @@ TruLedgr is a comprehensive personal finance application suite with multi-platfo
 - `dashboard/` - Vite/Vue.js web application (renamed from `vue/`)
 - `apple/` - Apple Multiplatform app (iOS/macOS)
 - `android/` - Android application
-- `landing/` - Landing page website
+- Landing site: retired (use root MkDocs site)
 - `docs/` - MkDocs technical documentation
 - `pyproject.toml` - Python project configuration
 
