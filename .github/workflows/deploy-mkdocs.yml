@@ -40,10 +40,14 @@ jobs:
         run: |
           poetry run mkdocs build --site-dir site
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Add CNAME for apex domain
+        run: |
+          echo "truledgr.app" > site/CNAME
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
-          publish_branch: gh-pages
-          cname: truledgr.app
+          path: ./site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
