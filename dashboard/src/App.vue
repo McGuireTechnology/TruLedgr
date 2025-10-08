@@ -42,8 +42,23 @@ export default {
   methods: {
     async testApi() {
       this.loading = true
+      // define apiBase in the outer scope so the catch block can reference it
+      let apiBase = 'http://localhost:8000'
       try {
-        const response = await fetch('http://localhost:8000/')
+        // Resolve API URL in this order:
+        // 1. build-time Vite env: import.meta.env.VITE_API_URL
+        // 2. runtime global (injected by platform) window.__API_URL__
+        // 3. fallback to current origin (useful when dashboard and api are same host)
+        // 4. final fallback to localhost:8000 for local development.
+        const viteApi = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL
+          ? import.meta.env.VITE_API_URL
+          : undefined
+        const runtimeApi = typeof window !== 'undefined' && window.__API_URL__
+          ? window.__API_URL__
+          : undefined
+        const defaultOrigin = (typeof window !== 'undefined' && window.location && window.location.origin) ? window.location.origin : ''
+        apiBase = viteApi || runtimeApi || defaultOrigin || apiBase
+        const response = await fetch(apiBase + '/')
         if (response.ok) {
           const data = await response.json()
           this.apiMessage = data.message
@@ -52,7 +67,7 @@ export default {
           throw new Error('API not responding')
         }
       } catch (error) {
-        this.apiMessage = 'Cannot connect to API - make sure the backend is running on port 8000'
+        this.apiMessage = `Cannot connect to API at ${apiBase} — check the API URL and CORS settings.`
         this.apiSuccess = false
       }
       this.loading = false
