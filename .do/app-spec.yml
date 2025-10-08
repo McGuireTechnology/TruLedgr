@@ -1,5 +1,5 @@
 # Minimal app spec: api service only. Add static sites via the DigitalOcean UI if needed.
-name: truledgr-app
+name: truledgr-api
 services:
   - name: api
     dockerfile_path: api/Dockerfile
@@ -9,3 +9,6 @@ services:
       - key: DATABASE_URL
         value: ${DATABASE_URL}
       - key: SECRET_KEY
+      - key: VITE_API_URL
+        value: "https://api.truledgr.app"
+        scope: RUN_AND_BUILD_TIME
