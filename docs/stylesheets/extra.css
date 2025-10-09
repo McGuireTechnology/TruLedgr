@@ -34,6 +34,14 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+/* Footer version display */
+.md-footer-version {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-family: 'Roboto Mono', monospace;
+}
+
 /* Improve navigation tabs on mobile */
 @media screen and (max-width: 76.1875em) {
   .md-tabs {

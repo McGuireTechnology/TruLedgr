@@ -12,8 +12,10 @@ android {
         applicationId = "technology.mcguire.truledgr"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        // Version managed by root VERSION file
+        // Formula: MAJOR * 10000 + MINOR * 100 + PATCH (e.g., 0.1.0 = 100)
+        versionCode = 100
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

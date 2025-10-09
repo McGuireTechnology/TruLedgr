@@ -138,6 +138,10 @@ extra:
   
   version:
     provider: mike
+    default: 0.1.0
+  
+  # Semantic version number displayed in footer
+  project_version: "0.1.0"
   
   # Header actions - login/signup buttons
   homepage: https://truledgr.app
@@ -208,6 +212,7 @@ nav:
           - Development Setup: developer/contributing/dev-setup.md
           - Running Locally: developer/contributing/running-apps.md
           - Development Workflow: developer/contributing/workflow.md
+          - Version Management: versioning.md
           - Code Style: developer/contributing/style.md
           - Testing: developer/contributing/testing.md
       - Deployment:
