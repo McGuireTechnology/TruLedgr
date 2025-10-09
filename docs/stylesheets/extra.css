@@ -1,0 +1,75 @@
+/* Custom styles for TruLedgr documentation */
+
+:root {
+  --truledgr-primary: #2196F3;
+  --truledgr-accent: #03A9F4;
+}
+
+/* Improve code block styling */
+.highlight pre {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom admonition colors */
+.md-typeset .admonition.note {
+  border-left-color: var(--truledgr-primary);
+}
+
+/* Enhance tables */
+.md-typeset table:not([class]) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Better spacing for content */
+.md-typeset h1 {
+  margin-top: 0;
+  color: var(--truledgr-primary);
+}
+
+/* Enhance footer */
+.md-footer-meta {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Improve navigation tabs on mobile */
+@media screen and (max-width: 76.1875em) {
+  .md-tabs {
+    background-color: var(--md-primary-fg-color);
+  }
+}
+
+/* Custom badge styles */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.badge-primary {
+  background-color: var(--truledgr-primary);
+  color: white;
+}
+
+.badge-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* Enhanced keyboard key styling */
+.md-typeset kbd {
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}

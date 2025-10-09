@@ -1,17 +1,92 @@
-# TruLedgr Documentation
+---
+title: Home
+description: Welcome to TruLedgr - Comprehensive personal finance application suite
+---
+
+# TruLedgr :moneybag:
+
+<div class="grid cards" markdown>
+
+-   :rocket: __Modern Architecture__
+
+    ---
+
+    Built with FastAPI, Vue 3, and native mobile apps for a seamless experience across all platforms
+
+-   :calendar: __Monthly Cycles__
+
+    ---
+
+    Designed around monthly financial reporting periods with recurring transaction patterns
+
+-   :shield: __Secure & Private__
+
+    ---
+
+    OAuth2 authentication, encrypted data, and user-controlled financial information
+
+-   :chart_with_upwards_trend: __Comprehensive Planning__
+
+    ---
+
+    Estate planning, tax planning, and complete financial management tools
+
+</div>
 
 ## Bonjour! Welcome to TruLedgr
 
-TruLedgr is a comprehensive personal finance application suite designed to help you manage your financial life with a focus on monthly cycles, estate planning, and tax planning.
+TruLedgr is a **comprehensive personal finance application suite** designed to help you manage your financial life with a focus on monthly cycles, estate planning, and tax planning.
 
-## Architecture Overview
+!!! success "Multi-Platform Support"
+    TruLedgr runs everywhere: web browsers, iOS, macOS, and Android devices.
+
+## :building_construction: Architecture Overview
 
 TruLedgr consists of multiple applications working together:
 
-- **FastAPI Backend** (`api/`) - The core API that handles all financial data and business logic
-- **Dashboard (Vue)** (`dashboard/`) - A responsive web interface built with Vite and Vue 3
-- **iOS/macOS App** (`apple/`) - Native Apple Multiplatform application using SwiftUI
-- **Android App** (`android/`) - Native Android application using Jetpack Compose
+=== "Backend API"
+
+    **FastAPI Backend** (`api/`)
+    
+    The core API that handles all financial data and business logic
+    
+    - Python 3.11+ with Poetry
+    - FastAPI with async/await
+    - SQLAlchemy ORM
+    - Pydantic models for validation
+
+=== "Dashboard Web"
+
+    **Dashboard (Vue)** (`dashboard/`)
+    
+    A responsive web interface built with Vite and Vue 3
+    
+    - Vue 3 Composition API
+    - Vite for blazing-fast development
+    - Modern responsive design
+    - Real-time API integration
+
+=== "iOS/macOS"
+
+    **Apple Multiplatform** (`apple/`)
+    
+    Native application using SwiftUI
+    
+    - SwiftUI for native UI
+    - Runs on iOS and macOS
+    - Shared codebase
+    - Native performance
+
+=== "Android"
+
+    **Android App** (`android/`)
+    
+    Native Android application
+    
+    - Jetpack Compose
+    - Material Design 3
+    - Native Android features
+    - Optimized performance
 
 ## Quick Start
 
