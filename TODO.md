@@ -29,11 +29,11 @@ Last Updated: 2025-10-09
 
 ### API Integration
 
-- [ ] Integrate with backend API (localhost:8000)
-  - [ ] Set up URLSession networking layer
+- [x] Integrate with backend API (localhost:8000)
+  - [x] Set up URLSession networking layer
   - [ ] Implement API client with Codable models
   - [ ] Add request/response interceptors
-  - [ ] Implement error handling
+  - [x] Implement error handling
 - [ ] Add offline mode support
 - [ ] Implement data sync conflict resolution
 - [ ] Add retry logic for failed requests
@@ -181,8 +181,9 @@ Last Updated: 2025-10-09
 
 ### API Integration
 
-- [ ] Set up Retrofit for networking
-- [ ] Implement API client
+- [x] Set up basic HTTP networking (HttpURLConnection)
+- [x] Implement API health check
+- [ ] Set up Retrofit for full API client
 - [ ] Add offline support with Room
 - [ ] Implement data sync
 
@@ -191,8 +192,8 @@ Last Updated: 2025-10-09
 - [ ] Build transaction tracking screens
 - [ ] Build monthly reporting screens
 - [ ] Build account management screens
-- [ ] Implement Material Design 3
-- [ ] Add dark theme support
+- [x] Implement Material Design 3
+- [x] Add dark theme support (system default)
 
 ### Testing
 
