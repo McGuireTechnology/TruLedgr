@@ -1,44 +1,112 @@
 ---
-title: Home
-description: Welcome to TruLedgr - Comprehensive personal finance application suite
+title: TruLedgr - Personal Finance Made Simple
+description: Take control of your finances with TruLedgr - comprehensive budgeting, transaction tracking, and financial planning
 ---
 
-# TruLedgr :moneybag:
+# Take Control of Your Financial Future
+
+**TruLedgr** helps you manage your money, plan your estate, and optimize your taxes - all in one powerful platform.
 
 <div class="grid cards" markdown>
 
--   :rocket: __Modern Architecture__
+-   :material-cash-multiple: __Track Every Dollar__
 
     ---
 
-    Built with FastAPI, Vue 3, and native mobile apps for a seamless experience across all platforms
+    Monitor all your accounts, transactions, and spending in real-time across web and mobile
 
--   :calendar: __Monthly Cycles__
+    [Learn More →](features/transactions.md){ .md-button }
 
-    ---
-
-    Designed around monthly financial reporting periods with recurring transaction patterns
-
--   :shield: __Secure & Private__
+-   :material-calendar-month: __Monthly Planning__
 
     ---
 
-    OAuth2 authentication, encrypted data, and user-controlled financial information
+    Built around your monthly financial cycle with automatic reports and recurring budgets
 
--   :chart_with_upwards_trend: __Comprehensive Planning__
+    [Explore Features →](features/reports.md){ .md-button }
+
+-   :material-shield-lock: __Secure & Private__
 
     ---
 
-    Estate planning, tax planning, and complete financial management tools
+    Your financial data stays yours - bank-level security with full data ownership
+
+    [Security Details →](guide/index.md){ .md-button }
+
+-   :material-chart-line: __Future Planning__
+
+    ---
+
+    Estate planning and tax optimization tools to help you prepare for what's ahead
+
+    [Get Started →](get-started/index.md){ .md-button .md-button--primary }
 
 </div>
 
-## Bonjour! Welcome to TruLedgr
+## Why TruLedgr?
 
-TruLedgr is a **comprehensive personal finance application suite** designed to help you manage your financial life with a focus on monthly cycles, estate planning, and tax planning.
+### :material-devices: Available Everywhere
 
-!!! success "Multi-Platform Support"
-    TruLedgr runs everywhere: web browsers, iOS, macOS, and Android devices.
+Use TruLedgr on any device - responsive web app, native iOS/macOS apps, or Android. Your financial data syncs seamlessly across all platforms.
+
+### :material-eye-off: Privacy First
+
+Unlike other personal finance apps that sell your data or show ads, TruLedgr puts you in control. Self-hosted option available for maximum privacy.
+
+### :material-calendar-check: Monthly-Focused Workflows
+
+Built around how you actually manage money - monthly paychecks, monthly bills, monthly budgets. Everything organized by the cycle that matters.
+
+### :material-puzzle: Complete Financial Picture
+
+Go beyond basic budgeting with integrated estate planning and tax planning tools. One platform for your entire financial life.
+
+---
+
+## Quick Start
+
+<div class="grid" markdown>
+
+=== "1. Download"
+
+    Get TruLedgr for your device:
+    
+    - :material-web: [Web Dashboard](apps/web.md) - Works in any browser
+    - :material-apple: [iOS & macOS](apps/apple.md) - Native Apple apps
+    - :material-android: [Android](apps/android.md) - Google Play Store
+
+=== "2. Create Account"
+
+    Sign up with your existing account:
+    
+    - :material-google: Google
+    - :material-microsoft: Microsoft
+    - :material-github: GitHub
+    - :material-apple: Apple
+    
+    No passwords to remember!
+
+=== "3. Add Accounts"
+
+    Connect your financial accounts:
+    
+    - Bank accounts
+    - Credit cards
+    - Investment accounts
+    - Loans & mortgages
+
+=== "4. Start Tracking"
+
+    Begin managing your money:
+    
+    - Set monthly budgets
+    - Record transactions
+    - Review reports
+    - Plan ahead
+
+</div>
+
+[Get Started Now →](get-started/index.md){ .md-button .md-button--primary .md-button--raised }
 
 ## :building_construction: Architecture Overview
 
