@@ -39,29 +39,77 @@ class MainActivity : ComponentActivity() {
     private fun checkApiHealth(onResult: (ApiStatus) -> Unit) {
         lifecycleScope.launch {
             val status = withContext(Dispatchers.IO) {
-                try {
-                    val url = URL("https://api.truledgr.app/health")
-                    val connection = url.openConnection() as HttpURLConnection
-                    connection.requestMethod = "GET"
-                    connection.connectTimeout = 3000
-                    connection.readTimeout = 3000
-                    
-                    val responseCode = connection.responseCode
-                    val message = if (responseCode == 200) {
-                        connection.inputStream.bufferedReader().use { it.readText() }
-                    } else {
-                        ""
+                // Try hostname first, then fallback to IP if DNS fails
+                val endpoints = listOf(
+                    "https://api.truledgr.app/health",
+                    "https://162.159.140.98/health"  // Cloudflare IP fallback
+                )
+                
+                var lastError = ""
+                for ((index, endpoint) in endpoints.withIndex()) {
+                    try {
+                        android.util.Log.d("TruLedgr", "Trying endpoint ${index + 1}/${endpoints.size}: $endpoint")
+                        val url = URL(endpoint)
+                        val connection = url.openConnection() as HttpURLConnection
+                        
+                        // Add Host header for IP-based requests
+                        if (endpoint.contains("162.159.140.98")) {
+                            connection.setRequestProperty("Host", "api.truledgr.app")
+                        }
+                        
+                        connection.requestMethod = "GET"
+                        connection.connectTimeout = 5000
+                        connection.readTimeout = 5000
+                        connection.setRequestProperty("Accept", "application/json")
+                        
+                        val responseCode = connection.responseCode
+                        android.util.Log.d("TruLedgr", "Response code: $responseCode")
+                        
+                        val message = if (responseCode == 200) {
+                            connection.inputStream.bufferedReader().use { it.readText() }
+                        } else {
+                            connection.errorStream?.bufferedReader()?.use { it.readText() } ?: ""
+                        }
+                        connection.disconnect()
+                        
+                        if (responseCode == 200) {
+                            android.util.Log.d("TruLedgr", "✅ Success: $message")
+                            return@withContext ApiStatus.Up(message)
+                        } else {
+                            lastError = "HTTP $responseCode: $message"
+                            android.util.Log.w("TruLedgr", "HTTP error: $lastError")
+                        }
+                    } catch (e: java.net.UnknownHostException) {
+                        lastError = "DNS lookup failed: ${e.message}"
+                        android.util.Log.e("TruLedgr", "❌ DNS error on $endpoint: ${e.message}", e)
+                        // Continue to next endpoint if DNS fails
+                        continue
+                    } catch (e: javax.net.ssl.SSLHandshakeException) {
+                        lastError = "SSL certificate verification failed. This is common in Android emulators. The API may be working but the emulator can't verify the certificate."
+                        android.util.Log.e("TruLedgr", "❌ SSL handshake error on $endpoint: ${e.message}", e)
+                        android.util.Log.e("TruLedgr", "💡 SSL Error Details: ${e.cause?.message}")
+                        android.util.Log.e("TruLedgr", "ℹ️  This typically happens in Android emulators. Try on a physical device or use HTTP for local testing.")
+                        // Continue to next endpoint
+                        continue
+                    } catch (e: java.security.cert.CertificateException) {
+                        lastError = "Certificate error: ${e.message}"
+                        android.util.Log.e("TruLedgr", "❌ Certificate error on $endpoint: ${e.message}", e)
+                        // Continue to next endpoint
+                        continue
+                    } catch (e: Exception) {
+                        lastError = "${e.javaClass.simpleName}: ${e.message}"
+                        android.util.Log.e("TruLedgr", "❌ Error on $endpoint: ${e.message}", e)
+                        android.util.Log.e("TruLedgr", "Error type: ${e.javaClass.name}")
+                        e.cause?.let { cause ->
+                            android.util.Log.e("TruLedgr", "Caused by: ${cause.javaClass.simpleName}: ${cause.message}")
+                        }
+                        // Continue to next endpoint
+                        continue
                     }
-                    connection.disconnect()
-                    
-                    if (responseCode == 200) {
-                        ApiStatus.Up(message)
-                    } else {
-                        ApiStatus.Down("HTTP $responseCode")
-                    }
-                } catch (e: Exception) {
-                    ApiStatus.Down(e.message ?: "Connection failed")
                 }
+                
+                // All endpoints failed
+                ApiStatus.Down(lastError.ifEmpty { "All endpoints failed" })
             }
             onResult(status)
         }
