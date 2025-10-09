@@ -93,23 +93,39 @@ struct ContentView: View {
         apiStatus = .checking
         
         guard let url = URL(string: "https://api.truledgr.app/health") else {
+            print("❌ Invalid URL")
             apiStatus = .down(error: "Invalid URL")
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        print("🔍 Checking API: https://api.truledgr.app/health")
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 10
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 if let error = error {
-                    apiStatus = .down(error: error.localizedDescription)
+                    let nsError = error as NSError
+                    let errorMsg = "[\(nsError.domain):\(nsError.code)] \(error.localizedDescription)"
+                    print("❌ API Error: \(errorMsg)")
+                    apiStatus = .down(error: errorMsg)
                     return
                 }
                 
                 guard let httpResponse = response as? HTTPURLResponse else {
+                    print("❌ Invalid response type")
                     apiStatus = .down(error: "Invalid response")
                     return
                 }
                 
+                print("✅ HTTP Status: \(httpResponse.statusCode)")
+                
                 if httpResponse.statusCode == 200, let data = data {
+                    let responseString = String(data: data, encoding: .utf8) ?? ""
+                    print("📡 Response: \(responseString)")
+                    
                     if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                        let message = json["message"] as? String {
                         apiStatus = .up(message: message)
@@ -117,12 +133,18 @@ struct ContentView: View {
                         apiStatus = .up(message: "API is healthy")
                     }
                 } else {
-                    apiStatus = .down(error: "HTTP \(httpResponse.statusCode)")
+                    if let data = data, let errorBody = String(data: data, encoding: .utf8) {
+                        print("❌ Error body: \(errorBody)")
+                        apiStatus = .down(error: "HTTP \(httpResponse.statusCode): \(errorBody)")
+                    } else {
+                        apiStatus = .down(error: "HTTP \(httpResponse.statusCode)")
+                    }
                 }
             }
         }
         
         task.resume()
+        print("🚀 API request started to: \(url.absoluteString)")
     }
 }
 
