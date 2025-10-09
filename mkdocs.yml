@@ -137,11 +137,20 @@ extra:
   
   version:
     provider: mike
+  
+  # Header actions - login/signup buttons
+  homepage: https://truledgr.app
+  
+  # Custom variables for login/signup
+  auth:
+    login_url: https://app.truledgr.app/login
+    signup_url: https://app.truledgr.app/signup
 
 extra_css:
   - stylesheets/extra.css
 
 extra_javascript:
+  - javascripts/auth-buttons.js
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
