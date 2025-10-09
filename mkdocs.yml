@@ -13,6 +13,7 @@ theme:
   language: en
   logo: assets/logo.png
   favicon: assets/favicon.png
+  custom_dir: docs/overrides
   
   palette:
     # Light mode
@@ -143,8 +144,8 @@ extra:
   
   # Custom variables for login/signup
   auth:
-    login_url: https://app.truledgr.app/login
-    signup_url: https://app.truledgr.app/signup
+    login_url: https://dash.truledgr.app/login
+    signup_url: https://dash.truledgr.app/signup
 
 extra_css:
   - stylesheets/extra.css

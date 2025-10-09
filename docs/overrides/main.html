@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {{ super() }}
+  <style>
+    .md-header__auth {
+      display: flex !important;
+      gap: 0.5rem;
+      align-items: center;
+      margin-right: 0.5rem;
+      z-index: 1000;
+    }
+    
+    .md-header__auth-button {
+      display: inline-block !important;
+      padding: 0.4rem 1rem;
+      border-radius: 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+    
+    .md-header__auth-button.login {
+      color: var(--md-default-fg-color);
+      border: 1px solid var(--md-default-fg-color--lighter);
+      background: transparent;
+    }
+    
+    .md-header__auth-button.login:hover {
+      border-color: var(--md-accent-fg-color);
+      color: var(--md-accent-fg-color);
+    }
+    
+    .md-header__auth-button.signup {
+      background: var(--md-accent-fg-color);
+      color: var(--md-primary-bg-color);
+      border: 1px solid var(--md-accent-fg-color);
+    }
+    
+    .md-header__auth-button.signup:hover {
+      background: var(--md-accent-fg-color--transparent);
+      opacity: 0.9;
+    }
+    
+    @media screen and (max-width: 76.1875em) {
+      .md-header__auth {
+        display: none !important;
+      }
+    }
+  </style>
+  
+  <script>
+    function addAuthButtons() {
+      // Find the header toolbar
+      const header = document.querySelector('.md-header__inner.md-grid');
+      if (!header) {
+        console.log('Header not found, retrying...');
+        setTimeout(addAuthButtons, 100);
+        return;
+      }
+      
+      // Check if auth buttons already added
+      if (document.querySelector('.md-header__auth')) {
+        console.log('Auth buttons already exist');
+        return;
+      }
+      
+      // Create auth buttons container
+      const authContainer = document.createElement('div');
+      authContainer.className = 'md-header__auth';
+      authContainer.style.cssText = 'display: flex !important; gap: 0.5rem; align-items: center; margin-right: 0.5rem;';
+      
+      // Create Login button
+      const loginBtn = document.createElement('a');
+      loginBtn.href = 'https://dash.truledgr.app/login';
+      loginBtn.className = 'md-header__auth-button login';
+      loginBtn.textContent = 'Login';
+      loginBtn.setAttribute('title', 'Login to TruLedgr');
+      loginBtn.style.cssText = 'display: inline-block !important; padding: 0.4rem 1rem; border-radius: 0.2rem; font-size: 0.75rem; font-weight: 600; text-decoration: none; color: var(--md-default-fg-color); border: 1px solid var(--md-default-fg-color--lighter); background: transparent;';
+      
+      // Create Sign Up button
+      const signupBtn = document.createElement('a');
+      signupBtn.href = 'https://dash.truledgr.app/signup';
+      signupBtn.className = 'md-header__auth-button signup';
+      signupBtn.textContent = 'Sign Up';
+      signupBtn.setAttribute('title', 'Create your TruLedgr account');
+      signupBtn.style.cssText = 'display: inline-block !important; padding: 0.4rem 1rem; border-radius: 0.2rem; font-size: 0.75rem; font-weight: 600; text-decoration: none; background: var(--md-accent-fg-color); color: white; border: 1px solid var(--md-accent-fg-color);';
+      
+      // Add buttons to container
+      authContainer.appendChild(loginBtn);
+      authContainer.appendChild(signupBtn);
+      
+      // Find the right place to insert (before the color palette toggle)
+      const colorToggle = header.querySelector('[for="__palette_0"], [for="__palette_1"]');
+      const searchButton = header.querySelector('[data-md-component="search"]');
+      const source = header.querySelector('.md-header__source');
+      
+      // Try multiple insertion points
+      if (colorToggle && colorToggle.parentElement) {
+        colorToggle.parentElement.insertBefore(authContainer, colorToggle.parentElement.firstChild);
+        console.log('Auth buttons inserted before color toggle');
+      } else if (searchButton && searchButton.parentElement) {
+        searchButton.parentElement.insertBefore(authContainer, searchButton);
+        console.log('Auth buttons inserted before search');
+      } else if (source) {
+        header.insertBefore(authContainer, source);
+        console.log('Auth buttons inserted before source');
+      } else {
+        // Last resort - append to header
+        header.appendChild(authContainer);
+        console.log('Auth buttons appended to header');
+      }
+      
+      console.log('Auth buttons added via template override - check visibility!');
+    }
+    
+    document.addEventListener('DOMContentLoaded', addAuthButtons);
+    setTimeout(addAuthButtons, 500);
+  </script>
+{% endblock %}

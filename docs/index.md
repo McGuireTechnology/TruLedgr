@@ -7,10 +7,14 @@ description: Take control of your finances with TruLedgr - comprehensive budgeti
 
 **TruLedgr** helps you manage your money, plan your estate, and optimize your taxes - all in one powerful platform.
 
-<div class="cta-container" markdown>
-  <a href="https://app.truledgr.app/signup" class="cta-hero">Start Free Today</a>
-  <a href="https://app.truledgr.app/login" class="cta-secondary">Login</a>
+<div class="cta-container" style="text-align: center; margin: 2rem 0;" markdown>
+  <a href="https://dash.truledgr.app/signup" class="cta-hero">Start Free Today</a>
+  <a href="https://dash.truledgr.app/login" class="cta-secondary">Login</a>
 </div>
+
+---
+
+## Why Choose TruLedgr?
 
 <div class="grid cards" markdown>
 
@@ -71,7 +75,7 @@ Go beyond basic budgeting with integrated estate planning and tax planning tools
 ## Ready to Get Started?
 
 <div class="cta-container" style="text-align: center; margin: 2rem 0;" markdown>
-  <a href="https://app.truledgr.app/signup" class="cta-hero">Start Free Today</a>
+  <a href="https://dash.truledgr.app/signup" class="cta-hero">Start Free Today</a>
   <p style="margin-top: 1rem; color: var(--md-default-fg-color--light);">No credit card required • Works on all devices • Secure & private</p>
 </div>
 
