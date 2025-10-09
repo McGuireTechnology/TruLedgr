@@ -29,7 +29,7 @@ class MainViewModel : ViewModel() {
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     
     private val apiService = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8000/") // Android emulator localhost
+        .baseUrl("http://api.truledgr.app/") // Android emulator localhost
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(ApiService::class.java)

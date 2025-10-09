@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             val status = withContext(Dispatchers.IO) {
                 try {
-                    val url = URL("http://10.0.2.2:8000/health") // Android emulator localhost
+                    val url = URL("https://api.truledgr.app/health")
                     val connection = url.openConnection() as HttpURLConnection
                     connection.requestMethod = "GET"
                     connection.connectTimeout = 3000
@@ -162,7 +162,7 @@ fun BonjourScreen(
         Spacer(modifier = Modifier.height(16.dp))
         
         Text(
-            text = "API endpoint: http://10.0.2.2:8000/health",
+            text = "API endpoint: https://api.truledgr.app/health",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center

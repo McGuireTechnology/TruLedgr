@@ -79,7 +79,7 @@ struct ContentView: View {
             }
             .disabled(apiStatus == .checking)
             
-            Text("API endpoint: http://localhost:8000/health")
+            Text("API endpoint: https://api.truledgr.app/health")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .padding(.top, 8)
@@ -92,7 +92,7 @@ struct ContentView: View {
     private func checkApiHealth() {
         apiStatus = .checking
         
-        guard let url = URL(string: "http://localhost:8000/health") else {
+        guard let url = URL(string: "https://api.truledgr.app/health") else {
             apiStatus = .down(error: "Invalid URL")
             return
         }

@@ -66,11 +66,11 @@ The API will be available at:
 
 ### Network Configuration
 
-The iOS/macOS app connects to `http://localhost:8000/health`
+The iOS/macOS app connects to `https://api.truledgr.app/health` (production API)
 
-- On macOS: `localhost` works directly
-- On iOS Simulator: `localhost` resolves to the host machine
-- On Physical iOS Device: You'll need to use your computer's IP address (e.g., `http://192.168.1.100:8000`)
+- Works on all platforms (macOS, iOS Simulator, Physical devices)
+- Requires internet connectivity
+- For local development, you can change the URL in `ContentView.swift` to `http://localhost:8000/health`
 
 ### Troubleshooting iOS/macOS
 
@@ -122,20 +122,13 @@ The `Info.plist` is configured to allow local networking:
 
 ### Network Configuration
 
-The Android app connects to `http://10.0.2.2:8000/health`
+The Android app connects to `https://api.truledgr.app/health` (production API)
 
-**Why `10.0.2.2`?**
-- Android emulators map `10.0.2.2` to the host machine's `localhost`
-- This is a special alias that lets the emulator access services running on your development machine
-
-**Physical Device**:
-If testing on a physical Android device, you'll need to:
-1. Find your computer's IP address (e.g., `192.168.1.100`)
-2. Update the URL in `MainActivity.kt`:
-   ```kotlin
-   val url = URL("http://YOUR_IP_HERE:8000/health")
-   ```
-3. Ensure your phone and computer are on the same network
+- Works on both Android Emulator and Physical devices
+- Requires internet connectivity
+- For local development, you can change the URL in `MainActivity.kt`:
+  - Emulator: `http://10.0.2.2:8000/health` (maps to host machine's localhost)
+  - Physical device: `http://YOUR_COMPUTER_IP:8000/health` (e.g., `http://192.168.1.100:8000/health`)
 
 ### Troubleshooting Android
 
