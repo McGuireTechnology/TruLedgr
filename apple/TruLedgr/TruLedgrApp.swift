@@ -11,7 +11,7 @@ import SwiftUI
 struct TruLedgrApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IdentifierFirstLoginView()
         }
     }
 }
