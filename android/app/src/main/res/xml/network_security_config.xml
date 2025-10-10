@@ -25,6 +25,13 @@
         </trust-anchors>
     </debug-overrides>
     
+    <!-- Allow HTTP traffic to localhost for local development -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+    
     <!-- 
     Alternative: If you need to trust a specific domain in debug mode only,
     uncomment this section and replace with your API domain
