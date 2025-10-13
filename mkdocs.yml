@@ -138,10 +138,10 @@ extra:
   
   version:
     provider: mike
-    default: 0.1.0
+    default: 0.1.1
   
   # Semantic version number displayed in footer
-  project_version: "0.1.0"
+  project_version: "0.1.1"
   
   # Header actions - login/signup buttons
   homepage: https://truledgr.app

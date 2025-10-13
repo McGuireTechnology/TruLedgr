@@ -6,7 +6,7 @@ from .routers import auth, users, oauth, config
 
 app = FastAPI(
     title="TruLedgr API",
-    version="0.1.0",
+    version="0.1.1",
     description="Personal finance application API"
 )
 

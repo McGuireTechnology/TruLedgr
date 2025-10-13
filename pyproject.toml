@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "TruLedgr"
-version = "0.1.0"  # Managed by VERSION file - use `python version.py` to view
+version = "0.1.1"  # Managed by VERSION file - use `python version.py` to view
 description = "Personal finance application suite"
 authors = ["McGuire Technology, LLC <hello@mcguire.technology>"]
 readme = "README.md"
