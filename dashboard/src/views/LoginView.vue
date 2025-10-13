@@ -34,7 +34,8 @@ const healthCheckInterval = ref<number | null>(null)
 const debounceTimeout = ref<number | null>(null)
 
 // Version
-const appVersion = '0.1.0'
+import { inject } from 'vue'
+const appVersion = inject('appVersion')
 
 // Form state - Identifier-first flow
 const step = ref<'identifier' | 'password'>('identifier')

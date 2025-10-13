@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -28,8 +28,8 @@ const displayUrl = computed(() =>
   currentApiUrl.value.replace('https://', '').replace('http://', '')
 )
 
-// Get version from package.json or environment
-const appVersion = '0.1.0'
+// Get version from package.json via injection
+const appVersion = inject('appVersion')
 
 const handleSignUp = () => {
   router.push('/signup')
