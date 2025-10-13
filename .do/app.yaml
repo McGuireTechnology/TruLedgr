@@ -37,9 +37,16 @@ jobs:
   run_command: |
     set -e
     echo "🚀 Starting database migration..."
-    poetry install --no-dev --no-interaction
-    echo "📦 Dependencies installed"
-    ./migrate.sh upgrade head
+    echo "📦 Installing Poetry..."
+    pip install --upgrade pip
+    pip install poetry
+    echo "✅ Poetry installed"
+    echo "📦 Installing project dependencies..."
+    poetry install --no-dev --no-interaction --no-root
+    echo "✅ Dependencies installed"
+    echo "🔄 Running migrations..."
+    cd api
+    poetry run alembic upgrade head
     echo "✅ Database migrations completed successfully"
   source_dir: /
 services:
