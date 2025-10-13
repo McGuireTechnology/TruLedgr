@@ -1,6 +1,6 @@
 # TruLedgr TODO List
 
-Last Updated: 2025-10-09
+Last Updated: 2025-10-13
 
 ## 🍎 Apple Platform (iOS/macOS/visionOS)
 
@@ -204,6 +204,108 @@ Last Updated: 2025-10-09
 ---
 
 ## 🔧 Backend API (FastAPI)
+
+### Clean Architecture & Domain Implementation
+
+**Status:** Architecture foundation established, domain implementation pending
+
+#### Domain Layer
+
+- [ ] Implement domain entities
+  - [ ] User entity (`api/entities/user.py`)
+    - [ ] UserId and EmailAddress value objects
+    - [ ] User dataclass with 9 fields
+    - [ ] activate(), deactivate(), record_login() methods
+    - [ ] Unit tests for User entity
+  - [ ] Account entity for financial accounts
+  - [ ] Transaction entity for financial transactions
+  - [ ] MonthlyReport entity for monthly worksheets
+- [ ] Implement value objects
+  - [ ] UserId value object (`api/value_objects/user_id.py`)
+    - [ ] Immutable UUID wrapper
+    - [ ] generate() class method
+    - [ ] Unit tests
+  - [ ] EmailAddress value object (`api/value_objects/email.py`)
+    - [ ] Email validation with regex
+    - [ ] Lowercase normalization
+    - [ ] Unit tests
+  - [ ] MonetaryAmount for decimal handling
+  - [ ] AccountNumber, TransactionId, etc.
+
+#### Infrastructure Layer
+
+- [ ] Implement SQLAlchemy models
+  - [ ] UserModel (`api/repositories/models/user.py`)
+    - [ ] 9 columns matching User entity
+    - [ ] Proper constraints and indexes
+    - [ ] timestamp management
+  - [ ] Base model class
+  - [ ] Models for accounts, transactions, reports
+- [ ] Implement mappers
+  - [ ] UserMapper (`api/repositories/mappers/user.py`)
+    - [ ] to_entity() - Model → Entity
+    - [ ] to_model() - Entity → Model
+    - [ ] update_model_from_entity()
+    - [ ] Unit tests for mapper
+  - [ ] Mappers for other entities
+- [ ] Implement repository implementations
+  - [ ] SqlAlchemyUserRepository (`api/repositories/user_repository.py`)
+    - [ ] create(), get_by_id(), get_by_email()
+    - [ ] update(), delete(), exists_by_email()
+    - [ ] Uses UserMapper
+    - [ ] Integration tests
+  - [ ] Repositories for other entities
+- [ ] Implement Unit of Work
+  - [ ] SqlAlchemyUnitOfWork (`api/repositories/uow.py`)
+    - [ ] Manages transactions across repositories
+    - [ ] commit(), rollback() methods
+    - [ ] Async context manager support
+    - [ ] Integration tests
+
+#### Service Layer
+
+- [ ] Refactor services to use repositories
+  - [x] AuthenticationService (already refactored with 29 unit tests)
+  - [ ] UserService - Remove SQLAlchemy, use repositories
+  - [ ] SessionService - Implement using repositories
+  - [ ] AccountService for financial accounts
+  - [ ] TransactionService for transactions
+  - [ ] ReportService for monthly reports
+
+#### API Layer
+
+- [ ] Update routers to use new dependencies
+  - [ ] Use get_uow() dependency injection
+  - [ ] Remove direct SQLAlchemy session usage
+  - [ ] Update auth endpoints
+  - [ ] Update user endpoints
+  - [ ] Ensure proper error handling
+
+#### Database
+
+- [ ] Create Alembic migrations
+  - [ ] Initial schema migration
+  - [ ] User table with all constraints
+  - [ ] OAuth connections table
+  - [ ] Financial data tables
+  - [ ] Run migrations: `poetry run alembic upgrade head`
+
+#### Testing
+
+- [ ] Complete unit test coverage
+  - [x] Auth service unit tests (29 tests)
+  - [ ] Unit tests for all entities
+  - [ ] Unit tests for all value objects
+  - [ ] Unit tests for all mappers
+  - [ ] Unit tests for remaining services
+- [ ] Integration tests
+  - [ ] Repository integration tests
+  - [ ] Unit of Work integration tests
+  - [ ] Full service integration tests
+- [ ] E2E tests
+  - [ ] Complete authentication flows
+  - [ ] Complete CRUD operations
+  - [ ] OAuth flows end-to-end
 
 ### Core Infrastructure
 
