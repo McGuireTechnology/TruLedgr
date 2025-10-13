@@ -92,7 +92,7 @@ async def register(
             email=email,
             hashed_password="",  # Will be set by auth service
             is_active=True,
-            is_admin=False
+            is_superuser=False
         )
         
         # Create user with hashed password
@@ -281,7 +281,7 @@ async def get_current_user_info(
         username=user.username,
         email=str(user.email),
         is_active=user.is_active,
-        is_admin=user.is_admin,
+        is_superuser=user.is_superuser,
         created_at=user.created_at,
         last_login=user.last_login
     )

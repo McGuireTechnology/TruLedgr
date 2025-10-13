@@ -73,7 +73,7 @@ async def list_users(
                 username=user.username,
                 email=str(user.email),
                 is_active=user.is_active,
-                is_admin=user.is_admin,
+                is_superuser=user.is_superuser,
                 created_at=user.created_at,
                 last_login=user.last_login
             )
@@ -132,7 +132,7 @@ async def get_user(
         target_user_id = UserId(user_id)
         
         # Check authorization: must be admin or requesting own profile
-        if not current_user.is_admin and current_user.id != target_user_id:
+        if not current_user.is_superuser and current_user.id != target_user_id:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Access denied: can only view your own profile"
@@ -152,7 +152,7 @@ async def get_user(
             username=user.username,
             email=str(user.email),
             is_active=user.is_active,
-            is_admin=user.is_admin,
+            is_superuser=user.is_superuser,
             created_at=user.created_at,
             last_login=user.last_login
         )
@@ -231,7 +231,7 @@ async def create_user(
             email=email,
             hashed_password="",  # No password set (admin-created)
             is_active=request.is_active,
-            is_admin=request.is_admin
+            is_superuser=request.is_superuser
         )
         
         created_user = await uow.users.create(user)
@@ -242,7 +242,7 @@ async def create_user(
             username=created_user.username,
             email=str(created_user.email),
             is_active=created_user.is_active,
-            is_admin=created_user.is_admin,
+            is_superuser=created_user.is_superuser,
             created_at=created_user.created_at,
             last_login=created_user.last_login
         )
@@ -310,7 +310,7 @@ async def update_user(
         
         # Check authorization
         is_own_profile = current_user.id == target_user_id
-        if not current_user.is_admin and not is_own_profile:
+        if not current_user.is_superuser and not is_own_profile:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Access denied: can only update your own profile"
@@ -342,10 +342,10 @@ async def update_user(
             user.username = request.username
         
         # Update fields based on permissions
-        if current_user.is_admin:
+        if current_user.is_superuser:
             # Admin can update everything
             user.is_active = request.is_active
-            user.is_admin = request.is_admin
+            user.is_superuser = request.is_superuser
         
         # Save changes
         updated_user = await uow.users.update(user)
@@ -356,7 +356,7 @@ async def update_user(
             username=updated_user.username,
             email=str(updated_user.email),
             is_active=updated_user.is_active,
-            is_admin=updated_user.is_admin,
+            is_superuser=updated_user.is_superuser,
             created_at=updated_user.created_at,
             last_login=updated_user.last_login
         )
@@ -425,7 +425,7 @@ async def partial_update_user(
         
         # Check authorization
         is_own_profile = current_user.id == target_user_id
-        if not current_user.is_admin and not is_own_profile:
+        if not current_user.is_superuser and not is_own_profile:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Access denied: can only update your own profile"
@@ -459,15 +459,15 @@ async def partial_update_user(
                 user.email = new_email
         
         # Update other fields based on permissions
-        if current_user.is_admin:
+        if current_user.is_superuser:
             # Admin can update everything
             if request.is_active is not None:
                 if request.is_active:
                     user.activate()
                 else:
                     user.deactivate()
-            if request.is_admin is not None:
-                user.is_admin = request.is_admin
+            if request.is_superuser is not None:
+                user.is_superuser = request.is_superuser
         
         # Save changes
         updated_user = await uow.users.update(user)
@@ -478,7 +478,7 @@ async def partial_update_user(
             username=updated_user.username,
             email=str(updated_user.email),
             is_active=updated_user.is_active,
-            is_admin=updated_user.is_admin,
+            is_superuser=updated_user.is_superuser,
             created_at=updated_user.created_at,
             last_login=updated_user.last_login
         )

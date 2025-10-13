@@ -103,10 +103,10 @@ def require_admin(user: User = Depends(get_current_user)) -> User:
         ):
             ...
     """
-    if not user.is_admin:
+    if not user.is_superuser:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin access required",
+            detail="Superuser access required",
         )
     return user
 

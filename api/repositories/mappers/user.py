@@ -28,7 +28,7 @@ class UserMapper:
             email=EmailAddress(model.email),
             hashed_password=model.hashed_password,
             is_active=model.is_active,
-            is_admin=model.is_admin,
+            is_superuser=model.is_superuser,
             created_at=model.created_at,
             updated_at=model.updated_at,
             last_login=model.last_login
@@ -50,7 +50,7 @@ class UserMapper:
             email=str(entity.email),
             hashed_password=entity.hashed_password,
             is_active=entity.is_active,
-            is_admin=entity.is_admin,
+            is_superuser=entity.is_superuser,
             created_at=entity.created_at,
             updated_at=entity.updated_at,
             last_login=entity.last_login
@@ -71,6 +71,6 @@ class UserMapper:
         model.email = str(entity.email)
         model.hashed_password = entity.hashed_password
         model.is_active = entity.is_active
-        model.is_admin = entity.is_admin
+        model.is_superuser = entity.is_superuser
         model.updated_at = entity.updated_at
         model.last_login = entity.last_login

@@ -19,7 +19,7 @@ class User:
     email: EmailAddress
     hashed_password: str
     is_active: bool = True
-    is_admin: bool = False
+    is_superuser: bool = False
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
     last_login: Optional[datetime] = None

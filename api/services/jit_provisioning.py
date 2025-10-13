@@ -162,7 +162,7 @@ async def create_user_from_oauth(
         email=EmailAddress(email),
         hashed_password="",  # OAuth-only account, no password
         is_active=True,
-        is_admin=False,
+        is_superuser=False,
     )
     
     return user, unique_username

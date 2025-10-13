@@ -92,9 +92,9 @@ class UserResponse(BaseModel):
     username: str = Field(..., description="Username (public profile name)")
     email: str = Field(..., description="User email address")
     is_active: bool = Field(..., description="Whether user is active")
-    is_admin: bool = Field(
+    is_superuser: bool = Field(
         default=False,
-        description="Whether user has admin privileges"
+        description="Whether user has superuser privileges"
     )
     created_at: datetime = Field(..., description="Account creation time")
     last_login: Optional[datetime] = Field(
@@ -109,7 +109,7 @@ class UserResponse(BaseModel):
                 "username": "johndoe",
                 "email": "user@example.com",
                 "is_active": True,
-                "is_admin": False,
+                "is_superuser": False,
                 "created_at": "2025-10-12T10:00:00Z",
                 "last_login": "2025-10-12T15:30:00Z"
             }
@@ -129,9 +129,9 @@ class UserUpdateRequest(BaseModel):
     )
     email: EmailStr = Field(..., description="User email address")
     is_active: bool = Field(True, description="Whether user is active")
-    is_admin: bool = Field(
+    is_superuser: bool = Field(
         False,
-        description="Whether user has admin privileges"
+        description="Whether user has superuser privileges"
     )
     
     model_config = {
@@ -140,7 +140,7 @@ class UserUpdateRequest(BaseModel):
                 "username": "johndoe_updated",
                 "email": "updated@example.com",
                 "is_active": True,
-                "is_admin": False
+                "is_superuser": False
             }
         }
     }
@@ -164,9 +164,9 @@ class UserPartialUpdateRequest(BaseModel):
         None,
         description="Whether user is active"
     )
-    is_admin: Optional[bool] = Field(
+    is_superuser: Optional[bool] = Field(
         None,
-        description="Whether user has admin privileges"
+        description="Whether user has superuser privileges"
     )
     
     model_config = {
@@ -195,7 +195,7 @@ class UserListResponse(BaseModel):
                         "username": "johndoe",
                         "email": "user@example.com",
                         "is_active": True,
-                        "is_admin": False,
+                        "is_superuser": False,
                         "created_at": "2025-10-12T10:00:00Z",
                         "last_login": "2025-10-12T15:30:00Z"
                     }
