@@ -22,24 +22,27 @@ Centralized version management script that maintains version numbers across all 
 
 ### Usage
 
+The script is executable and can be run directly or via Python:
+
 ```bash
 # View current version
-python scripts/version.py
+./scripts/version.py
+# or: python scripts/version.py
 
 # Bump patch version (0.1.0 -> 0.1.1)
-python scripts/version.py bump patch
+./scripts/version.py bump patch
 
 # Bump minor version (0.1.0 -> 0.2.0)
-python scripts/version.py bump minor
+./scripts/version.py bump minor
 
 # Bump major version (0.1.0 -> 1.0.0)
-python scripts/version.py bump major
+./scripts/version.py bump major
 
 # Set specific version
-python scripts/version.py set 1.2.3
+./scripts/version.py set 1.2.3
 
 # Sync current version to all platforms (useful after manual VERSION file edit)
-python scripts/version.py sync
+./scripts/version.py sync
 ```
 
 ### Version File Locations
@@ -59,7 +62,7 @@ The script updates the following files:
 
 When releasing a new version:
 
-1. Bump the version: `python scripts/version.py bump patch`
+1. Bump the version: `./scripts/version.py bump patch`
 2. Review the changes: `git diff`
 3. Commit the version bump: `git commit -am "chore: bump version to X.Y.Z"`
 4. Tag the release: `git tag vX.Y.Z`
@@ -69,7 +72,7 @@ When releasing a new version:
 
 ```bash
 # Development cycle: patch releases
-$ python scripts/version.py bump patch
+$ ./scripts/version.py bump patch
 🔼 Bumping patch: 0.1.0 -> 0.1.1
 📦 Syncing version 0.1.1 to all platforms...
 ✅ Updated pyproject.toml: 0.1.1
@@ -80,19 +83,19 @@ $ python scripts/version.py bump patch
 ✨ Version sync complete!
 
 # New feature: minor release
-$ python scripts/version.py bump minor
+$ ./scripts/version.py bump minor
 🔼 Bumping minor: 0.1.1 -> 0.2.0
 📦 Syncing version 0.2.0 to all platforms...
 ...
 
 # Breaking change: major release
-$ python scripts/version.py bump major
+$ ./scripts/version.py bump major
 🔼 Bumping major: 0.2.0 -> 1.0.0
 📦 Syncing version 1.0.0 to all platforms...
 ...
 
 # Set specific version (useful for hotfixes)
-$ python scripts/version.py set 0.1.2
+$ ./scripts/version.py set 0.1.2
 🎯 Setting version: 0.1.1 -> 0.1.2
 ...
 ```
@@ -105,6 +108,7 @@ $ python scripts/version.py set 0.1.2
 
 ### Notes
 
-- Always run from repository root: `python scripts/version.py`
-- The script uses Poetry and does not require installation
-- Changes are made in-place, so commit after verifying
+- Always run from repository root: `./scripts/version.py` or `python scripts/version.py`
+- The script is standalone and does not require Poetry or dependencies
+- Changes are made in-place, so review with `git diff` and commit after verifying
+- Script automatically skips platforms that don't exist yet with warnings
