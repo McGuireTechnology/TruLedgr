@@ -7,12 +7,12 @@ across all subprojects. The version is read from the VERSION file
 at the repository root.
 
 Usage:
-    python version.py                    # Show current version
-    python version.py bump patch         # Bump patch: 0.1.0 -> 0.1.1
-    python version.py bump minor         # Bump minor: 0.1.0 -> 0.2.0
-    python version.py bump major         # Bump major: 0.1.0 -> 1.0.0
-    python version.py set 1.2.3          # Set specific version
-    python version.py sync               # Sync version to all platforms
+    python scripts/version.py                    # Show current version
+    python scripts/version.py bump patch         # Bump patch: 0.1.0 -> 0.1.1
+    python scripts/version.py bump minor         # Bump minor: 0.1.0 -> 0.2.0
+    python scripts/version.py bump major         # Bump major: 0.1.0 -> 1.0.0
+    python scripts/version.py set 1.2.3          # Set specific version
+    python scripts/version.py sync               # Sync version to all platforms
 """
 
 import re
@@ -20,8 +20,8 @@ import sys
 from pathlib import Path
 from typing import Tuple
 
-# Root directory of the project
-ROOT_DIR = Path(__file__).parent
+# Root directory of the project (parent of scripts directory)
+ROOT_DIR = Path(__file__).parent.parent
 VERSION_FILE = ROOT_DIR / "VERSION"
 
 # Platform-specific version files
@@ -192,17 +192,17 @@ def sync_mkdocs_yml(version: str) -> None:
     
     content = MKDOCS_YML.read_text()
     
-    # Update version.default
+    # Update version.default (looks like "default: 0.1.0")
     new_content = re.sub(
-        r'default: [^\n]+',
-        f'default: {version}',
+        r'(default:\s+)[\d.]+',
+        f'\\g<1>{version}',
         content
     )
     
-    # Update project_version
+    # Update project_version (looks like 'project_version: "0.1.0"')
     new_content = re.sub(
-        r'project_version: "[^"]+"',
-        f'project_version: "{version}"',
+        r'(project_version:\s*")[^"]+(")',
+        f'\\g<1>{version}\\g<2>',
         new_content
     )
     
