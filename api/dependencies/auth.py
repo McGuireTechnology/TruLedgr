@@ -91,15 +91,15 @@ async def get_current_active_user(
     return user
 
 
-def require_admin(user: User = Depends(get_current_user)) -> User:
+def require_superuser(user: User = Depends(get_current_user)) -> User:
     """
-    Require user to be an admin.
+    Require user to be a superuser.
     
     Usage:
         @router.delete("/users/{id}")
         async def delete_user(
             id: str,
-            admin: User = Depends(require_admin)
+            admin: User = Depends(require_superuser)
         ):
             ...
     """

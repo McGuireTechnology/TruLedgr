@@ -50,7 +50,7 @@ Created `api/dependencies/` for FastAPI dependency injection:
 
 - `dependencies/__init__.py` - Module documentation
 - `dependencies/database.py` - `get_db_session()`, `get_uow()`
-- `dependencies/auth.py` - `get_current_user()`, `require_admin()`, etc.
+- `dependencies/auth.py` - `get_current_user()`, `require_superuser()`, etc.
 - `dependencies/pagination.py` - Pagination parameters
 
 These provide proper dependency injection for routers, eliminating direct instantiation of services.

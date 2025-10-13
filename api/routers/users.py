@@ -11,7 +11,7 @@ from ..schemas.auth import (
     ErrorResponse
 )
 from ..dependencies.database import get_uow
-from ..dependencies.auth import get_current_user, require_admin
+from ..dependencies.auth import get_current_user, require_superuser
 from ..repositories.uow import SqlAlchemyUnitOfWork
 from ..entities import User
 from ..value_objects import UserId, EmailAddress
@@ -41,7 +41,7 @@ async def list_users(
         le=100,
         description="Items per page"
     ),
-    admin: User = Depends(require_admin),
+    admin: User = Depends(require_superuser),
     uow: SqlAlchemyUnitOfWork = Depends(get_uow)
 ) -> UserListResponse:
     """
@@ -186,7 +186,7 @@ async def get_user(
 )
 async def create_user(
     request: UserUpdateRequest,
-    admin: User = Depends(require_admin),
+    admin: User = Depends(require_superuser),
     uow: SqlAlchemyUnitOfWork = Depends(get_uow)
 ) -> UserResponse:
     """
@@ -512,7 +512,7 @@ async def partial_update_user(
 )
 async def delete_user(
     user_id: str,
-    admin: User = Depends(require_admin),
+    admin: User = Depends(require_superuser),
     uow: SqlAlchemyUnitOfWork = Depends(get_uow)
 ):
     """
