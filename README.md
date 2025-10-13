@@ -50,8 +50,16 @@ Before you begin, ensure you have the following tools installed:
 ```bash
 cd api
 poetry install
+
+# Initialize database (first time only)
+cd ..
+./migrate.sh init
+
+# Run development server
 poetry run uvicorn api.main:app --reload
 ```
+
+**Database Migrations**: Use `./migrate.sh` for database schema management. See [Database Migrations](#database-migrations) below.
 
 ### Dashboard Web App
 
@@ -107,12 +115,49 @@ pip install mkdocs-material
 mkdocs serve
 ```
 
+## Database Migrations
+
+TruLedgr uses [Alembic](https://alembic.sqlalchemy.org/) for database schema version control. A helper script simplifies common operations:
+
+### Quick Commands
+
+```bash
+# Create new migration from model changes
+./migrate.sh create "Add user timezone field"
+
+# Apply all pending migrations
+./migrate.sh upgrade
+
+# Rollback last migration
+./migrate.sh downgrade
+
+# Check current migration status
+./migrate.sh status
+
+# Initialize fresh database (WARNING: deletes existing data)
+./migrate.sh init
+```
+
+### Manual Alembic Usage
+
+For advanced operations, use Alembic directly:
+
+```bash
+cd api
+poetry run alembic current          # Show current version
+poetry run alembic history          # Show migration history
+poetry run alembic upgrade head     # Apply all migrations
+poetry run alembic downgrade -1     # Rollback one migration
+```
+
+See [api/migrations/README.md](api/migrations/README.md) for comprehensive documentation.
+
 ## Technology Stack
 
 - **Backend**: FastAPI (Python) with Poetry dependency management
+- **Database**: SQLite (development), PostgreSQL (production) with Alembic migrations
 - **Frontend Web**: Vite + Vue.js 3
 - **Mobile**: SwiftUI (iOS/macOS), Jetpack Compose (Android)  
-- **Database**: SQLite (development), PostgreSQL (production)
 - **Documentation**: MkDocs
 - **Deployment**: DigitalOcean
 
