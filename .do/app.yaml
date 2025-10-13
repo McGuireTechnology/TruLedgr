@@ -16,7 +16,6 @@ ingress:
         prefix: /
 name: truledgr-api
 region: nyc
-# PRE_DEPLOY job runs database migrations before app instances start
 jobs:
 - name: db-migrate
   kind: PRE_DEPLOY
@@ -37,14 +36,12 @@ jobs:
   run_command: |
     set -e
     echo "🚀 Starting database migration..."
-    echo "� Checking environment..."
-    which python3 || echo "python3 not found"
-    python3 --version || echo "cannot run python3"
-    ls -la /app/.heroku/python/bin/ || echo "heroku python not found"
-    echo "🔄 Running migrations directly with alembic..."
-    cd api
-    /app/.heroku/python/bin/python -m alembic upgrade head
-    echo "✅ Database migrations completed successfully"
+    export PATH="/workspace/.heroku/python/bin:$PATH"
+    export PYTHONPATH="/workspace:$PYTHONPATH"
+    cd /workspace
+    echo "🔄 Running migrations from /workspace..."
+    python3 -m alembic -c api/alembic.ini upgrade head
+    echo "✅ Migrations completed!"
   source_dir: /
 services:
 - environment_slug: python
