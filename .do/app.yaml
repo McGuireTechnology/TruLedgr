@@ -36,11 +36,13 @@ jobs:
   run_command: |
     set -e
     echo "🚀 Starting database migration..."
-    export PATH="/workspace/.heroku/python/bin:$PATH"
-    export PYTHONPATH="/workspace:$PYTHONPATH"
-    cd /workspace
-    echo "🔄 Running migrations from /workspace..."
-    python3 -m alembic -c api/alembic.ini upgrade head
+    # Source the buildpack profile to set up Python environment
+    if [ -f /workspace/.profile.d/python.sh ]; then
+      source /workspace/.profile.d/python.sh
+    fi
+    cd /workspace/api
+    echo "🔄 Running Alembic migrations..."
+    python3 -m alembic upgrade head
     echo "✅ Migrations completed!"
   source_dir: /
 services:
