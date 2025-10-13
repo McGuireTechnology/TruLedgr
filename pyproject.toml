@@ -28,6 +28,7 @@ mkdocs = "^1.5.3"
 mkdocs-material = "^9.4.6"
 ruff = "^0.14.0"
 black = "^24.1.0"
+alembic = "^1.17.0"
 
 [build-system]
 requires = ["poetry-core"]
