@@ -33,17 +33,7 @@ jobs:
     repo: McGuireTechnology/TruLedgr
   instance_count: 1
   instance_size_slug: apps-s-1vcpu-0.5gb
-  run_command: |
-    set -e
-    echo "🚀 Starting database migration..."
-    # Source the buildpack profile to set up Python environment
-    if [ -f /workspace/.profile.d/python.sh ]; then
-      source /workspace/.profile.d/python.sh
-    fi
-    cd /workspace/api
-    echo "🔄 Running Alembic migrations..."
-    python3 -m alembic upgrade head
-    echo "✅ Migrations completed!"
+  run_command: /cnb/lifecycle/launcher python3 /workspace/api/run_migrations.py
   source_dir: /
 services:
 - environment_slug: python
