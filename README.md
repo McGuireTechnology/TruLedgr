@@ -17,6 +17,34 @@ TruLedgr is designed to help you manage your personal finances with a focus on m
 
 Each application can be run independently but they work best together. Start with the FastAPI backend, then launch any of the frontend applications.
 
+## Prerequisites
+
+Before you begin, ensure you have the following tools installed:
+
+### API (Backend)
+
+- Python 3.10+
+- [Poetry](https://python-poetry.org/)
+
+### Dashboard (Web)
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+
+### Apple (iOS/macOS)
+
+- [Xcode](https://developer.apple.com/xcode/)
+
+### Android
+
+- [Android Studio](https://developer.android.com/studio)
+
+### Recommended Tools
+
+- [Homebrew](https://brew.sh/) (macOS package manager)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [docctl](https://github.com/docctl/docctl) (MkDocs CLI helper)
+- [GitHub CLI](https://cli.github.com/) (`gh`)
+
 ### Backend API
 
 ```bash

@@ -196,6 +196,12 @@ nav:
       - Architecture:
           - developer/architecture/index.md
           - Overview: developer/architecture/overview.md
+          - DDD & Clean Architecture: architecture/ddd-clean-architecture.md
+          - Refactoring Completed: architecture/REFACTORING_COMPLETED.md
+          - Architecture Summary: architecture/ARCHITECTURE_SUMMARY.md
+          - Quick Reference: architecture/QUICK_REFERENCE.md
+          - Colocation Analysis: architecture/COLOCATION_ANALYSIS.md
+          - Models & Mappers Location: architecture/MODELS_MAPPERS_LOCATION.md
           - API Backend: developer/architecture/api.md
           - Frontend Web: developer/architecture/frontend.md
           - Mobile Apps: developer/architecture/mobile.md
