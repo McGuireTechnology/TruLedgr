@@ -19,10 +19,12 @@ jobs:
   envs:
   - key: DATABASE_URL
     scope: RUN_TIME
+    type: SECRET
     value: ${DATABASE_URL}
   - key: SECRET_KEY
     scope: RUN_TIME
-    value: ${SECRET_KEY}
+    type: SECRET
+    value: jAkoSyjaYDg2fljBgGP8dvpTUbD-1yHayHtHdEbinDQ
   github:
     branch: staging
     repo: McGuireTechnology/TruLedgr
@@ -39,10 +41,12 @@ services:
   envs:
   - key: DATABASE_URL
     scope: RUN_AND_BUILD_TIME
+    type: SECRET
     value: ${DATABASE_URL}
   - key: SECRET_KEY
     scope: RUN_AND_BUILD_TIME
-    value: ${SECRET_KEY}
+    type: SECRET
+    value: jAkoSyjaYDg2fljBgGP8dvpTUbD-1yHayHtHdEbinDQ
   - key: VITE_API_URL
     scope: RUN_AND_BUILD_TIME
     value: https://staging.api.truledgr.app
