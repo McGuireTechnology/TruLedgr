@@ -17,13 +17,49 @@ TruLedgr is designed to help you manage your personal finances with a focus on m
 
 Each application can be run independently but they work best together. Start with the FastAPI backend, then launch any of the frontend applications.
 
+## Prerequisites
+
+Before you begin, ensure you have the following tools installed:
+
+### API (Backend)
+
+- Python 3.10+
+- [Poetry](https://python-poetry.org/)
+
+### Dashboard (Web)
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+
+### Apple (iOS/macOS)
+
+- [Xcode](https://developer.apple.com/xcode/)
+
+### Android
+
+- [Android Studio](https://developer.android.com/studio)
+
+### Recommended Tools
+
+- [Homebrew](https://brew.sh/) (macOS package manager)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [docctl](https://github.com/docctl/docctl) (MkDocs CLI helper)
+- [GitHub CLI](https://cli.github.com/) (`gh`)
+
 ### Backend API
 
 ```bash
 cd api
 poetry install
+
+# Initialize database (first time only)
+cd ..
+./migrate.sh init
+
+# Run development server
 poetry run uvicorn api.main:app --reload
 ```
+
+**Database Migrations**: Use `./migrate.sh` for database schema management. See [Database Migrations](#database-migrations) below.
 
 ### Dashboard Web App
 
@@ -79,12 +115,49 @@ pip install mkdocs-material
 mkdocs serve
 ```
 
+## Database Migrations
+
+TruLedgr uses [Alembic](https://alembic.sqlalchemy.org/) for database schema version control. A helper script simplifies common operations:
+
+### Quick Commands
+
+```bash
+# Create new migration from model changes
+./migrate.sh create "Add user timezone field"
+
+# Apply all pending migrations
+./migrate.sh upgrade
+
+# Rollback last migration
+./migrate.sh downgrade
+
+# Check current migration status
+./migrate.sh status
+
+# Initialize fresh database (WARNING: deletes existing data)
+./migrate.sh init
+```
+
+### Manual Alembic Usage
+
+For advanced operations, use Alembic directly:
+
+```bash
+cd api
+poetry run alembic current          # Show current version
+poetry run alembic history          # Show migration history
+poetry run alembic upgrade head     # Apply all migrations
+poetry run alembic downgrade -1     # Rollback one migration
+```
+
+See [api/migrations/README.md](api/migrations/README.md) for comprehensive documentation.
+
 ## Technology Stack
 
 - **Backend**: FastAPI (Python) with Poetry dependency management
+- **Database**: SQLite (development), PostgreSQL (production) with Alembic migrations
 - **Frontend Web**: Vite + Vue.js 3
 - **Mobile**: SwiftUI (iOS/macOS), Jetpack Compose (Android)  
-- **Database**: SQLite (development), PostgreSQL (production)
 - **Documentation**: MkDocs
 - **Deployment**: DigitalOcean
 

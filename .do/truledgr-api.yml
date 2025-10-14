@@ -1,0 +1,58 @@
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+domains:
+- domain: api.truledgr.app
+  type: PRIMARY
+  zone: api.truledgr.app
+features:
+- buildpack-stack=ubuntu-22
+ingress:
+  rules:
+  - component:
+      name: api
+    match:
+      path:
+        prefix: /
+jobs:
+- build_command: pip install --upgrade pip && pip install poetry && poetry install --only main --no-root --no-interaction
+  environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${DATABASE_URL}
+  - key: SECRET_KEY
+    scope: RUN_TIME
+    value: ${SECRET_KEY}
+  github:
+    branch: main
+    repo: McGuireTechnology/TruLedgr
+  instance_count: 1
+  instance_size_slug: apps-s-1vcpu-0.5gb
+  kind: PRE_DEPLOY
+  name: migrations
+  run_command: python3 /workspace/api/run_migrations.py
+  source_dir: /
+name: truledgr-api
+region: nyc
+services:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: ${DATABASE_URL}
+  - key: SECRET_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: ${SECRET_KEY}
+  - key: VITE_API_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://api.truledgr.app
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: McGuireTechnology/TruLedgr
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: apps-s-1vcpu-0.5gb
+  name: api
+  source_dir: /

@@ -1,17 +1,178 @@
-# TruLedgr Documentation
+---
+title: TruLedgr - Personal Finance Made Simple
+description: Take control of your finances with TruLedgr - comprehensive budgeting, transaction tracking, and financial planning
+---
 
-## Bonjour! Welcome to TruLedgr
+# Take Control of Your Financial Future
 
-TruLedgr is a comprehensive personal finance application suite designed to help you manage your financial life with a focus on monthly cycles, estate planning, and tax planning.
+**TruLedgr** helps you manage your money, plan your estate, and optimize your taxes - all in one powerful platform.
 
-## Architecture Overview
+<div class="cta-container" style="text-align: center; margin: 2rem 0;" markdown>
+  <a href="https://dash.truledgr.app/signup" class="cta-hero">Start Free Today</a>
+  <a href="https://dash.truledgr.app/login" class="cta-secondary">Login</a>
+</div>
+
+---
+
+## Why Choose TruLedgr?
+
+<div class="grid cards" markdown>
+
+-   :material-cash-multiple: __Track Every Dollar__
+
+    ---
+
+    Monitor all your accounts, transactions, and spending in real-time across web and mobile
+
+    [Learn More →](features/transactions.md){ .md-button }
+
+-   :material-calendar-month: __Monthly Planning__
+
+    ---
+
+    Built around your monthly financial cycle with automatic reports and recurring budgets
+
+    [Explore Features →](features/reports.md){ .md-button }
+
+-   :material-shield-lock: __Secure & Private__
+
+    ---
+
+    Your financial data stays yours - bank-level security with full data ownership
+
+    [Security Details →](guide/index.md){ .md-button }
+
+-   :material-chart-line: __Future Planning__
+
+    ---
+
+    Estate planning and tax optimization tools to help you prepare for what's ahead
+
+    [Get Started →](get-started/index.md){ .md-button .md-button--primary }
+
+</div>
+
+## Why TruLedgr?
+
+### :material-devices: Available Everywhere
+
+Use TruLedgr on any device - responsive web app, native iOS/macOS apps, or Android. Your financial data syncs seamlessly across all platforms.
+
+### :material-eye-off: Privacy First
+
+Unlike other personal finance apps that sell your data or show ads, TruLedgr puts you in control. Self-hosted option available for maximum privacy.
+
+### :material-calendar-check: Monthly-Focused Workflows
+
+Built around how you actually manage money - monthly paychecks, monthly bills, monthly budgets. Everything organized by the cycle that matters.
+
+### :material-puzzle: Complete Financial Picture
+
+Go beyond basic budgeting with integrated estate planning and tax planning tools. One platform for your entire financial life.
+
+---
+
+## Ready to Get Started?
+
+<div class="cta-container" style="text-align: center; margin: 2rem 0;" markdown>
+  <a href="https://dash.truledgr.app/signup" class="cta-hero">Start Free Today</a>
+  <p style="margin-top: 1rem; color: var(--md-default-fg-color--light);">No credit card required • Works on all devices • Secure & private</p>
+</div>
+
+---
+
+## Quick Start
+
+<div class="grid" markdown>
+
+=== "1. Download"
+
+    Get TruLedgr for your device:
+    
+    - :material-web: [Web Dashboard](apps/web.md) - Works in any browser
+    - :material-apple: [iOS & macOS](apps/apple.md) - Native Apple apps
+    - :material-android: [Android](apps/android.md) - Google Play Store
+
+=== "2. Create Account"
+
+    Sign up with your existing account:
+    
+    - :material-google: Google
+    - :material-microsoft: Microsoft
+    - :material-github: GitHub
+    - :material-apple: Apple
+    
+    No passwords to remember!
+
+=== "3. Add Accounts"
+
+    Connect your financial accounts:
+    
+    - Bank accounts
+    - Credit cards
+    - Investment accounts
+    - Loans & mortgages
+
+=== "4. Start Tracking"
+
+    Begin managing your money:
+    
+    - Set monthly budgets
+    - Record transactions
+    - Review reports
+    - Plan ahead
+
+</div>
+
+[Get Started Now →](get-started/index.md){ .md-button .md-button--primary .md-button--raised }
+
+## :building_construction: Architecture Overview
 
 TruLedgr consists of multiple applications working together:
 
-- **FastAPI Backend** (`api/`) - The core API that handles all financial data and business logic
-- **Dashboard (Vue)** (`dashboard/`) - A responsive web interface built with Vite and Vue 3
-- **iOS/macOS App** (`apple/`) - Native Apple Multiplatform application using SwiftUI
-- **Android App** (`android/`) - Native Android application using Jetpack Compose
+=== "Backend API"
+
+    **FastAPI Backend** (`api/`)
+    
+    The core API that handles all financial data and business logic
+    
+    - Python 3.11+ with Poetry
+    - FastAPI with async/await
+    - SQLAlchemy ORM
+    - Pydantic models for validation
+
+=== "Dashboard Web"
+
+    **Dashboard (Vue)** (`dashboard/`)
+    
+    A responsive web interface built with Vite and Vue 3
+    
+    - Vue 3 Composition API
+    - Vite for blazing-fast development
+    - Modern responsive design
+    - Real-time API integration
+
+=== "iOS/macOS"
+
+    **Apple Multiplatform** (`apple/`)
+    
+    Native application using SwiftUI
+    
+    - SwiftUI for native UI
+    - Runs on iOS and macOS
+    - Shared codebase
+    - Native performance
+
+=== "Android"
+
+    **Android App** (`android/`)
+    
+    Native Android application
+    
+    - Jetpack Compose
+    - Material Design 3
+    - Native Android features
+    - Optimized performance
 
 ## Quick Start
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "TruLedgr"
-version = "0.1.0"
+version = "0.1.1"  # Managed by VERSION file - use `python version.py` to view
 description = "Personal finance application suite"
 authors = ["McGuire Technology, LLC <hello@mcguire.technology>"]
 readme = "README.md"
@@ -10,6 +10,17 @@ packages = [{include = "api"}]
 python = "^3.11"
 fastapi = "^0.104.1"
 uvicorn = {extras = ["standard"], version = "^0.24.0"}
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.23"}
+aiosqlite = "^0.19.0"
+asyncpg = "^0.29.0"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.17.0"
+pydantic = {extras = ["email"], version = "^2.5.0"}
+pydantic-settings = "^2.1.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+bcrypt = "^4.1.2"
+python-multipart = "^0.0.6"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2"

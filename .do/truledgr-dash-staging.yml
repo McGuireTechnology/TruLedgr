@@ -1,0 +1,29 @@
+domains:
+- domain: staging.dash.truledgr.app
+  type: PRIMARY
+envs:
+- key: NODE_ENV
+  scope: RUN_AND_BUILD_TIME
+  value: production
+- key: VITE_API_URL
+  scope: RUN_AND_BUILD_TIME
+  value: https://staging.api.truledgr.app
+ingress:
+  rules:
+  - component:
+      name: dashboard
+    match:
+      path:
+        prefix: /
+name: truledgr-dash-staging
+region: nyc
+static_sites:
+- build_command: npm ci --include=dev && npm run build
+  catchall_document: index.html
+  github:
+    branch: staging
+    repo: McGuireTechnology/TruLedgr
+  index_document: index.html
+  name: dashboard
+  output_dir: dist
+  source_dir: dashboard

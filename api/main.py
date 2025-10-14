@@ -2,7 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-app = FastAPI(title="TruLedgr API", version="0.1.0")
+from .routers import auth, users, oauth, config
+
+app = FastAPI(
+    title="TruLedgr API",
+    version="0.1.1",
+    description="Personal finance application API"
+)
+
+# Include routers
+app.include_router(auth.router)
+app.include_router(users.router)
+app.include_router(oauth.router)
+app.include_router(config.router)
 
 # Configure CORS
 # Allow origins can be set via ALLOWED_ORIGINS env (comma-separated).

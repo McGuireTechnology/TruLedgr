@@ -1,0 +1,172 @@
+/* Custom styles for TruLedgr documentation */
+
+:root {
+  --truledgr-primary: #2196F3;
+  --truledgr-accent: #03A9F4;
+}
+
+/* Improve code block styling */
+.highlight pre {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom admonition colors */
+.md-typeset .admonition.note {
+  border-left-color: var(--truledgr-primary);
+}
+
+/* Enhance tables */
+.md-typeset table:not([class]) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Better spacing for content */
+.md-typeset h1 {
+  margin-top: 0;
+  color: var(--truledgr-primary);
+}
+
+/* Enhance footer */
+.md-footer-meta {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Footer version display */
+.md-footer-version {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* Improve navigation tabs on mobile */
+@media screen and (max-width: 76.1875em) {
+  .md-tabs {
+    background-color: var(--md-primary-fg-color);
+  }
+}
+
+/* Custom badge styles */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.badge-primary {
+  background-color: var(--truledgr-primary);
+  color: white;
+}
+
+.badge-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* Enhanced keyboard key styling */
+.md-typeset kbd {
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Auth buttons in header */
+.md-header__button.auth-button {
+  margin-left: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 0.2rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.md-header__button.auth-button.login {
+  color: var(--md-primary-fg-color);
+  border: 1px solid var(--md-primary-fg-color);
+}
+
+.md-header__button.auth-button.login:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.md-header__button.auth-button.signup {
+  background-color: var(--truledgr-accent);
+  color: white;
+  border: 1px solid var(--truledgr-accent);
+}
+
+.md-header__button.auth-button.signup:hover {
+  background-color: #0288D1;
+  border-color: #0288D1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(3, 169, 244, 0.3);
+}
+
+/* Hide auth buttons on mobile to save space */
+@media screen and (max-width: 76.1875em) {
+  .md-header__button.auth-button {
+    display: none;
+  }
+}
+
+/* Prominent CTA button styling */
+.cta-hero {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--truledgr-primary), var(--truledgr-accent));
+  color: white !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+  transition: all 0.3s ease;
+  margin: 1rem 0.5rem;
+}
+
+.cta-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
+  text-decoration: none;
+}
+
+.cta-secondary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  background: transparent;
+  color: var(--truledgr-primary) !important;
+  border: 2px solid var(--truledgr-primary);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  margin: 1rem 0.5rem;
+}
+
+.cta-secondary:hover {
+  background-color: var(--truledgr-primary);
+  color: white !important;
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* CTA container */
+.cta-container {
+  text-align: center;
+  margin: 2rem 0;
+}

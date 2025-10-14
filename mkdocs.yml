@@ -1,33 +1,229 @@
-site_name: TruLedgr Documentation
-site_description: Documentation for TruLedgr Personal Finance Application Suite
-site_author: Nathan
+site_name: TruLedgr
+site_description: Comprehensive personal finance application suite with multi-platform support for monthly cycles, estate planning, and tax planning
+site_author: McGuire Technology, LLC
 site_url: https://truledgr.app
+repo_url: https://github.com/McGuireTechnology/TruLedgr
+repo_name: McGuireTechnology/TruLedgr
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2025 McGuire Technology, LLC
 
 theme:
   name: material
+  language: en
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  custom_dir: docs/overrides
+  
   palette:
-    primary: blue
-    accent: light blue
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  
   features:
-    - navigation.tabs
-    - navigation.sections
-    - toc.integrate
+    # Navigation
+    - navigation.instant          # Instant loading (SPA-like)
+    - navigation.instant.prefetch # Prefetch pages for faster navigation
+    - navigation.instant.progress # Show progress indicator
+    - navigation.tracking         # Update URL with active anchor
+    - navigation.tabs             # Top-level sections as tabs
+    - navigation.tabs.sticky      # Sticky tabs
+    - navigation.sections         # Render sections in navigation
+    - navigation.expand           # Expand sections by default
+    - navigation.path             # Show breadcrumb path
+    - navigation.indexes          # Section index pages
+    - navigation.top              # Back to top button
+    - navigation.footer           # Footer with prev/next links
+    
+    # Table of contents
+    - toc.follow                  # TOC follows scroll
+    - toc.integrate               # TOC in navigation
+    
+    # Search
+    - search.suggest              # Search suggestions
+    - search.highlight            # Highlight search terms
+    - search.share                # Share search results
+    
+    # Content
+    - content.code.copy           # Copy button for code blocks
+    - content.code.annotate       # Code annotations
+    - content.tabs.link           # Link content tabs
+    - content.tooltips            # Improved tooltips
+    
+    # Header
+    - header.autohide             # Hide header on scroll
+
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - tags:
+      tags_file: tags.md
+
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section
+      toc_depth: 3
+  
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/McGuireTechnology/TruLedgr
+      name: TruLedgr on GitHub
+    - icon: fontawesome/solid/globe
+      link: https://truledgr.app
+      name: TruLedgr Website
+  
+  generator: false  # Remove "Made with Material for MkDocs"
+  
+  version:
+    provider: mike
+    default: 0.1.1
+  
+  # Semantic version number displayed in footer
+  project_version: "0.1.1"
+  
+  # Header actions - login/signup buttons
+  homepage: https://truledgr.app
+  
+  # Custom variables for login/signup
+  auth:
+    login_url: https://dash.truledgr.app/login
+    signup_url: https://dash.truledgr.app/signup
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/auth-buttons.js
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Home: index.md
-  - Getting Started:
-    - Quick Start: getting-started/quick-start.md
-    - Running the Applications: getting-started/running-apps.md
-  - Architecture:
-    - Overview: architecture/overview.md
-    - API: architecture/api.md
-    - Frontend: architecture/frontend.md
-    - Mobile Apps: architecture/mobile.md
-
-markdown_extensions:
-  - admonition
-  - codehilite
-  - toc:
-      permalink: true
-
-# Trigger Pages deploy: bump at 2025-10-08T19:45:00Z
+  - Features:
+      - features/index.md
+      - Account Management: features/accounts.md
+      - Transaction Tracking: features/transactions.md
+      - Monthly Reports: features/reports.md
+      - Estate Planning: features/estate.md
+      - Tax Planning: features/tax.md
+  - Get Started:
+      - get-started/index.md
+      - Download & Install: get-started/download.md
+      - Create Account: get-started/account.md
+      - First Budget: get-started/first-budget.md
+  - User Guide:
+      - guide/index.md
+      - Dashboard Overview: guide/dashboard.md
+      - Managing Accounts: guide/managing-accounts.md
+      - Recording Transactions: guide/transactions.md
+      - Monthly Workflows: guide/monthly-workflow.md
+      - Reports & Analytics: guide/reports.md
+  - Platform Apps:
+      - apps/index.md
+      - Web Dashboard: apps/web.md
+      - iOS & macOS: apps/apple.md
+      - Android: apps/android.md
+  - Support:
+      - support/index.md
+      - FAQ: support/faq.md
+      - Troubleshooting: support/troubleshooting.md
+      - Contact: support/contact.md
+  - Developer:
+      - developer/index.md
+      - Architecture:
+          - developer/architecture/index.md
+          - Overview: developer/architecture/overview.md
+          - DDD & Clean Architecture: architecture/ddd-clean-architecture.md
+          - Refactoring Completed: architecture/REFACTORING_COMPLETED.md
+          - Architecture Summary: architecture/ARCHITECTURE_SUMMARY.md
+          - Quick Reference: architecture/QUICK_REFERENCE.md
+          - Colocation Analysis: architecture/COLOCATION_ANALYSIS.md
+          - Models & Mappers Location: architecture/MODELS_MAPPERS_LOCATION.md
+          - API Backend: developer/architecture/api.md
+          - Frontend Web: developer/architecture/frontend.md
+          - Mobile Apps: developer/architecture/mobile.md
+          - Database Design: developer/architecture/database.md
+          - Authentication: developer/architecture/auth.md
+      - API Reference:
+          - developer/api/index.md
+          - Endpoints: developer/api/endpoints.md
+          - Models: developer/api/models.md
+          - Authentication: developer/api/authentication.md
+      - Contributing:
+          - developer/contributing/index.md
+          - Getting Started: developer/contributing/getting-started.md
+          - Development Setup: developer/contributing/dev-setup.md
+          - Running Locally: developer/contributing/running-apps.md
+          - Development Workflow: developer/contributing/workflow.md
+          - Version Management: versioning.md
+          - Code Style: developer/contributing/style.md
+          - Testing: developer/contributing/testing.md
+      - Deployment:
+          - developer/deployment/index.md
+          - DigitalOcean: developer/deployment/digitalocean.md
+          - Environment Variables: developer/deployment/environment.md
+          - CI/CD: developer/deployment/cicd.md
+  - Tags: tags.md
