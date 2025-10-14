@@ -28,9 +28,12 @@ if database_url:
         database_url = database_url.replace(
             'postgresql://', 'postgresql+asyncpg://', 1
         )
-    # Convert sslmode parameter to ssl for asyncpg compatibility
-    if 'sslmode=require' in database_url:
-        database_url = database_url.replace('sslmode=require', 'ssl=require')
+    # Remove sslmode parameter (asyncpg handles SSL differently)
+    # SQLAlchemy with asyncpg will use SSL by default for remote connections
+    if '?sslmode=require' in database_url:
+        database_url = database_url.replace('?sslmode=require', '')
+    elif '&sslmode=require' in database_url:
+        database_url = database_url.replace('&sslmode=require', '')
     config.set_main_option('sqlalchemy.url', database_url)
 elif not config.get_main_option('sqlalchemy.url'):
     # Fallback to default SQLite database
