@@ -1,6 +1,14 @@
 alerts:
 - rule: DEPLOYMENT_FAILED
 - rule: DOMAIN_FAILED
+databases:
+- cluster_name: postgres
+  db_name: truledgr-staging
+  db_user: truledgr-staging
+  engine: PG
+  name: postgres
+  production: true
+  version: "17"
 domains:
 - domain: staging.api.truledgr.app
   type: PRIMARY
@@ -19,8 +27,7 @@ jobs:
   envs:
   - key: DATABASE_URL
     scope: RUN_TIME
-    type: SECRET
-    value: ${DATABASE_URL}
+    value: ${postgres.DATABASE_URL}
   - key: SECRET_KEY
     scope: RUN_TIME
     type: SECRET
@@ -41,8 +48,7 @@ services:
   envs:
   - key: DATABASE_URL
     scope: RUN_AND_BUILD_TIME
-    type: SECRET
-    value: ${DATABASE_URL}
+    value: ${postgres.DATABASE_URL}
   - key: SECRET_KEY
     scope: RUN_AND_BUILD_TIME
     type: SECRET
