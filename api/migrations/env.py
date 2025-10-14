@@ -22,8 +22,9 @@ config = context.config
 
 # Override sqlalchemy.url from environment variable if available
 database_url = os.getenv('DATABASE_URL')
-if database_url:
-    print(f"🔍 Original DATABASE_URL: {database_url[:50]}...")
+print(f"🔍 DATABASE_URL from environment: {database_url}")
+if database_url and database_url.strip():
+    print(f"🔍 Original DATABASE_URL: {database_url[:80]}...")
     # Convert postgresql:// to postgresql+asyncpg:// for async operations
     if database_url.startswith('postgresql://'):
         database_url = database_url.replace(
@@ -35,8 +36,11 @@ if database_url:
         database_url = database_url.replace('?sslmode=require', '')
     elif '&sslmode=require' in database_url:
         database_url = database_url.replace('&sslmode=require', '')
-    print(f"🔍 Converted DATABASE_URL: {database_url[:50]}...")
-    config.set_main_option('sqlalchemy.url', database_url)
+    print(f"🔍 Converted DATABASE_URL: {database_url[:80]}...")
+    if not database_url or not database_url.strip():
+        print("⚠️  WARNING: DATABASE_URL became empty after processing!")
+    else:
+        config.set_main_option('sqlalchemy.url', database_url)
 elif not config.get_main_option('sqlalchemy.url'):
     # Fallback to default SQLite database
     default_db = 'sqlite+aiosqlite:///./truledgr.db'
