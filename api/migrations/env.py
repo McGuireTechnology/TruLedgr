@@ -28,6 +28,9 @@ if database_url:
         database_url = database_url.replace(
             'postgresql://', 'postgresql+asyncpg://', 1
         )
+    # Convert sslmode parameter to ssl for asyncpg compatibility
+    if 'sslmode=require' in database_url:
+        database_url = database_url.replace('sslmode=require', 'ssl=require')
     config.set_main_option('sqlalchemy.url', database_url)
 elif not config.get_main_option('sqlalchemy.url'):
     # Fallback to default SQLite database
