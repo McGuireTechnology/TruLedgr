@@ -23,6 +23,11 @@ config = context.config
 # Override sqlalchemy.url from environment variable if available
 database_url = os.getenv('DATABASE_URL')
 if database_url:
+    # Convert postgresql:// to postgresql+asyncpg:// for async operations
+    if database_url.startswith('postgresql://'):
+        database_url = database_url.replace(
+            'postgresql://', 'postgresql+asyncpg://', 1
+        )
     config.set_main_option('sqlalchemy.url', database_url)
 elif not config.get_main_option('sqlalchemy.url'):
     # Fallback to default SQLite database
